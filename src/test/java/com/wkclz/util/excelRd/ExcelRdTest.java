@@ -8,10 +8,9 @@ import java.util.List;
 
 public class ExcelRdTest {
 
-	@Test
 	public static void excelRd() throws IOException, ExcelReadException {
 
-		String path = "D:/Users/lz/Desktop/test.xlsx";
+		String path = "/Users/wangkaicun/Desktop/test.xlsx";
 		ExcelRd excelRd = new ExcelRd(path);
 		excelRd.setStartRow(1);	// 指定起始行，从0开始
 		excelRd.setStartCol(1);	// 指定起始列，从0开始

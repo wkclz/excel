@@ -1,5 +1,6 @@
 package com.wkclz.util.excel;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 
@@ -11,6 +12,10 @@ public class ExcelUtil {
 	public static final HorizontalAlignment ALIGN_LEFT = HorizontalAlignment.LEFT;
 	/** 中对齐 */
 	public static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
+	/** 边框大小 */
+	public static final BorderStyle BORDER = BorderStyle.THIN;
+
+
 
 	private static boolean isLetter(char c) {
 		int k = 0x80;

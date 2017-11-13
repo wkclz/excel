@@ -9,7 +9,10 @@ public class ExcelTest {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	@Test
+	public static void main(String[] args){
+		excel();
+	}
+
 	public static void excel() {
 		
 		System.out.println("数据准备：" + sdf.format(new Date()));
@@ -19,10 +22,10 @@ public class ExcelTest {
 		excel.setCreate_by("虾米");
 		excel.setDateFrom("2017-07-01");
 		excel.setDateTo("2017-07-12");
-		excel.setSavePath("D:/Users/lz/Desktop/test.xlsx");
+		excel.setSavePath("/Users/wangkaicun/Desktop/test.xlsx");
 		String[] header = {"序号","日期","时间","数字","row合并","col合并1","col合并2","超长文字自动换行"};
 		excel.setHeader(header);
-		for (int i = 0; i < 120000; i++) {
+		for (int i = 0; i < 120; i++) {
 			ExcelRow row = excel.createRow();
 			row.addCell(i+1);			// 序号
 			row.addCell(new java.sql.Date(new Date().getTime()));	// 日期

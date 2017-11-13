@@ -1,5 +1,7 @@
 package com.wkclz.util.excel;
 
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,10 @@ public class ExcelRow {
 	public void addCell(Object cellContent, boolean border) {
 		addCell(cellContent, border,ExcelUtil.ALIGN_CENTER);
 	}
-	public void addCell(Object cellContent, short align) {
+	public void addCell(Object cellContent, HorizontalAlignment align) {
 		addCell(cellContent, true, align);
 	}
-	public void addCell(Object cellContent, boolean border, short align) {
+	public void addCell(Object cellContent, boolean border, HorizontalAlignment align) {
 		addCell(cellContent, border, align, 1, 1);
 	}
 	public void addCell(Object cellContent, int col, int row) {
@@ -32,10 +34,10 @@ public class ExcelRow {
 	public void addCell(Object cellContent, boolean border, int col, int row) {
 		addCell(cellContent, border, ExcelUtil.ALIGN_CENTER, col, row);
 	}
-	public void addCell(Object cellContent, short align, int col, int row) {
+	public void addCell(Object cellContent, HorizontalAlignment align, int col, int row) {
 		addCell(cellContent, true, align, col, row);
 	}
-	public void addCell(Object cellContent, boolean border, short align, int col, int row) {
+	public void addCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row) {
 		ExcelCell excelCell = new ExcelCell(cellContent, border, align, col, row);
 		if(this.row==null)
 			this.row = new ArrayList<ExcelCell>();

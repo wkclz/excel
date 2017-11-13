@@ -1,5 +1,7 @@
 package com.wkclz.util.excel;
 
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+
 public class ExcelCell {
 	
 	/** cell内容 */
@@ -7,13 +9,13 @@ public class ExcelCell {
 	/** 是否有边框 */
 	private boolean border;
 	/** 对齐方式，只有左和中，默认中对齐，从ExcelUtil 取值*/
-	private short align;
+	private HorizontalAlignment align;
 	/** 合并列数【宽度】 */
 	private int col;
 	/**	合并行数【高度】 */
 	private int row;
 	
-	protected ExcelCell(Object cellContent, boolean border, short align, int col, int row) {
+	protected ExcelCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row) {
 		super();
 		this.cellContent = cellContent;
 		this.border = border;
@@ -39,11 +41,11 @@ public class ExcelCell {
 		this.border = border;
 	}
 	/** 对齐方式，只有左和中，默认中对齐，从ExcelUtil 取值*/
-	protected short getAlign() {
+	protected HorizontalAlignment getAlign() {
 		return align;
 	}
 	/** 对齐方式，只有左和中，默认中对齐，从ExcelUtil 取值*/
-	protected void setAlign(short align) {
+	protected void setAlign(HorizontalAlignment align) {
 		this.align = align;
 	}
 	/** 合并列数【宽度】 */

@@ -1,6 +1,7 @@
 package com.wkclz.util.excelRd;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
 
@@ -14,21 +15,21 @@ public class ExcelRdUtil {
 
 	protected static Object getCellValue(XSSFCell cell, String type){
 		if(cell==null||"".equals(cell.toString().trim())) return null;
-		int cellType = cell.getCellType();
-		if(INTEGER.equals(type) && cellType == XSSFCell.CELL_TYPE_NUMERIC){
+		CellType cellType = cell.getCellTypeEnum();
+		if(INTEGER.equals(type) && cellType == CellType.NUMERIC){
 			Double numeric = cell.getNumericCellValue();
 			return numeric.intValue();
 		}
-		if(DOUBLE.equals(type) && cellType == XSSFCell.CELL_TYPE_NUMERIC){
+		if(DOUBLE.equals(type) && cellType == CellType.NUMERIC){
 			return cell.getNumericCellValue();
 		}
-		if(DATETIME.equals(type) && cellType == XSSFCell.CELL_TYPE_NUMERIC) {
+		if(DATETIME.equals(type) && cellType == CellType.NUMERIC) {
 			return cell.getDateCellValue();
 		}
-		if(DATE.equals(type) && cellType == XSSFCell.CELL_TYPE_NUMERIC){
+		if(DATE.equals(type) && cellType == CellType.NUMERIC){
 			return new java.sql.Date(cell.getDateCellValue().getTime());
 		}
-		if(STRING.equals(type) && cellType == XSSFCell.CELL_TYPE_STRING){
+		if(STRING.equals(type) && cellType == CellType.STRING){
 			return cell.getStringCellValue();
 		}
 		return cell.toString();
@@ -36,21 +37,21 @@ public class ExcelRdUtil {
 	
 	protected static Object getCellValue(HSSFCell cell, String type){
 		if(cell==null||"".equals(cell.toString().trim())) return null;
-		int cellType = cell.getCellType();
-		if(INTEGER.equals(type) && cellType == HSSFCell.CELL_TYPE_NUMERIC){
+		CellType cellType = cell.getCellTypeEnum();
+		if(INTEGER.equals(type) && cellType == CellType.NUMERIC){
 			Double numeric = cell.getNumericCellValue();
 			return numeric.intValue();
 		}
-		if(DOUBLE.equals(type) && cellType == HSSFCell.CELL_TYPE_NUMERIC){
+		if(DOUBLE.equals(type) && cellType == CellType.NUMERIC){
 			return cell.getNumericCellValue();
 		}
-		if(DATETIME.equals(type) && cellType == HSSFCell.CELL_TYPE_NUMERIC){
+		if(DATETIME.equals(type) && cellType == CellType.NUMERIC){
 			return cell.getDateCellValue();
 		}
-		if(DATE.equals(type) && cellType == HSSFCell.CELL_TYPE_NUMERIC){
+		if(DATE.equals(type) && cellType == CellType.NUMERIC){
 			return new java.sql.Date(cell.getDateCellValue().getTime());
 		}
-		if(STRING.equals(type) && cellType == HSSFCell.CELL_TYPE_STRING){
+		if(STRING.equals(type) && cellType == CellType.STRING){
 			return cell.getStringCellValue();
 		}
 		return cell.getStringCellValue();

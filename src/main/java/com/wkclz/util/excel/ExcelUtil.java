@@ -1,16 +1,16 @@
 package com.wkclz.util.excel;
 
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
 import java.util.Date;
 
 public class ExcelUtil {
 	
 	/** 左对齐 */
-	public static final short ALIGN_LEFT = XSSFCellStyle.ALIGN_LEFT;
+	public static final HorizontalAlignment ALIGN_LEFT = HorizontalAlignment.LEFT;
 	/** 中对齐 */
-	public static final short ALIGN_CENTER = XSSFCellStyle.ALIGN_CENTER;
+	public static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
 
 	private static boolean isLetter(char c) {
 		int k = 0x80;

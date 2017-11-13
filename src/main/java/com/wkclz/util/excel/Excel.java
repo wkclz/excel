@@ -17,17 +17,18 @@ package com.wkclz.util.excel;
  * └─────┴────┴────┴───────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘ └───────┴───┴───┘
  */
 
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
 public class Excel extends ExcelContent {
 	
@@ -155,7 +156,7 @@ public class Excel extends ExcelContent {
 		 */
 		ExcelCell excelCell;	// cell 对象
 		Object content;			// cell 内容
-		short align;			// cell 对齐方式【默认居中】
+        HorizontalAlignment align;			// cell 对齐方式【默认居中】
 		boolean border;			// cell 边框【默认有边框】
 		List<ExcelRow> lines = getRows();
 		
@@ -185,7 +186,7 @@ public class Excel extends ExcelContent {
 				// 若有创建cell 直接获取，否则，新建【新建cell ，合并，设置边框，这些都将只有在新建的时候进行操作，之后只是跳过相应的cell】
 				SXSSFCell cell = row.getCell(col_num);
 				if(cell==null){
-					cell = row.createCell(col_num,SXSSFCell.CELL_TYPE_NUMERIC);
+                    cell = row.createCell(col_num, CellType.NUMERIC);
 					// 合并单元格
 					mergeCell(col_merge, row_merge, col_num, border);
 					col_num += col_merge;	 // 列号向前
@@ -194,7 +195,7 @@ public class Excel extends ExcelContent {
 					col_num = getCell(row,col_num);
 					// 当前列号需要更新
 					now_cell = col_num;
-					cell = row.createCell(col_num, SXSSFCell.CELL_TYPE_NUMERIC);
+                    cell = row.createCell(col_num, CellType.NUMERIC);
 					// 合并单元格
 					mergeCell(col_merge, row_merge, col_num, border);
 					col_num ++;
@@ -252,7 +253,7 @@ public class Excel extends ExcelContent {
 				}
 				
 				// 最后，当字符串处理
-				cell = row.createCell(now_cell,SXSSFCell.CELL_TYPE_STRING);
+                cell = row.createCell(now_cell, CellType.STRING);
 				setIntStrStyle(cell, align, border);
 				cell.setCellValue(content.toString());
 				
@@ -284,64 +285,64 @@ public class Excel extends ExcelContent {
 		return err;
 	}
 	
-	private void setIntStrStyle(SXSSFCell cell,short align, boolean border){
+	private void setIntStrStyle(SXSSFCell cell, HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleStrCenterWithBorder());
 		// 边框 + 左边
-		if(border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleStrLeftWithBorder());
 		// 无边框 + 左边
-		if(!border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleStrLeftNoBorder());
 		// 无边框 + 中间
-		if(!border && XSSFCellStyle.ALIGN_CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align)
 			cell.setCellStyle(getStyleStrCenterNoBorder());
 	}
-	private void setDoubleStyle(SXSSFCell cell,short align, boolean border){
+	private void setDoubleStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleNumCenterWithBorder());
 		// 边框 + 左边
-		if(border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleNumLeftWithBorder());
 		// 无边框 + 左边
-		if(!border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleNumLeftNoBorder());
 		// 无边框 + 中间
-		if(!border && XSSFCellStyle.ALIGN_CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align)
 			cell.setCellStyle(getStyleNumCenterNoBorder());
 	}
-	private void setDateStyle(SXSSFCell cell,short align, boolean border){
+	private void setDateStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleDateCenterWithBorder());
 		// 边框 + 左边
-		if(border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleDateLeftWithBorder());
 		// 无边框 + 左边
-		if(!border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleDateLeftNoBorder());
 		// 无边框 + 中间
-		if(!border && XSSFCellStyle.ALIGN_CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align)
 			cell.setCellStyle(getStyleDateCenterNoBorder());
 	}
-	private void setDateTimeStyle(SXSSFCell cell,short align, boolean border){
+	private void setDateTimeStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleDateTimeCenterWithBorder());
 		// 边框 + 左边
-		if(border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleDateTimeLeftWithBorder());
 		// 无边框 + 左边
-		if(!border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleDateTimeLeftNoBorder());
 		// 无边框 + 中间
-		if(!border && XSSFCellStyle.ALIGN_CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align)
 			cell.setCellStyle(getStyleDateTimeCenterNoBorder());
 	}
-	private void setWrapTextStyle(SXSSFCell cell,short align, boolean border){
+	private void setWrapTextStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleWrapTextCenterWithBorder());
 		// 边框 + 左边
-		if(border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleWrapTextLeftWithBorder());
 		// 无边框 + 左边
-		if(!border && XSSFCellStyle.ALIGN_LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align)
 			cell.setCellStyle(getStyleWrapTextLeftNoBorder());
 		// 无边框 + 中间
-		if(!border && XSSFCellStyle.ALIGN_CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align)
 			cell.setCellStyle(getStyleWrapTextCenterNoBorder());
 	}
 	

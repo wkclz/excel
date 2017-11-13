@@ -1,7 +1,5 @@
 package com.wkclz.util.excelRd;
 
-import org.junit.Test;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +22,6 @@ public class ExcelRdTest {
 		excelRd.setTypes(types);	// 指定每列的类型
 		
 		List<ExcelRdRow> rows = excelRd.analysisXlsx();
-		@SuppressWarnings("unchecked")
 		HashMap<String, Object>[] plans = new HashMap[rows.size()];
 
 		int size = rows.size();

@@ -12,7 +12,7 @@ public abstract class ExcelRdContent extends ExcelRdBase {
 	/** 起始列 */
 	private int startCol;
 	/** 列类型 */
-	private List<String> types;
+	private List<ExcelRdTypeEnum> types;
 	/** 行对象 */
 	private List<ExcelRdRow> rows;
 	
@@ -35,16 +35,16 @@ public abstract class ExcelRdContent extends ExcelRdBase {
 	public void setStartCol(int startCol) {
 		this.startCol = startCol;
 	}
-	protected List<String> getTypes() {
+	protected List<ExcelRdTypeEnum> getTypes() {
 		return types;
 	}
-	public void setTypes(List<String> types) {
+	public void setTypes(List<ExcelRdTypeEnum> types) {
 		this.types = types;
 	}
-	public void setTypes(String[] types) {
+	public void setTypes(ExcelRdTypeEnum[] types) {
 		if(this.types==null)
-			this.types = new ArrayList<String>();
-		for (String type : types) {
+			this.types = new ArrayList<ExcelRdTypeEnum>();
+		for (ExcelRdTypeEnum type : types) {
 			this.types.add(type);
 		}
 	}

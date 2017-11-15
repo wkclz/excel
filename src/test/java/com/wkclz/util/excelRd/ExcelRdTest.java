@@ -6,18 +6,22 @@ import java.util.List;
 
 public class ExcelRdTest {
 
+	public static void main(String[] args) throws IOException, ExcelReadException {
+		excelRd();
+	}
+
 	public static void excelRd() throws IOException, ExcelReadException {
 
 		String path = "/Users/wangkaicun/Desktop/test.xlsx";
 		ExcelRd excelRd = new ExcelRd(path);
 		excelRd.setStartRow(1);	// 指定起始行，从0开始
 		excelRd.setStartCol(1);	// 指定起始列，从0开始
-		String[] types = {
-			ExcelRdUtil.INTEGER,
-			ExcelRdUtil.DOUBLE,
-			ExcelRdUtil.DATETIME,
-			ExcelRdUtil.DATE,
-			ExcelRdUtil.STRING
+        ExcelRdTypeEnum[] types = {
+			ExcelRdTypeEnum.INTEGER,
+            ExcelRdTypeEnum.DOUBLE,
+            ExcelRdTypeEnum.DATETIME,
+            ExcelRdTypeEnum.DATE,
+            ExcelRdTypeEnum.STRING
 		};
 		excelRd.setTypes(types);	// 指定每列的类型
 		

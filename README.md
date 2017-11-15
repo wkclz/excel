@@ -2,7 +2,7 @@
 
 ### 介绍
 ***
-> * 对 excel 的生成 的读取，一直都是一个很花时间的问题，现对excel的生成和读取，封装成一个工具，将加快excel 在 java中的处理。 \
+> * 对 excel 的生成 的读取，一直都是一个很花时间的问题，现对excel的生成和读取，封装成一个工具，将加快excel 在 java中的处理。 
 > * Excel 是对 poi 的封装，建立一个通用的excel模板，再通过 set,add,create等简单的操作方法生成 excel。同时也能指定起始度坐标，对标准的 Excel进行读取。
 
 
@@ -109,3 +109,10 @@
 <div align=center>
 <img src="http://static.wkclz.com/img/alipay.png" width="280" height="280" alt="亦菲表演机器猫"/>
 </div>
+
+
+***
+# 更新日志
+2017-11-15 22:58:33
+***
+1. Excel读取工具 ExcelRd 定义枚举类型ExcelRdTypeEnum：INTEGER("整形"),DOUBLE("双精浮点型"),DATE("日期型"),DATETIME("日期时间型"),STRING("字符型");读取时需要初始化字段类型。

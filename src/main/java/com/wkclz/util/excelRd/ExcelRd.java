@@ -36,7 +36,7 @@ public class ExcelRd extends ExcelRdContent {
 		if(!file.isFile())
 			throw new ExcelReadException("Excel path is not a file");
 		
-		List<String> types = getTypes();
+		List<ExcelRdTypeEnum> types = getTypes();
 		if(types==null||types.size()==0)
 			throw new ExcelReadException("Types of the data must be set");
 		

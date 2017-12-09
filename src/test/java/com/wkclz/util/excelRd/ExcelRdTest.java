@@ -6,11 +6,11 @@ import java.util.List;
 
 public class ExcelRdTest {
 
-	public static void main(String[] args) throws IOException, ExcelReadException {
+	public static void main(String[] args) throws IOException, ExcelRdException {
 		excelRd();
 	}
 
-	public static void excelRd() throws IOException, ExcelReadException {
+	public static void excelRd() throws IOException, ExcelRdException {
 
 		String path = "/Users/wangkaicun/Desktop/test.xlsx";
 		ExcelRd excelRd = new ExcelRd(path);

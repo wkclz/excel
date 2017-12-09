@@ -66,40 +66,27 @@ public class Excel extends ExcelContent {
 	* @date 2017年7月16日 上午12:57:41 *  
 	* @throws
 	 */
-	public String CreateXlsx(){
+	public void CreateXlsx() throws ExcelException, IOException {
 		// 把最后一次的数据加进去
 		if(row!=null)
 			addRow(row);
 		
-		String err = "";
-		
 		if(getTitle()==null||"".equals(getTitle().trim()))
-			err += "title cannot be null or empty!";
-		
+			throw new ExcelException("title cannot be null or empty!");
+
 		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
-			err += "header or width cannot be null or empty!";
-		
+			throw new ExcelException("header or width cannot be null or empty!");
+
 		if(getSavePath()==null||"".equals(getSavePath().trim()))
-			err += "savePath cannot be null or empty!";
-		
-		if (!"".equals(err)) {
-			return err;
-		}
+			throw new ExcelException("savePath cannot be null or empty!");
 
         create();   // 生成的过程
 
 		// 导出到文件
-        try {
-            FileOutputStream outputStream = new FileOutputStream(getSavePath());
-            getWorkbook().write(outputStream);
-            outputStream.flush();
-            outputStream.close();
-            err += "导出成功";
-        } catch (IOException e) {
-            err += e.getMessage();
-            e.printStackTrace();
-        }
-		return err;
+        FileOutputStream outputStream = new FileOutputStream(getSavePath());
+        getWorkbook().write(outputStream);
+        outputStream.flush();
+        outputStream.close();
 	}
 
 
@@ -110,7 +97,7 @@ public class Excel extends ExcelContent {
      */
 	private void create(){
 
-		setWorkbook(new SXSSFWorkbook(65535));	// 内存保留65535行数据，多余的新刷新到固化存储
+		setWorkbook(new SXSSFWorkbook(65535));	// 内存保留65535行数据，多余的刷新到固化存储
 		setSheet(getWorkbook().createSheet(getTitle()));
 
 		// title

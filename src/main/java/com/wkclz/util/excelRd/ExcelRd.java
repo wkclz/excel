@@ -21,24 +21,24 @@ public class ExcelRd extends ExcelRdContent {
 		this.file = file;
 	}
 	
-	public List<ExcelRdRow> analysisXlsx() throws ExcelReadException, IOException {
+	public List<ExcelRdRow> analysisXlsx() throws ExcelRdException, IOException {
 		String xlsxPath = file.getPath();
 		
 		if(!(xlsxPath.endsWith(".xlsx")||xlsxPath.endsWith(".xls")))
-			throw new ExcelReadException("Excel can only be xlsx or xls!");
+			throw new ExcelRdException("Excel can only be xlsx or xls!");
 		
 		// 03版本的excel要特别标明
 		if(xlsxPath.endsWith(".xls"))
 			xls = true;
 		
 		if(!file.exists())
-			throw new ExcelReadException("Excel path is not correct");
+			throw new ExcelRdException("Excel path is not correct");
 		if(!file.isFile())
-			throw new ExcelReadException("Excel path is not a file");
+			throw new ExcelRdException("Excel path is not a file");
 		
 		List<ExcelRdTypeEnum> types = getTypes();
 		if(types==null||types.size()==0)
-			throw new ExcelReadException("Types of the data must be set");
+			throw new ExcelRdException("Types of the data must be set");
 		
 		is = new FileInputStream(file);
 		

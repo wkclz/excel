@@ -30,9 +30,9 @@
 > * setTitle(String title) 
 > * setCreate_by(String create_by)
 > * setCreate_by(Object create_by)【会将object转换为String】
-> * setDateFrom(String dateFrom) 【null】
-> * setDateTo(String dateTo) 【null】
-> * setSavePath(String savePath)
+> * setDateFrom(String dateFrom) [null]
+> * setDateTo(String dateTo) [null]
+> * setSavePath(String savePath) [null]
 > * setHeader(List<String> header)
 > * setHeader(String[] header)
 > * setWidth(Integer width)【在有设置 header的时候，会自动取其长度，不需要header的需要设置 width】
@@ -47,7 +47,8 @@
 * 提供的create方法：
 > * createRow() 创建行对象【创建row对象，创建前会将上一个行对象添加到excel】
 > * createRowInCache()创建行对象【不直接添加到excel中，需要调用addRowFromCache(ExcelRow row) 对会被加入到excel】
-> * CreateXlsx() 创建最终的excel.
+> * CreateXlsx() 创建最终的excel，无返回.
+> * CreateXlsxByFile() 创建最终的excel在临时目录，并返回 File.
 
 * 通过 createRow方法创建了行对象row后，可以对行对象进行操作。
 
@@ -110,15 +111,13 @@
 <img src="http://static.wkclz.com/img/alipay.png" width="280" height="280" alt="亦菲表演机器猫"/>
 </div>
 
-
 ***
 # 更新日志
-2017-11-15 22:58:33
+2017-12-09 10:15:52
+1. Excel 生成去除结果返回，换成 throws 的方式抛出错误。
+2. 将 excel 生成过程独立，加入方法 CreateXlsxByFile()，写入到临时目录，返回File
+3. 结构优化
 ***
+2017-11-15 22:58:33
 1. Excel读取工具 ExcelRd 定义枚举类型ExcelRdTypeEnum：INTEGER("整形"),DOUBLE("双精浮点型"),DATE("日期型"),DATETIME("日期时间型"),STRING("字符型");读取时需要初始化字段类型。
 
-2017-12-09 10:15:52
-***
-1. Excel 生成去除结果返回，换成 thros 的方式抛出错误。
-2. 将 excel 生成过程独立，即将加入文件流返回
-3. 结构优化

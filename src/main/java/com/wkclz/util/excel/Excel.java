@@ -24,8 +24,7 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -56,40 +55,75 @@ public class Excel extends ExcelContent {
 		}
 		addRow(row);
 	}
-	
-	
-	/**
-	* @Title:  
-	* @Description: TODO(创建Excel) 
-	* @param @return    设定文件 
-	* @author wangkc admin@wkclz.com  
-	* @date 2017年7月16日 上午12:57:41 *  
-	* @throws
-	 */
-	public void CreateXlsx() throws ExcelException, IOException {
-		// 把最后一次的数据加进去
-		if(row!=null)
-			addRow(row);
-		
-		if(getTitle()==null||"".equals(getTitle().trim()))
-			throw new ExcelException("title cannot be null or empty!");
 
-		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
-			throw new ExcelException("header or width cannot be null or empty!");
 
-		if(getSavePath()==null||"".equals(getSavePath().trim()))
-			throw new ExcelException("savePath cannot be null or empty!");
+    /**
+     * @Title:
+     * @Description: 生成 Excel 到指定目录
+     * @param @return    设定文件
+     * @author wangkc admin@wkclz.com
+     * @date 2017年7月16日 上午12:57:41 *
+     * @throws
+     */
+    public void CreateXlsx() throws ExcelException, IOException {
+        // 把最后一次的数据加进去
+        if(row!=null)
+            addRow(row);
+
+        if(getTitle()==null||"".equals(getTitle().trim()))
+            throw new ExcelException("title cannot be null or empty!");
+
+        if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
+            throw new ExcelException("header or width cannot be null or empty!");
+
+        if(getSavePath()==null||"".equals(getSavePath().trim()))
+            throw new ExcelException("savePath cannot be null or empty!");
 
         create();   // 生成的过程
 
-		// 导出到文件
+        // 导出到文件
         FileOutputStream outputStream = new FileOutputStream(getSavePath());
         getWorkbook().write(outputStream);
         outputStream.flush();
         outputStream.close();
-	}
+    }
 
+    /**
+     * @Title:
+     * @Description: 生成 Excel 到输出流
+     * @param @return    设定文件
+     * @author wangkc admin@wkclz.com
+     * @date 2017年12月09日 上午10:31:09 *
+     * @throws
+     */
+    public File CreateXlsxByFile() throws ExcelException {
+        // 把最后一次的数据加进去
+        if(row!=null)
+            addRow(row);
 
+        if(getTitle()==null||"".equals(getTitle().trim()))
+            throw new ExcelException("title cannot be null or empty!");
+
+        if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
+            throw new ExcelException("header or width cannot be null or empty!");
+
+        create();   // 生成的过程
+
+        File file = null;
+        try {
+
+            file = File.createTempFile("temp", ".xlsx");
+            FileOutputStream stream = new FileOutputStream(file);
+            getWorkbook().write(stream);
+            stream.flush();
+            stream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+
+    }
 
 
     /**

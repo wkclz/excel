@@ -85,10 +85,34 @@ public class Excel extends ExcelContent {
 		if (!"".equals(err)) {
 			return err;
 		}
-		
+
+        create();   // 生成的过程
+
+		// 导出到文件
+        try {
+            FileOutputStream outputStream = new FileOutputStream(getSavePath());
+            getWorkbook().write(outputStream);
+            outputStream.flush();
+            outputStream.close();
+            err += "导出成功";
+        } catch (IOException e) {
+            err += e.getMessage();
+            e.printStackTrace();
+        }
+		return err;
+	}
+
+
+
+
+    /**
+     * 生成 excel 的具体过程
+     */
+	private void create(){
+
 		setWorkbook(new SXSSFWorkbook(65535));	// 内存保留65535行数据，多余的新刷新到固化存储
 		setSheet(getWorkbook().createSheet(getTitle()));
-		
+
 		// title
 		if( getTitle()!=null && !"".equals(getTitle().trim()) ){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, getWidth()-1));
@@ -97,14 +121,14 @@ public class Excel extends ExcelContent {
 			cell_title.setCellStyle(getStyleTitle());
 			cell_title.setCellValue(getTitle());
 		}
-		
+
 		// infomation of this excel
 		getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, 2));
 		SXSSFRow row_info = getSheet().createRow(rownum);
 		SXSSFCell cell_time = row_info.createCell(0);
 		cell_time.setCellStyle(getStyleStrLeftNoBorder());
 		cell_time.setCellValue("创建时间："+sdf_dateTime.format(new Date()));
-		
+
 		// create_by
 		if(getCreate_by()!=null){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 3, 5));
@@ -112,9 +136,9 @@ public class Excel extends ExcelContent {
 			cell_create_by.setCellStyle(getStyleStrLeftNoBorder());
 			cell_create_by.setCellValue("创建人："+getCreate_by());
 		}
-		
+
 		rownum++;
-		
+
 		// date_from_to
 		String date_info = "";
 		if(getDateFrom()!=null&&getDateTo()!=null)
@@ -123,7 +147,7 @@ public class Excel extends ExcelContent {
 			date_info = "时间："+getDateFrom();
 		if(getDateFrom()==null&&getDateTo()!=null)
 			date_info = "时间："+getDateTo();
-		
+
 		if(!"".equals(date_info)){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, 5));
 			SXSSFRow row_date_info = getSheet().createRow(rownum);
@@ -132,8 +156,8 @@ public class Excel extends ExcelContent {
 			cell_date_info.setCellValue(date_info);
 			rownum++;
 		}
-		
-		
+
+
 		// 写 列名称
 		List<String> hs = getHeader();
 		if(hs!=null&&hs.size()>0){
@@ -145,7 +169,7 @@ public class Excel extends ExcelContent {
 				ExcelUtil.setWidth(getSheet(), i, hs.get(i));
 			}
 		}
-		
+
 		// 写数据
 		/**
 		 * 要考虑的情况：
@@ -156,24 +180,24 @@ public class Excel extends ExcelContent {
 		 */
 		ExcelCell excelCell;	// cell 对象
 		Object content;			// cell 内容
-        HorizontalAlignment align;			// cell 对齐方式【默认居中】
+		HorizontalAlignment align;			// cell 对齐方式【默认居中】
 		boolean border;			// cell 边框【默认有边框】
 		List<ExcelRow> lines = getRows();
-		
+
 		// 对所有行对象进行循环
 		for (ExcelRow line : lines) {
-			
+
 			int col_num = 0;	// 列号
 			SXSSFRow row = getSheet().getRow(rownum);
 			if(row==null)
 				row = getSheet().createRow(rownum);
-			
+
 			// 对所有的cell 对象进行循环【在设置表格的时候，若有合并的cell，会自动跳过】
 			int size = line.size();
 			for (int j = 0; j < size; j++) {
-				
+
 				int now_cell = col_num;	// 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
-				
+
 				excelCell = line.get(j);
 				content = excelCell.getCellContent();
 				align = excelCell.getAlign();
@@ -182,11 +206,11 @@ public class Excel extends ExcelContent {
 				if(col_merge<1) col_merge = 1;
 				int row_merge = excelCell.getRow();
 				if(row_merge<1) row_merge = 1;
-				
+
 				// 若有创建cell 直接获取，否则，新建【新建cell ，合并，设置边框，这些都将只有在新建的时候进行操作，之后只是跳过相应的cell】
 				SXSSFCell cell = row.getCell(col_num);
 				if(cell==null){
-                    cell = row.createCell(col_num, CellType.NUMERIC);
+					cell = row.createCell(col_num, CellType.NUMERIC);
 					// 合并单元格
 					mergeCell(col_merge, row_merge, col_num, border);
 					col_num += col_merge;	 // 列号向前
@@ -195,23 +219,23 @@ public class Excel extends ExcelContent {
 					col_num = getCell(row,col_num);
 					// 当前列号需要更新
 					now_cell = col_num;
-                    cell = row.createCell(col_num, CellType.NUMERIC);
+					cell = row.createCell(col_num, CellType.NUMERIC);
 					// 合并单元格
 					mergeCell(col_merge, row_merge, col_num, border);
 					col_num ++;
 				}
-				
+
 				// 空
 				if (content == null)
 					content = "";
-				
+
 				// Integer
 				if(content instanceof Integer){
 					setIntStrStyle(cell, align, border);
 					cell.setCellValue((Integer) content);
 					continue;
 				}
-				
+
 				// Double
 				if(content instanceof Double){
 					setDoubleStyle(cell, align, border);
@@ -221,7 +245,7 @@ public class Excel extends ExcelContent {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
 					continue;
 				}
-				
+
 				// 时间【不能把 java.sql.Date 的时间算在内】：java.util.Date
 				if( !(content instanceof java.sql.Date) && (content instanceof Date) ){
 					content = sdf_dateTime.format(content);
@@ -236,7 +260,7 @@ public class Excel extends ExcelContent {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
 					continue;
 				}
-				
+
 				// java.sql.Date
 				if( (content instanceof Date) ){
 					content = sdf_date.format(content);
@@ -251,12 +275,12 @@ public class Excel extends ExcelContent {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
 					continue;
 				}
-				
+
 				// 最后，当字符串处理
-                cell = row.createCell(now_cell, CellType.STRING);
+				cell = row.createCell(now_cell, CellType.STRING);
 				setIntStrStyle(cell, align, border);
 				cell.setCellValue(content.toString());
-				
+
 				// 如果文字内容太长了，设置为富文本类型
 				// 列不合并才自动宽度
 				if(col_merge==1){
@@ -264,26 +288,15 @@ public class Excel extends ExcelContent {
 					if(too_long)
 						setWrapTextStyle(cell, align, border);
 				}
-				
+
 			}
 			rownum++;
 		}
-		
-		// 导出到文件
-		if("".equals(err)){
-			try {
-				FileOutputStream outputStream = new FileOutputStream(getSavePath());
-				getWorkbook().write(outputStream);
-				outputStream.flush();
-				outputStream.close();
-				err += "导出成功";
-			} catch (IOException e) {
-				err += e.getMessage();
-				e.printStackTrace();
-			}
-		}
-		return err;
 	}
+
+
+
+
 	
 	private void setIntStrStyle(SXSSFCell cell, HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleStrCenterWithBorder());

@@ -27,6 +27,7 @@ public class ExcelTest {
         }
         System.out.println("生成excel到指定目录完成：" + sdf.format(new Date()));
 
+        /*
         // 保存到临时文件并输出 File
         try {
             File file = excel.CreateXlsxByFile();
@@ -36,6 +37,7 @@ public class ExcelTest {
         }
 
         System.out.println("生成excel到临时文件完成：" + sdf.format(new Date()));
+        */
 
 	}
 

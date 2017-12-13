@@ -3,6 +3,7 @@ package com.wkclz.util.excelRd;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExcelRdTest {
 
@@ -10,7 +11,7 @@ public class ExcelRdTest {
 		excelRd();
 	}
 
-	public static void excelRd() throws IOException, ExcelRdException {
+	private static void excelRd() throws IOException, ExcelRdException {
 
 		String path = "/Users/wangkaicun/Desktop/test.xlsx";
 		ExcelRd excelRd = new ExcelRd(path);
@@ -26,7 +27,7 @@ public class ExcelRdTest {
 		excelRd.setTypes(types);	// 指定每列的类型
 		
 		List<ExcelRdRow> rows = excelRd.analysisXlsx();
-		HashMap<String, Object>[] plans = new HashMap[rows.size()];
+		Map<String, Object>[] plans = new HashMap[rows.size()];
 
 		int size = rows.size();
 		for (int i = 0; i < size; i++) {

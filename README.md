@@ -14,7 +14,7 @@
 > 1. poi-ooxml-schemas-3.17.jar
 > 1. xmlbeans-2.6.0.jar
 > 1. commons-collections4-4.1.jar
-* *以上依赖已经在 pom.xml 中描述*
+* *以上依赖已经在 pom.xml 中描述，只支持 poi3.15及以上版本*
  
 
 ### 特点：

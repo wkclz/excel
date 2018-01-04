@@ -47,7 +47,7 @@ public class ExcelTest {
 
         Excel excel = new Excel();
         excel.setTitle("标题");
-        excel.setCreate_by("虾米");
+        excel.setCreateBy("虾米");
         excel.setDateFrom("2017-07-01");
         excel.setDateTo("2017-07-12");
         excel.setSavePath(savePath);

@@ -26,6 +26,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.*;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,12 +71,6 @@ public class Excel extends ExcelContent {
         if(row!=null)
             addRow(row);
 
-        if(getTitle()==null||"".equals(getTitle().trim()))
-            throw new ExcelException("title cannot be null or empty!");
-
-        if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
-            throw new ExcelException("header or width cannot be null or empty!");
-
         if(getSavePath()==null||"".equals(getSavePath().trim()))
             throw new ExcelException("savePath cannot be null or empty!");
 
@@ -101,12 +96,6 @@ public class Excel extends ExcelContent {
         if(row!=null)
             addRow(row);
 
-        if(getTitle()==null||"".equals(getTitle().trim()))
-            throw new ExcelException("title cannot be null or empty!");
-
-        if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
-            throw new ExcelException("header or width cannot be null or empty!");
-
         create();   // 生成的过程
 
         File file = null;
@@ -129,18 +118,44 @@ public class Excel extends ExcelContent {
     /**
      * 生成 excel 的具体过程
      */
-	private void create(){
+	private void create() throws ExcelException {
+
+	    String title = getTitle();
+		if(title==null||"".equals(title.trim()))
+			throw new ExcelException("title cannot be null or empty!");
+
+		// 找出不允许的 str
+		String[] notAllowdStrs = {":","：","/","?","？","\\","*","[","]"};
+		List<String> existStr = new ArrayList<String>();
+        for (String notAllowdStr: notAllowdStrs) {
+            if (title.contains(notAllowdStr))
+                existStr.add(notAllowdStr);
+        }
+
+        if (!existStr.isEmpty()){
+            String rt = "";
+            for (String s: existStr) {
+                rt = s+",";
+            }
+            rt = rt.substring(0,rt.length()-1);
+            throw new ExcelException("title contains this chars: \""+rt + "\" is not allowd!");
+        }
+
+
+		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
+			throw new ExcelException("header or width cannot be null or empty!");
+
 
 		setWorkbook(new SXSSFWorkbook(65535));	// 内存保留65535行数据，多余的刷新到固化存储
-		setSheet(getWorkbook().createSheet(getTitle()));
+		setSheet(getWorkbook().createSheet(title));
 
 		// title
-		if( getTitle()!=null && !"".equals(getTitle().trim()) ){
+		if( title!=null && !"".equals(title.trim()) ){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, getWidth()-1));
 			SXSSFRow row_title = getSheet().createRow(rownum++);
 			SXSSFCell cell_title = row_title.createCell(0);
 			cell_title.setCellStyle(getStyleTitle());
-			cell_title.setCellValue(getTitle());
+			cell_title.setCellValue(title);
 		}
 
 		// infomation of this excel
@@ -151,11 +166,11 @@ public class Excel extends ExcelContent {
 		cell_time.setCellValue("创建时间："+sdf_dateTime.format(new Date()));
 
 		// create_by
-		if(getCreate_by()!=null){
+		if(getCreateBy()!=null){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 3, 5));
 			SXSSFCell cell_create_by = row_info.createCell(3);
 			cell_create_by.setCellStyle(getStyleStrLeftNoBorder());
-			cell_create_by.setCellValue("创建人："+getCreate_by());
+			cell_create_by.setCellValue("创建人："+getCreateBy());
 		}
 
 		rownum++;

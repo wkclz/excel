@@ -8,7 +8,7 @@ public abstract class ExcelContent extends ExcelStyle {
 	/** 标题 */
 	private String title;
 	/** 创建人 */
-	private String create_by;
+	private String createBy;
 	/** 时间从 */
 	private String dateFrom;
 	/** 时间从 */
@@ -28,18 +28,18 @@ public abstract class ExcelContent extends ExcelStyle {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getCreate_by() {
-		return create_by;
+	public String getCreateBy() {
+		return createBy;
 	}
-	public void setCreate_by(String create_by) {
-		if(create_by==null)
-			create_by = "";
-		this.create_by = create_by;
+	public void setCreateBy(String createBy) {
+		if(createBy==null)
+			createBy = "";
+		this.createBy = createBy;
 	}
-	public void setCreate_by(Object create_by) {
-		if(create_by==null)
-			create_by = "";
-		this.create_by = create_by.toString();
+	public void setCreateBy(Object createBy) {
+		if(createBy==null)
+			createBy = "";
+		this.createBy = createBy.toString();
 	}
 	public String getDateFrom() {
 		return dateFrom;

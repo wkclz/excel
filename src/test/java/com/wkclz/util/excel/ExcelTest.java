@@ -53,7 +53,7 @@ public class ExcelTest {
         String[] header = {"序号","日期","时间","数字","row合并","col合并1","col合并2","超长文字自动换行"};
         excel.setHeader(header);
 
-        for (int i = 0; i < 120000; i++) {
+        for (int i = 0; i < 120; i++) {
             ExcelRow row = excel.createRow();
             row.addCell(i+1);			                    // 序号
             row.addCell(new java.sql.Date(new Date().getTime()));	// 日期

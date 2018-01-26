@@ -21,7 +21,9 @@ public abstract class ExcelContent extends ExcelStyle {
 	private Integer width;
 	/** 行对象 */
 	private List<ExcelRow> rows;
-	
+
+	private Integer cacheRowsInMemory;
+
 	public String getTitle() {
 		return title;
 	}
@@ -96,5 +98,45 @@ public abstract class ExcelContent extends ExcelStyle {
 			this.rows = new ArrayList<ExcelRow>();
 		this.rows.add(row);
 	}
+
+    public Integer getCacheRowsInMemory() {
+        return cacheRowsInMemory;
+    }
+
+    public void setCacheRowsInMemory(Integer cacheRowsInMemory) {
+        this.cacheRowsInMemory = cacheRowsInMemory;
+    }
+
+    /**
+     * 此方法为了兼容旧版，
+     * @param createBy
+     */
+    @Deprecated
+    public void setCreate_by(String createBy) {
+        if(createBy==null)
+            createBy = "";
+        this.createBy = createBy;
+    }
+
+    /**
+     * 此方法为了兼容旧版，
+     * @param createBy
+     */
+    @Deprecated
+    public void setCreate_by(Object createBy) {
+        if(createBy==null)
+            createBy = "";
+        this.createBy = createBy.toString();
+    }
+
+
+    /**
+     * 此方法为了兼容旧版，
+     * @return
+     */
+    @Deprecated
+    public String getCreate_by() {
+        return createBy;
+    }
 	
 }

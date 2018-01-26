@@ -1,7 +1,5 @@
 package com.wkclz.util.excel;
 
-import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -35,9 +33,10 @@ public class ExcelTest {
         } catch (ExcelException e) {
             e.printStackTrace();
         }
+        */
 
         System.out.println("生成excel到临时文件完成：" + sdf.format(new Date()));
-        */
+
 
 	}
 
@@ -54,7 +53,7 @@ public class ExcelTest {
         String[] header = {"序号","日期","时间","数字","row合并","col合并1","col合并2","超长文字自动换行"};
         excel.setHeader(header);
 
-        for (int i = 0; i < 120; i++) {
+        for (int i = 0; i < 120000; i++) {
             ExcelRow row = excel.createRow();
             row.addCell(i+1);			                    // 序号
             row.addCell(new java.sql.Date(new Date().getTime()));	// 日期

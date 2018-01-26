@@ -146,7 +146,8 @@ public class Excel extends ExcelContent {
 			throw new ExcelException("header or width cannot be null or empty!");
 
 
-		setWorkbook(new SXSSFWorkbook(65535));	// 内存保留65535行数据，多余的刷新到固化存储
+        Integer cacheRowsInMemory = getCacheRowsInMemory() == null ? ExcelUtil.CACHE_ROWS_IN_MEMORY : getCacheRowsInMemory();
+		setWorkbook(new SXSSFWorkbook(cacheRowsInMemory));	// 内存保留 10240 行数据，多余的刷新到固化存储
 		setSheet(getWorkbook().createSheet(title));
 
 		// title

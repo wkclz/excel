@@ -36,6 +36,7 @@
 > * setHeader(List<String> header)
 > * setHeader(String[] header)
 > * setWidth(Integer width)【在有设置 header的时候，会自动取其长度，不需要header的需要设置 width】
+> * setCacheRowsInMemory(Integer rows) [10240] 【设置内存缓存的数据行数。内存小的服务器请调小。如果不理解，请不要设置。】
 
 * 提供的get方法：
 > * 以上的set方法均有对应的无参get方法。
@@ -120,4 +121,8 @@
 ***
 2017-11-15 22:58:33
 1. Excel读取工具 ExcelRd 定义枚举类型ExcelRdTypeEnum：INTEGER("整形"),DOUBLE("双精浮点型"),DATE("日期型"),DATETIME("日期时间型"),STRING("字符型");读取时需要初始化字段类型。
+***
+2018-01-26 11:41:22
+1. 还原旧方法，对旧版本的兼容
+2. 减小生成 excel生成时内存缓存的量，减小服务器压力。同时此参数支持设置。
 

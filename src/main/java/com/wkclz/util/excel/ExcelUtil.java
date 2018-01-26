@@ -15,6 +15,8 @@ public class ExcelUtil {
 	/** 边框大小 */
 	public static final BorderStyle BORDER = BorderStyle.THIN;
 
+	protected static final Integer CACHE_ROWS_IN_MEMORY = 10240;
+
 
 
 	private static boolean isLetter(char c) {

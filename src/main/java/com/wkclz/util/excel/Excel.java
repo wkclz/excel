@@ -66,12 +66,13 @@ public class Excel extends ExcelContent {
      * @date 2017年7月16日 上午12:57:41 *
      * @throws
      */
-    public void CreateXlsx() throws ExcelException, IOException {
+    public String CreateXlsx() throws ExcelException, IOException {
         // 把最后一次的数据加进去
         if(row!=null)
             addRow(row);
 
-        if(getSavePath()==null||"".equals(getSavePath().trim()))
+        String path = getSavePath();
+        if(path==null||"".equals(path.trim()))
             throw new ExcelException("savePath cannot be null or empty!");
 
         create();   // 生成的过程
@@ -81,6 +82,7 @@ public class Excel extends ExcelContent {
         getWorkbook().write(outputStream);
         outputStream.flush();
         outputStream.close();
+        return path;
     }
 
     /**

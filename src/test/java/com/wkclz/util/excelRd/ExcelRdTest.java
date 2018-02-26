@@ -35,18 +35,11 @@ public class ExcelRdTest {
 			ExcelRdRow excelRdRow = rows.get(i);
 			List<Object> row = excelRdRow.getRow();
 			HashMap<String, Object> plan = new HashMap<String, Object>();
-			
-			Object t1 = row.get(0);
-			Object t2 = row.get(1);
-			Object t3 = row.get(2);
-			Object t4 = row.get(3);
-			Object t5 = row.get(4);
-			
-			System.out.println(t1);
-			System.out.println(t2);
-			System.out.println(t3);
-			System.out.println(t4);
-			System.out.println(t5);
+
+            for (Object t : row) {
+                System.out.println(t);
+            }
+            System.out.println("\n");
 			
 			plans[i] = plan;
 		}

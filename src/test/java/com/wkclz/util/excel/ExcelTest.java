@@ -1,6 +1,5 @@
 package com.wkclz.util.excel;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +16,7 @@ public class ExcelTest {
 
 		// 保存到指定的目录
         try {
-            excel.CreateXlsx();
+            excel.createXlsx();
         } catch (ExcelException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -28,7 +27,7 @@ public class ExcelTest {
         /*
         // 保存到临时文件并输出 File
         try {
-            File file = excel.CreateXlsxByFile();
+            File file = excel.createXlsxByFile();
             System.out.println(file.getPath());
         } catch (ExcelException e) {
             e.printStackTrace();

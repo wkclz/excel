@@ -1,18 +1,12 @@
 package com.wkclz.util.excel;
 
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
-public abstract class ExcelStyle extends ExcelBase {
+public class ExcelStyle {
 
-    private static final short DEFAULT_COLOR = Font.COLOR_NORMAL;
-    private static final short DEFAULT_HEIGHT_IN_POINTS = 10;
-    private static final String DEFAULT_FONT_NAME = "宋体";
-	
 	
 	/*
 	 * 标题和列名
@@ -25,26 +19,28 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 标题样式【默认无边框】 */
-	protected XSSFCellStyle getStyleTitle() {
+	protected XSSFCellStyle getStyleTitle(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if (styleTitle==null){
-			styleTitle = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleTitle = (XSSFCellStyle) workbook.createCellStyle();
 			styleTitle.setAlignment(HorizontalAlignment.CENTER);
 			styleTitle.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleTitle.setFont(createFont(getWorkbook(),24));
+			styleTitle.setFont(ExcelUtil.createFont(excel,24));
 		}
 		return styleTitle;
 	}
 	
 	/** 列名样式【默认有边框】 */
-	protected XSSFCellStyle getStyleHeader() {
+	protected XSSFCellStyle getStyleHeader(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleHeader==null){
-			styleHeader = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleHeader = (XSSFCellStyle) workbook.createCellStyle();
 			styleHeader.setAlignment(HorizontalAlignment.CENTER);
 			styleHeader.setVerticalAlignment(VerticalAlignment.CENTER);
 
 			//边框
 			styleHeader = addBorder(styleHeader);
-			styleHeader.setFont(createFont(getWorkbook(),12));
+			styleHeader.setFont(ExcelUtil.createFont(excel,12));
 		}
 		return styleHeader;
 	}
@@ -66,54 +62,57 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 字符串 【无边框,左边】 */
-	protected XSSFCellStyle getStyleStrLeftNoBorder() {
+	protected XSSFCellStyle getStyleStrLeftNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrLeftNoBorder==null){
-			styleStrLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleStrLeftNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleStrLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleStrLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-
-			styleStrLeftNoBorder.setFont(createFont(getWorkbook()));
+			styleStrLeftNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleStrLeftNoBorder;
 	}
 	
 	/** 字符串 【无边框，中间】 */
-	protected XSSFCellStyle getStyleStrCenterNoBorder() {
+	protected XSSFCellStyle getStyleStrCenterNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrCenterNoBorder==null){
-			styleStrCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleStrCenterNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 
 			styleStrCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleStrCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 
-			styleStrCenterNoBorder.setFont(createFont(getWorkbook()));
+			styleStrCenterNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleStrCenterNoBorder;
 	}
 	
 	/** 字符串 【有边框，左边】 */
-	protected XSSFCellStyle getStyleStrLeftWithBorder() {
+	protected XSSFCellStyle getStyleStrLeftWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrLeftWithBorder==null){
-			styleStrLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleStrLeftWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleStrLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleStrLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 
 			//边框
 			styleStrLeftWithBorder = addBorder(styleStrLeftWithBorder);
-			styleStrLeftWithBorder.setFont(createFont(getWorkbook()));
+			styleStrLeftWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleStrLeftWithBorder;
 	}
 	
 	/** 字符串 【有边框，中间】 */
-	protected XSSFCellStyle getStyleStrCenterWithBorder() {
+	protected XSSFCellStyle getStyleStrCenterWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrCenterWithBorder==null){
-			styleStrCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleStrCenterWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleStrCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleStrCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 
 			//边框
 			styleStrCenterWithBorder = addBorder(styleStrCenterWithBorder);
-			styleStrCenterWithBorder.setFont(createFont(getWorkbook()));
+			styleStrCenterWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleStrCenterWithBorder;
 	}
@@ -135,55 +134,59 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 小数 【无边框,左边】 */
-	protected XSSFCellStyle getStyleNumLeftNoBorder() {
+	protected XSSFCellStyle getStyleNumLeftNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumLeftNoBorder==null){
-			styleNumLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleNumLeftNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleNumLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleNumLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleNumLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
-			styleNumLeftNoBorder.setFont(createFont(getWorkbook()));
+			styleNumLeftNoBorder.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
+			styleNumLeftNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleNumLeftNoBorder;
 	}
 	
 	/** 小数 【无边框，中间】 */
-	protected XSSFCellStyle getStyleNumCenterNoBorder() {
+	protected XSSFCellStyle getStyleNumCenterNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumCenterNoBorder==null){
-			styleNumCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleNumCenterNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleNumCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleNumCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleNumCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
-			styleNumCenterNoBorder.setFont(createFont(getWorkbook()));
+			styleNumCenterNoBorder.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
+			styleNumCenterNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleNumCenterNoBorder;
 	}
 	
 	/** 小数 【有边框，左边】 */
-	protected XSSFCellStyle getStyleNumLeftWithBorder() {
+	protected XSSFCellStyle getStyleNumLeftWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumLeftWithBorder==null){
-			styleNumLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleNumLeftWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleNumLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleNumLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleNumLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
+			styleNumLeftWithBorder.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
 
 			//边框
 			styleNumLeftWithBorder = addBorder(styleNumLeftWithBorder);
-			styleNumLeftWithBorder.setFont(createFont(getWorkbook()));
+			styleNumLeftWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleNumLeftWithBorder;
 	}
 	
 	/** 小数 【有边框，中间】 */
-	protected XSSFCellStyle getStyleNumCenterWithBorder() {
+	protected XSSFCellStyle getStyleNumCenterWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumCenterWithBorder==null){
-			styleNumCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleNumCenterWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleNumCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleNumCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleNumCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
+			styleNumCenterWithBorder.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
 
 			//边框
 			styleNumCenterWithBorder = addBorder(styleNumCenterWithBorder);
-			styleNumCenterWithBorder.setFont(createFont(getWorkbook()));
+			styleNumCenterWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleNumCenterWithBorder;
 	}
@@ -205,55 +208,59 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 日期 【无边框,左边】 */
-	protected XSSFCellStyle getStyleDateLeftNoBorder() {
+	protected XSSFCellStyle getStyleDateLeftNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateLeftNoBorder==null){
-			styleDateLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateLeftNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
-			styleDateLeftNoBorder.setFont(createFont(getWorkbook()));
+			styleDateLeftNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd"));
+			styleDateLeftNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateLeftNoBorder;
 	}
 	
 	/** 日期 【无边框，中间】 */
-	protected XSSFCellStyle getStyleDateCenterNoBorder() {
+	protected XSSFCellStyle getStyleDateCenterNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateCenterNoBorder==null){
-			styleDateCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateCenterNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
-			styleDateCenterNoBorder.setFont(createFont(getWorkbook()));
+			styleDateCenterNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd"));
+			styleDateCenterNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateCenterNoBorder;
 	}
 	
 	/** 日期 【有边框，左边】 */
-	protected XSSFCellStyle getStyleDateLeftWithBorder() {
+	protected XSSFCellStyle getStyleDateLeftWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateLeftWithBorder==null){
-			styleDateLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateLeftWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
+			styleDateLeftWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd"));
 
 			//边框
 			styleDateLeftWithBorder = addBorder(styleDateLeftWithBorder);
-			styleDateLeftWithBorder.setFont(createFont(getWorkbook()));
+			styleDateLeftWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateLeftWithBorder;
 	}
 	
 	/** 日期 【有边框，中间】 */
-	protected XSSFCellStyle getStyleDateCenterWithBorder() {
+	protected XSSFCellStyle getStyleDateCenterWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateCenterWithBorder==null){
-			styleDateCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateCenterWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
+			styleDateCenterWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd"));
 
 			//边框
 			styleDateCenterWithBorder = addBorder(styleDateCenterWithBorder);
-			styleDateCenterWithBorder.setFont(createFont(getWorkbook()));
+			styleDateCenterWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateCenterWithBorder;
 	}
@@ -275,55 +282,59 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 日期时间 【无边框,左边】 */
-	protected XSSFCellStyle getStyleDateTimeLeftNoBorder() {
+	protected XSSFCellStyle getStyleDateTimeLeftNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeLeftNoBorder==null){
-			styleDateTimeLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateTimeLeftNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateTimeLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateTimeLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateTimeLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
-			styleDateTimeLeftNoBorder.setFont(createFont(getWorkbook()));
+			styleDateTimeLeftNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleDateTimeLeftNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateTimeLeftNoBorder;
 	}
 	
 	/** 日期时间 【无边框，中间】 */
-	protected XSSFCellStyle getStyleDateTimeCenterNoBorder() {
+	protected XSSFCellStyle getStyleDateTimeCenterNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeCenterNoBorder==null){
-			styleDateTimeCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateTimeCenterNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateTimeCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateTimeCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateTimeCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
-			styleDateTimeCenterNoBorder.setFont(createFont(getWorkbook()));
+			styleDateTimeCenterNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleDateTimeCenterNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateTimeCenterNoBorder;
 	}
 	
 	/** 日期时间 【有边框，左边】 */
-	protected XSSFCellStyle getStyleDateTimeLeftWithBorder() {
+	protected XSSFCellStyle getStyleDateTimeLeftWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeLeftWithBorder==null){
-			styleDateTimeLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateTimeLeftWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateTimeLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateTimeLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateTimeLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleDateTimeLeftWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 
 			//边框
 			styleDateTimeLeftWithBorder = addBorder(styleDateTimeLeftWithBorder);
-			styleDateTimeLeftWithBorder.setFont(createFont(getWorkbook()));
+			styleDateTimeLeftWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateTimeLeftWithBorder;
 	}
 	
 	/** 日期时间 【有边框，中间】 */
-	protected XSSFCellStyle getStyleDateTimeCenterWithBorder() {
+	protected XSSFCellStyle getStyleDateTimeCenterWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeCenterWithBorder==null){
-			styleDateTimeCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleDateTimeCenterWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleDateTimeCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateTimeCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleDateTimeCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleDateTimeCenterWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 
 			//边框
 			styleDateTimeCenterWithBorder = addBorder(styleDateTimeCenterWithBorder);
-			styleDateTimeCenterWithBorder.setFont(createFont(getWorkbook()));
+			styleDateTimeCenterWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleDateTimeCenterWithBorder;
 	}
@@ -345,59 +356,63 @@ public abstract class ExcelStyle extends ExcelBase {
 	
 	
 	/** 富文本，自动换行 【无边框,左边】 */
-	protected XSSFCellStyle getStyleWrapTextLeftNoBorder() {
+	protected XSSFCellStyle getStyleWrapTextLeftNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextLeftNoBorder==null){
-			styleWrapTextLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleWrapTextLeftNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleWrapTextLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleWrapTextLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleWrapTextLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleWrapTextLeftNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextLeftNoBorder.setWrapText(true);
-			styleWrapTextLeftNoBorder.setFont(createFont(getWorkbook()));
+			styleWrapTextLeftNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleWrapTextLeftNoBorder;
 	}
 	
 	/** 富文本，自动换行 【无边框，中间】 */
-	protected XSSFCellStyle getStyleWrapTextCenterNoBorder() {
+	protected XSSFCellStyle getStyleWrapTextCenterNoBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextCenterNoBorder==null){
-			styleWrapTextCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleWrapTextCenterNoBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleWrapTextCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleWrapTextCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleWrapTextCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleWrapTextCenterNoBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextCenterNoBorder.setWrapText(true);
-			styleWrapTextCenterNoBorder.setFont(createFont(getWorkbook()));
+			styleWrapTextCenterNoBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleWrapTextCenterNoBorder;
 	}
 	
 	/** 富文本，自动换行 【有边框，左边】 */
-	protected XSSFCellStyle getStyleWrapTextLeftWithBorder() {
+	protected XSSFCellStyle getStyleWrapTextLeftWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextLeftWithBorder==null){
-			styleWrapTextLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleWrapTextLeftWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleWrapTextLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleWrapTextLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleWrapTextLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleWrapTextLeftWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextLeftWithBorder.setWrapText(true);
 
 			//边框
 			styleWrapTextLeftWithBorder = addBorder(styleWrapTextLeftWithBorder);
-			styleWrapTextLeftWithBorder.setFont(createFont(getWorkbook()));
+			styleWrapTextLeftWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleWrapTextLeftWithBorder;
 	}
 	
 	/** 富文本，自动换行 【有边框，中间】 */
-	protected XSSFCellStyle getStyleWrapTextCenterWithBorder() {
+	protected XSSFCellStyle getStyleWrapTextCenterWithBorder(Excel excel) {
+        SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextCenterWithBorder==null){
-			styleWrapTextCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
+			styleWrapTextCenterWithBorder = (XSSFCellStyle) workbook.createCellStyle();
 			styleWrapTextCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleWrapTextCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleWrapTextCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+			styleWrapTextCenterWithBorder.setDataFormat(workbook.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextCenterWithBorder.setWrapText(true);
 			//边框
 			styleWrapTextCenterWithBorder = addBorder(styleWrapTextCenterWithBorder);
 
-			styleWrapTextCenterWithBorder.setFont(createFont(getWorkbook()));
+			styleWrapTextCenterWithBorder.setFont(ExcelUtil.createFont(excel));
 		}
 		return styleWrapTextCenterWithBorder;
 	}
@@ -420,40 +435,4 @@ public abstract class ExcelStyle extends ExcelBase {
 		return xssfCellStyle;
 	}
 
-
-    /**
-     * 构建字体
-     * @param workbook
-     * @return
-     */
-    private static Font createFont(SXSSFWorkbook workbook){
-        return createFont(workbook, 0, 0, null);
-    }
-
-    /**
-     * 构建字体
-     * @param workbook
-     * @param heightInPoints
-     * @return
-     */
-    private static Font createFont(SXSSFWorkbook workbook,int heightInPoints){
-        return createFont(workbook, 0, heightInPoints, null);
-    }
-
-    /**
-     * 构建字体
-     * @param workbook
-     * @param color
-     * @param heightInPoints
-     * @param fontName
-     * @return
-     */
-	private static Font createFont(SXSSFWorkbook workbook, int color, int heightInPoints, String fontName){
-        Font font = workbook.createFont();
-        font.setColor(color == 0 ? DEFAULT_COLOR : (short) color);
-        font.setFontHeightInPoints(heightInPoints == 0 ? DEFAULT_HEIGHT_IN_POINTS : (short)heightInPoints);
-        font.setFontName(fontName == null ? DEFAULT_FONT_NAME : fontName);
-        return font;
-    }
-	
 }

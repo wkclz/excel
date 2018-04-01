@@ -1,28 +1,85 @@
 package com.wkclz.util.excel;
 
+
+/*
+                            _ooOoo_
+                           o8888888o
+                           88" . "88
+                           (| -_- |)
+                            O\ = /O
+                        ____/`---'\____
+                      .   ' \\| | `.
+                       / \\||| : ||| \
+                     / _||||| -:- |||||- \
+                       | | \\\ - / | |
+                     | \_| ''\---/'' | |
+                      \ .-\__ `-` ___/-. /
+                   ___`. .' /--.--\ `. . __
+                ."" '< `.___\_<|>_/___.' >'"".
+               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+                 \ \ `-. \_ __\ /__ _/ .-` / /
+         ======`-.____`-.___\_____/___.-`____.-'======
+                            `=---='
+
+         .............................................
+                  佛祖保佑             永无BUG
+          佛曰:
+                  写字楼里写字间，写字间里程序员；
+                  程序人员写程序，又拿程序换酒钱。
+                  酒醒只在网上坐，酒醉还来网下眠；
+                  酒醉酒醒日复日，网上网下年复年。
+                  但愿老死电脑间，不愿鞠躬老板前；
+                  奔驰宝马贵者趣，公交自行程序员。
+                  别人笑我忒疯癫，我笑自己命太贱；
+                  不见满街漂亮妹，哪个归得程序员？
+*/
+
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.PrintSetup;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public abstract class ExcelContent extends ExcelStyle {
-	
+public abstract class ExcelContent {
+
+    /** excel 工作簿 */
+    protected SXSSFWorkbook workbook;
+    /** sheet */
+    protected SXSSFSheet sheet;
+    /** 行号 */
+    protected int rownum = 0;
+
 	/** 标题 */
-	private String title;
+    protected String title;
 	/** 创建人 */
-	private String createBy;
+    protected String createBy;
 	/** 时间从 */
-	private String dateFrom;
+    protected String dateFrom;
 	/** 时间从 */
-	private String dateTo;
+    protected String dateTo;
 	/** 保存路径 */
-	private String savePath;
+    protected String savePath;
 	/** 表格列名 */
-	private List<String> header;
+    protected List<String> header;
 	/** Excel 宽度【用于在没有title的情况下定义标题合并】 */
-	private Integer width;
+    protected Integer width;
 	/** 行对象 */
-	private List<ExcelRow> rows;
+    protected List<ExcelRow> rows;
 
-	private Integer cacheRowsInMemory;
+	/** 字体缓存重用 */
+    protected Map<String, Font> workBookFonts;
+
+    /** 所有样式 */
+    protected ExcelStyle style;
+
+    protected Integer cacheRowsInMemory;
+
+
+
+
 
 	public String getTitle() {
 		return title;
@@ -78,7 +135,7 @@ public abstract class ExcelContent extends ExcelStyle {
 		if(header!=null) {
 			this.width = header.length;
 		}
-		this.header = new ArrayList<String>(); 
+		this.header = new ArrayList<String>();
 		for (String h : header) {
 			this.header.add(h);
 		}
@@ -114,6 +171,42 @@ public abstract class ExcelContent extends ExcelStyle {
         this.cacheRowsInMemory = cacheRowsInMemory;
     }
 
+    public Map<String, Font> getWorkBookFonts() {
+        return workBookFonts;
+    }
+
+    public void setWorkBookFonts(Map<String, Font> workBookFonts) {
+        this.workBookFonts = workBookFonts;
+    }
+
+    public ExcelStyle getStyle() {
+        return style;
+    }
+
+    public void setStyle(ExcelStyle style) {
+        this.style = style;
+    }
+
+    public SXSSFWorkbook getWorkbook() {
+        return workbook;
+    }
+    public void setWorkbook(SXSSFWorkbook workbook) {
+        this.workbook = workbook;
+    }
+    public SXSSFSheet getSheet() {
+        return sheet;
+    }
+    public void setSheet(SXSSFSheet sheet) {
+        // 不显示风格线
+        sheet.setDisplayGridlines(false);
+        PrintSetup ps = sheet.getPrintSetup();
+        // 打印方向，true：横向，false：纵向(默认)
+        ps.setLandscape(false);
+        // A4纸
+        ps.setPaperSize(PrintSetup.A4_PAPERSIZE);
+        this.sheet = sheet;
+    }
+
     /**
      * 此方法为了兼容旧版，
      * @param createBy
@@ -147,5 +240,5 @@ public abstract class ExcelContent extends ExcelStyle {
     public String getCreate_by() {
         return createBy;
     }
-	
+
 }

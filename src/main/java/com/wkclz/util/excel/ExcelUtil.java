@@ -25,8 +25,9 @@ public class ExcelUtil {
 	}
 	
 	private static int length(String s) {
-		if (s == null)
+		if (s == null) {
 			return 0;
+		}
 		char[] c = s.toCharArray();
 		int len = 0;
 		for (int i = 0; i < c.length; i++) {
@@ -57,8 +58,9 @@ public class ExcelUtil {
 	protected static boolean setWidth(SXSSFSheet sheel, int col, String s){
 		int width = ExcelUtil.width(s);
 		width = width > 72*256 ? 72*256 : width;
-		if(width>sheel.getColumnWidth(col))
+		if(width>sheel.getColumnWidth(col)) {
 			sheel.setColumnWidth(col, width);
+		}
 		return width == 72*256;
 	}
 	
@@ -74,7 +76,9 @@ public class ExcelUtil {
 	* @throws
 	 */
 	public static java.sql.Date getSqlDate(Date date){
-		if(date==null) return null;
+		if(date==null) {
+			return null;
+		}
 		return new java.sql.Date(date.getTime());
 	}
 	

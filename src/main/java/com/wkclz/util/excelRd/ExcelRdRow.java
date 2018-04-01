@@ -11,8 +11,9 @@ public class ExcelRdRow {
 		return row;
 	}
 	protected void addCell(Object cellContent) {
-		if(this.row==null)
-			this.row = new ArrayList<Object>();
+		if(this.row==null) {
+            this.row = new ArrayList<Object>();
+        }
 		this.row.add(cellContent);
 	}
 	

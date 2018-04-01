@@ -9,7 +9,9 @@ public class ExcelRdUtil {
 
 
 	protected static Object getCellValue(XSSFCell cell, ExcelRdTypeEnum type){
-		if(cell==null||"".equals(cell.toString().trim())) return null;
+		if(cell==null||"".equals(cell.toString().trim())) {
+			return null;
+		}
 		CellType cellType = cell.getCellTypeEnum();
 		if( type == ExcelRdTypeEnum.INTEGER && cellType == CellType.NUMERIC){
 			Double numeric = cell.getNumericCellValue();
@@ -31,7 +33,9 @@ public class ExcelRdUtil {
 	}
 	
 	protected static Object getCellValue(HSSFCell cell, ExcelRdTypeEnum type){
-		if(cell==null||"".equals(cell.toString().trim())) return null;
+		if(cell==null||"".equals(cell.toString().trim())) {
+			return null;
+		}
 		CellType cellType = cell.getCellTypeEnum();
 		if( type == ExcelRdTypeEnum.INTEGER && cellType == CellType.NUMERIC){
 			Double numeric = cell.getNumericCellValue();

@@ -39,19 +39,22 @@ public class ExcelRow {
 	}
 	public void addCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row) {
 		ExcelCell excelCell = new ExcelCell(cellContent, border, align, col, row);
-		if(this.row==null)
+		if(this.row==null) {
 			this.row = new ArrayList<ExcelCell>();
+		}
 		this.row.add(excelCell);
 	}
 
 	protected int size(){
-		if(row==null)
+		if(row==null) {
 			return 0;
+		}
 		return row.size();
 	}
 	protected ExcelCell get(int i){
-		if(row==null)
+		if(row==null) {
 			return null;
+		}
 		return row.get(i);
 	}
 }

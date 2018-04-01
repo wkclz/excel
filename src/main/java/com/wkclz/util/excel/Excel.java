@@ -36,8 +36,9 @@ public class Excel extends ExcelContent {
 	/** 创建一行 row */
 	public ExcelRow createRow() {
 		// 只有第一次 createRow 的时候才能为空。之后的 createRow过程都需要把前一次的 row 添加进去
-		if(row!=null)
+		if(row!=null) {
 			addRow(row);
+		}
 		row = new ExcelRow();
 		return row;
 	}
@@ -68,12 +69,14 @@ public class Excel extends ExcelContent {
      */
     public String CreateXlsx() throws ExcelException, IOException {
         // 把最后一次的数据加进去
-        if(row!=null)
-            addRow(row);
+        if(row!=null) {
+			addRow(row);
+		}
 
         String path = getSavePath();
-        if(path==null||"".equals(path.trim()))
-            throw new ExcelException("savePath cannot be null or empty!");
+        if(path==null||"".equals(path.trim())) {
+			throw new ExcelException("savePath cannot be null or empty!");
+		}
 
         create();   // 生成的过程
 
@@ -95,8 +98,9 @@ public class Excel extends ExcelContent {
      */
     public File CreateXlsxByFile() throws ExcelException {
         // 把最后一次的数据加进去
-        if(row!=null)
-            addRow(row);
+        if(row!=null) {
+			addRow(row);
+		}
 
         create();   // 生成的过程
 
@@ -123,15 +127,17 @@ public class Excel extends ExcelContent {
 	private void create() throws ExcelException {
 
 	    String title = getTitle();
-		if(title==null||"".equals(title.trim()))
+		if(title==null||"".equals(title.trim())) {
 			throw new ExcelException("title cannot be null or empty!");
+		}
 
 		// 找出不允许的 str
 		String[] notAllowdStrs = {":","：","/","?","？","\\","*","[","]"};
 		List<String> existStr = new ArrayList<String>();
         for (String notAllowdStr: notAllowdStrs) {
-            if (title.contains(notAllowdStr))
-                existStr.add(notAllowdStr);
+            if (title.contains(notAllowdStr)) {
+				existStr.add(notAllowdStr);
+			}
         }
 
         if (!existStr.isEmpty()){
@@ -144,8 +150,9 @@ public class Excel extends ExcelContent {
         }
 
 
-		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null)
+		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null) {
 			throw new ExcelException("header or width cannot be null or empty!");
+		}
 
 
         Integer cacheRowsInMemory = getCacheRowsInMemory() == null ? ExcelUtil.CACHE_ROWS_IN_MEMORY : getCacheRowsInMemory();
@@ -180,12 +187,15 @@ public class Excel extends ExcelContent {
 
 		// date_from_to
 		String date_info = "";
-		if(getDateFrom()!=null&&getDateTo()!=null)
+		if(getDateFrom()!=null&&getDateTo()!=null) {
 			date_info = "时间范围：从"+getDateFrom()+"到"+getDateTo();
-		if(getDateFrom()!=null&&getDateTo()==null)
+		}
+		if(getDateFrom()!=null&&getDateTo()==null) {
 			date_info = "时间："+getDateFrom();
-		if(getDateFrom()==null&&getDateTo()!=null)
+		}
+		if(getDateFrom()==null&&getDateTo()!=null) {
 			date_info = "时间："+getDateTo();
+		}
 
 		if(!"".equals(date_info)){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, 5));
@@ -228,8 +238,9 @@ public class Excel extends ExcelContent {
 
 			int col_num = 0;	// 列号
 			SXSSFRow row = getSheet().getRow(rownum);
-			if(row==null)
+			if(row==null) {
 				row = getSheet().createRow(rownum);
+			}
 
 			// 对所有的cell 对象进行循环【在设置表格的时候，若有合并的cell，会自动跳过】
 			int size = line.size();
@@ -242,9 +253,13 @@ public class Excel extends ExcelContent {
 				align = excelCell.getAlign();
 				border = excelCell.getBorder();
 				int col_merge = excelCell.getCol();
-				if(col_merge<1) col_merge = 1;
+				if(col_merge<1) {
+					col_merge = 1;
+				}
 				int row_merge = excelCell.getRow();
-				if(row_merge<1) row_merge = 1;
+				if(row_merge<1) {
+					row_merge = 1;
+				}
 
 				// 若有创建cell 直接获取，否则，新建【新建cell ，合并，设置边框，这些都将只有在新建的时候进行操作，之后只是跳过相应的cell】
 				SXSSFCell cell = row.getCell(col_num);
@@ -265,8 +280,9 @@ public class Excel extends ExcelContent {
 				}
 
 				// 空
-				if (content == null)
+				if (content == null) {
 					content = "";
+				}
 
 				// Integer
 				if(content instanceof Integer){
@@ -280,8 +296,9 @@ public class Excel extends ExcelContent {
 					setDoubleStyle(cell, align, border);
 					cell.setCellValue((Double) content);
 					// 列不合并才自动宽度
-					if(col_merge==1)
+					if(col_merge==1) {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					}
 					continue;
 				}
 
@@ -295,8 +312,9 @@ public class Excel extends ExcelContent {
 						e.printStackTrace();
 					}
 					// 列不合并才自动宽度
-					if(col_merge==1)
+					if(col_merge==1) {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					}
 					continue;
 				}
 
@@ -310,8 +328,9 @@ public class Excel extends ExcelContent {
 						e.printStackTrace();
 					}
 					// 列不合并才自动宽度
-					if(col_merge==1)
+					if(col_merge==1) {
 						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					}
 					continue;
 				}
 
@@ -324,8 +343,9 @@ public class Excel extends ExcelContent {
 				// 列不合并才自动宽度
 				if(col_merge==1){
 					boolean too_long = ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
-					if(too_long)
+					if(too_long) {
 						setWrapTextStyle(cell, align, border);
+					}
 				}
 
 			}
@@ -340,62 +360,77 @@ public class Excel extends ExcelContent {
 	private void setIntStrStyle(SXSSFCell cell, HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleStrCenterWithBorder());
 		// 边框 + 左边
-		if(border && HorizontalAlignment.LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleStrLeftWithBorder());
+		}
 		// 无边框 + 左边
-		if(!border && HorizontalAlignment.LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleStrLeftNoBorder());
+		}
 		// 无边框 + 中间
-		if(!border && HorizontalAlignment.CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align) {
 			cell.setCellStyle(getStyleStrCenterNoBorder());
+		}
 	}
 	private void setDoubleStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleNumCenterWithBorder());
 		// 边框 + 左边
-		if(border && HorizontalAlignment.LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleNumLeftWithBorder());
+		}
 		// 无边框 + 左边
-		if(!border && HorizontalAlignment.LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleNumLeftNoBorder());
+		}
 		// 无边框 + 中间
-		if(!border && HorizontalAlignment.CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align) {
 			cell.setCellStyle(getStyleNumCenterNoBorder());
+		}
 	}
 	private void setDateStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleDateCenterWithBorder());
 		// 边框 + 左边
-		if(border && HorizontalAlignment.LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleDateLeftWithBorder());
+		}
 		// 无边框 + 左边
-		if(!border && HorizontalAlignment.LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleDateLeftNoBorder());
+		}
 		// 无边框 + 中间
-		if(!border && HorizontalAlignment.CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align) {
 			cell.setCellStyle(getStyleDateCenterNoBorder());
+		}
 	}
 	private void setDateTimeStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleDateTimeCenterWithBorder());
 		// 边框 + 左边
-		if(border && HorizontalAlignment.LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleDateTimeLeftWithBorder());
+		}
 		// 无边框 + 左边
-		if(!border && HorizontalAlignment.LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleDateTimeLeftNoBorder());
+		}
 		// 无边框 + 中间
-		if(!border && HorizontalAlignment.CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align) {
 			cell.setCellStyle(getStyleDateTimeCenterNoBorder());
+		}
 	}
 	private void setWrapTextStyle(SXSSFCell cell,HorizontalAlignment align, boolean border){
 		cell.setCellStyle(getStyleWrapTextCenterWithBorder());
 		// 边框 + 左边
-		if(border && HorizontalAlignment.LEFT == align)
+		if(border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleWrapTextLeftWithBorder());
+		}
 		// 无边框 + 左边
-		if(!border && HorizontalAlignment.LEFT == align)
+		if(!border && HorizontalAlignment.LEFT == align) {
 			cell.setCellStyle(getStyleWrapTextLeftNoBorder());
+		}
 		// 无边框 + 中间
-		if(!border && HorizontalAlignment.CENTER == align)
+		if(!border && HorizontalAlignment.CENTER == align) {
 			cell.setCellStyle(getStyleWrapTextCenterNoBorder());
+		}
 	}
 	
 	/**
@@ -425,17 +460,20 @@ public class Excel extends ExcelContent {
 			for (int x=rownum; x < rownum+row_merge; x++) {
 				for (int y = col_num; y < col_num+col_merge; y++) {
 					SXSSFRow r = getSheet().getRow(x);
-					if(r==null)
+					if(r==null) {
 						r = getSheet().createRow(x);
+					}
 					SXSSFCell c = r.getCell(y);
-					if(c==null)
+					if(c==null) {
 						c = r.createCell(y);
+					}
 					
 					// 是否需要设置边框
-					if(border)
+					if(border) {
 						c.setCellStyle(getStyleNumCenterWithBorder());
-					else
+					} else {
 						c.setCellStyle(getStyleNumCenterNoBorder());
+					}
 				}
 			}
 		}

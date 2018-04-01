@@ -34,13 +34,15 @@ public abstract class ExcelContent extends ExcelStyle {
 		return createBy;
 	}
 	public void setCreateBy(String createBy) {
-		if(createBy==null)
+		if(createBy==null) {
 			createBy = "";
+		}
 		this.createBy = createBy;
 	}
 	public void setCreateBy(Object createBy) {
-		if(createBy==null)
+		if(createBy==null) {
 			createBy = "";
+		}
 		this.createBy = createBy.toString();
 	}
 	public String getDateFrom() {
@@ -66,17 +68,20 @@ public abstract class ExcelContent extends ExcelStyle {
 	}
 	/** 使用List<String>初始化列名 */
 	public void setHeader(List<String> header) {
-		if(header!=null)
+		if(header!=null) {
 			this.width = header.size();
+		}
 		this.header = header;
 	}
 	/** 使用String[] 初始化列名 */
 	public void setHeader(String[] header) {
-		if(header!=null)
+		if(header!=null) {
 			this.width = header.length;
+		}
 		this.header = new ArrayList<String>(); 
-		for (String h : header)
+		for (String h : header) {
 			this.header.add(h);
+		}
 	}
 	public Integer getWidth() {
 		return width;
@@ -88,14 +93,16 @@ public abstract class ExcelContent extends ExcelStyle {
 		this.rows = rows;
 	}
 	protected List<ExcelRow> getRows() {
-		if(rows==null)
+		if(rows==null) {
 			rows = new ArrayList<ExcelRow>();
+		}
 		return rows;
 	}
 	/** 使用setLines初始化内容行 */
 	protected void addRow(ExcelRow row) {
-		if(this.rows==null)
+		if(this.rows==null) {
 			this.rows = new ArrayList<ExcelRow>();
+		}
 		this.rows.add(row);
 	}
 
@@ -113,8 +120,9 @@ public abstract class ExcelContent extends ExcelStyle {
      */
     @Deprecated
     public void setCreate_by(String createBy) {
-        if(createBy==null)
-            createBy = "";
+        if(createBy==null) {
+			createBy = "";
+		}
         this.createBy = createBy;
     }
 
@@ -124,8 +132,9 @@ public abstract class ExcelContent extends ExcelStyle {
      */
     @Deprecated
     public void setCreate_by(Object createBy) {
-        if(createBy==null)
-            createBy = "";
+        if(createBy==null) {
+			createBy = "";
+		}
         this.createBy = createBy.toString();
     }
 

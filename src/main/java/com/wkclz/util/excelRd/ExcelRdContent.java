@@ -42,8 +42,9 @@ public abstract class ExcelRdContent extends ExcelRdBase {
 		this.types = types;
 	}
 	public void setTypes(ExcelRdTypeEnum[] types) {
-		if(this.types==null)
-			this.types = new ArrayList<ExcelRdTypeEnum>();
+		if(this.types==null) {
+            this.types = new ArrayList<ExcelRdTypeEnum>();
+        }
 		for (ExcelRdTypeEnum type : types) {
 			this.types.add(type);
 		}
@@ -55,8 +56,9 @@ public abstract class ExcelRdContent extends ExcelRdBase {
 		this.rows = rows;
 	}
 	protected void addRow(ExcelRdRow row) {
-		if(rows==null)
-			rows = new ArrayList<ExcelRdRow>();
+		if(rows==null) {
+            rows = new ArrayList<ExcelRdRow>();
+        }
 		rows.add(row);
 	}
 }

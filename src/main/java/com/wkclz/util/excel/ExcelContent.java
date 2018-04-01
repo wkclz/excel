@@ -38,6 +38,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,14 @@ public abstract class ExcelContent {
     /** excel 工作簿 */
     protected SXSSFWorkbook workbook;
     /** sheet */
+    /** 多 sheet 支持 */
     protected SXSSFSheet sheet;
+    protected List<SXSSFSheet> sheets;
+    /** sheet号 */
+    protected Integer sheetNum = 0;
     /** 行号 */
-    protected int rownum = 0;
+    protected Integer rowNum = 0;
+    /** 基本信息后的第一行。 */
 
 	/** 标题 */
     protected String title;
@@ -75,8 +81,28 @@ public abstract class ExcelContent {
     /** 所有样式 */
     protected ExcelStyle style;
 
-    protected Integer cacheRowsInMemory;
+    protected Integer cacheRowsInMemory = 10240;
 
+    protected List<SXSSFSheet> getSheets() {
+        if(this.sheets==null) {
+            this.sheets = new ArrayList<SXSSFSheet>();
+        }
+        return this.sheets;
+    }
+    protected void addSheet(SXSSFSheet sheet) {
+        if(this.sheets==null) {
+            this.sheets = new ArrayList<SXSSFSheet>();
+        }
+
+        // 不显示风格线
+        sheet.setDisplayGridlines(false);
+        PrintSetup ps = sheet.getPrintSetup();
+        // 打印方向，true：横向，false：纵向(默认)
+        ps.setLandscape(false);
+        // A4纸
+        ps.setPaperSize(PrintSetup.A4_PAPERSIZE);
+        this.sheets.add(sheet);
+    }
 
 	public String getTitle() {
 		return title;
@@ -152,7 +178,6 @@ public abstract class ExcelContent {
 		}
 		return rows;
 	}
-	/** 使用setLines初始化内容行 */
 	protected void addRow(ExcelRow row) {
 		if(this.rows==null) {
 			this.rows = new ArrayList<ExcelRow>();
@@ -189,19 +214,6 @@ public abstract class ExcelContent {
     }
     public void setWorkbook(SXSSFWorkbook workbook) {
         this.workbook = workbook;
-    }
-    public SXSSFSheet getSheet() {
-        return sheet;
-    }
-    public void setSheet(SXSSFSheet sheet) {
-        // 不显示风格线
-        sheet.setDisplayGridlines(false);
-        PrintSetup ps = sheet.getPrintSetup();
-        // 打印方向，true：横向，false：纵向(默认)
-        ps.setLandscape(false);
-        // A4纸
-        ps.setPaperSize(PrintSetup.A4_PAPERSIZE);
-        this.sheet = sheet;
     }
 
     /**

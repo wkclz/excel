@@ -20,8 +20,6 @@ public class ExcelUtil {
     protected static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
 	/** 边框大小 */
     protected static final BorderStyle BORDER = BorderStyle.THIN;
-	/** 写 Excel 时的缓存数 */
-	protected static final Integer CACHE_ROWS_IN_MEMORY = 10240;
 
 
     /**

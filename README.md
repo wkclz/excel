@@ -29,7 +29,7 @@
 1. 提供以下set方法：
 > * setTitle(String title) 
 > * setCreateBy(String createBy)
-> * setCreateBy(Object createNy)【会将object转换为String】
+> * setCreateBy(Object createBy)【会将object转换为String】
 > * setDateFrom(String dateFrom) [null]
 > * setDateTo(String dateTo) [null]
 > * setSavePath(String savePath) [null]
@@ -44,6 +44,7 @@
 * add方法：
 > * addRow(ExcelRow row) 添加行对象【protected】【保护的方法。createXlsx过程会自动添加】
 > * addRowFromCache(ExcelRow row) 【将缓存对象加入到excel。会将上一个createRow得到的对象立即添加到excel】
+> * addNewSheet() 添加一个 Sheet。默认的 Sheet 不需要手动添加。【注意，Sheet 分离时，不能有row合并，否则排版会异常】
 
 * 提供的create方法：
 > * createRow() 创建行对象【创建row对象，创建前会将上一个行对象添加到excel】
@@ -115,9 +116,10 @@
 ***
 # 更新日志
 ***
-2018-04-01 19:14:38
+2018-04-02 00:45:15
 1. 标准化代码
 2. 优化Excel生成过程中的内存占用
+3. 多 Sheet 支持
 
 ***
 2018-01-26 11:41:22

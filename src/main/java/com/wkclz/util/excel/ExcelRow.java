@@ -6,9 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExcelRow {
-	
+
+	private Integer sheetNum;
+
 	private List<ExcelCell> row;
-	
+
+	protected Integer getSheetNum() {
+		return sheetNum;
+	}
+
+	protected void setSheetNum(Integer sheetNum) {
+		this.sheetNum = sheetNum;
+	}
+
 	protected List<ExcelCell> getRow() {
 		return row;
 	}

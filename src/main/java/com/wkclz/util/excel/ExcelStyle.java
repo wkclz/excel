@@ -26,7 +26,6 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleTitle = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleTitle.setAlignment(HorizontalAlignment.CENTER);
 			styleTitle.setVerticalAlignment(VerticalAlignment.CENTER);
-			styleTitle.setVerticalAlignment(VerticalAlignment.CENTER);
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 24);
@@ -42,12 +41,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleHeader = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleHeader.setAlignment(HorizontalAlignment.CENTER);
 			styleHeader.setVerticalAlignment(VerticalAlignment.CENTER);
+
 			//边框
-			styleHeader.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleHeader.setBorderBottom(ExcelUtil.BORDER);
-			styleHeader.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleHeader.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleHeader.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleHeader = addBorder(styleHeader);
+
 			// 字体
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
@@ -94,7 +91,6 @@ public abstract class ExcelStyle extends ExcelBase {
 		if(styleStrCenterNoBorder==null){
 			styleStrCenterNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
 
-
 			styleStrCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleStrCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			Font font = getWorkbook().createFont();
@@ -112,11 +108,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleStrLeftWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleStrLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleStrLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
+
 			//边框
-			styleStrLeftWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleStrLeftWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleStrLeftWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleStrLeftWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleStrLeftWithBorder = addBorder(styleStrLeftWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -132,11 +127,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleStrCenterWithBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleStrCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleStrCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
+
 			//边框
-			styleStrCenterWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleStrCenterWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleStrCenterWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleStrCenterWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleStrCenterWithBorder = addBorder(styleStrCenterWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -201,11 +195,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleNumLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleNumLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleNumLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
+
 			//边框
-			styleNumLeftWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleNumLeftWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleNumLeftWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleNumLeftWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleNumLeftWithBorder = addBorder(styleNumLeftWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -222,11 +215,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleNumCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleNumCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleNumCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
+
 			//边框
-			styleNumCenterWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleNumCenterWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleNumCenterWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleNumCenterWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleNumCenterWithBorder = addBorder(styleNumCenterWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -291,11 +283,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
+
 			//边框
-			styleDateLeftWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleDateLeftWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleDateLeftWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleDateLeftWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleDateLeftWithBorder = addBorder(styleDateLeftWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -312,11 +303,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
+
 			//边框
-			styleDateCenterWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleDateCenterWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleDateCenterWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleDateCenterWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleDateCenterWithBorder = addBorder(styleDateCenterWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -381,11 +371,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateTimeLeftWithBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateTimeLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateTimeLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+
 			//边框
-			styleDateTimeLeftWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleDateTimeLeftWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleDateTimeLeftWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleDateTimeLeftWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleDateTimeLeftWithBorder = addBorder(styleDateTimeLeftWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -402,11 +391,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateTimeCenterWithBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateTimeCenterWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateTimeCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+
 			//边框
-			styleDateTimeCenterWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleDateTimeCenterWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleDateTimeCenterWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleDateTimeCenterWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleDateTimeCenterWithBorder = addBorder(styleDateTimeCenterWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -474,11 +462,10 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleWrapTextLeftWithBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleWrapTextLeftWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextLeftWithBorder.setWrapText(true);
+
 			//边框
-			styleWrapTextLeftWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleWrapTextLeftWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleWrapTextLeftWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleWrapTextLeftWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleWrapTextLeftWithBorder = addBorder(styleWrapTextLeftWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -497,10 +484,8 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleWrapTextCenterWithBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextCenterWithBorder.setWrapText(true);
 			//边框
-			styleWrapTextCenterWithBorder.setBorderBottom(ExcelUtil.BORDER); //下边框
-			styleWrapTextCenterWithBorder.setBorderLeft(ExcelUtil.BORDER);//左边框
-			styleWrapTextCenterWithBorder.setBorderTop(ExcelUtil.BORDER);//上边框
-			styleWrapTextCenterWithBorder.setBorderRight(ExcelUtil.BORDER);//右边框
+			styleWrapTextCenterWithBorder = addBorder(styleWrapTextCenterWithBorder);
+
 			Font font = getWorkbook().createFont();
 			font.setColor(Font.COLOR_NORMAL);
 			font.setFontHeightInPoints((short) 10);
@@ -508,6 +493,24 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleWrapTextCenterWithBorder.setFont(font);
 		}
 		return styleWrapTextCenterWithBorder;
+	}
+
+
+	/**
+	 * 添加边框
+	 * @param xssfCellStyle
+	 * @return
+	 */
+	private XSSFCellStyle addBorder(XSSFCellStyle xssfCellStyle){
+		//左边框
+		xssfCellStyle.setBorderLeft(ExcelUtil.BORDER);
+		//右边框
+		xssfCellStyle.setBorderRight(ExcelUtil.BORDER);
+		//上边框
+		xssfCellStyle.setBorderTop(ExcelUtil.BORDER);
+		//下边框
+		xssfCellStyle.setBorderBottom(ExcelUtil.BORDER);
+		return xssfCellStyle;
 	}
 	
 }

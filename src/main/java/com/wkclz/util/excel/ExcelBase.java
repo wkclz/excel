@@ -61,10 +61,13 @@ public abstract class ExcelBase {
 		return sheet;
 	}
 	protected void setSheet(SXSSFSheet sheet) {
-		sheet.setDisplayGridlines(false);// 不显示风格线
+		// 不显示风格线
+		sheet.setDisplayGridlines(false);
 		PrintSetup ps = sheet.getPrintSetup();
-		ps.setLandscape(false); 					// 打印方向，true：横向，false：纵向(默认) 
-		ps.setPaperSize(PrintSetup.A4_PAPERSIZE);	// A4纸
+		// 打印方向，true：横向，false：纵向(默认)
+		ps.setLandscape(false);
+		// A4纸
+		ps.setPaperSize(PrintSetup.A4_PAPERSIZE);
 		this.sheet = sheet;
 	}
 }

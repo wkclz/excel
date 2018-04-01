@@ -171,14 +171,15 @@ public class Excel extends ExcelContent {
             throw new ExcelException("title contains this chars: \""+rt + "\" is not allowd!");
         }
 
-
-		if((getHeader()==null||getHeader().size()==0)&&getWidth()==null) {
+        boolean headerError = (getHeader()==null||getHeader().size()==0)&&getWidth()==null;
+		if(headerError) {
 			throw new ExcelException("header or width cannot be null or empty!");
 		}
 
 
         Integer cacheRowsInMemory = getCacheRowsInMemory() == null ? ExcelUtil.CACHE_ROWS_IN_MEMORY : getCacheRowsInMemory();
-		setWorkbook(new SXSSFWorkbook(cacheRowsInMemory));	// 内存保留 10240 行数据，多余的刷新到固化存储
+		// 内存保留 10240 行数据，多余的刷新到固化存储
+        setWorkbook(new SXSSFWorkbook(cacheRowsInMemory));
 		setSheet(getWorkbook().createSheet(title));
 
 		// title
@@ -258,7 +259,8 @@ public class Excel extends ExcelContent {
 		// 对所有行对象进行循环
 		for (ExcelRow line : lines) {
 
-			int colNum = 0;	// 列号
+			// 列号
+			int colNum = 0;
 			SXSSFRow row = getSheet().getRow(rownum);
 			if(row==null) {
 				row = getSheet().createRow(rownum);
@@ -268,7 +270,8 @@ public class Excel extends ExcelContent {
 			int size = line.size();
 			for (int j = 0; j < size; j++) {
 
-				int nowCell = colNum;	// 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
+				// 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
+				int nowCell = colNum;
 
 				excelCell = line.get(j);
 				content = excelCell.getCellContent();
@@ -289,7 +292,8 @@ public class Excel extends ExcelContent {
 					cell = row.createCell(colNum, CellType.NUMERIC);
 					// 合并单元格
 					mergeCell(colMerge, rowMerge, colNum, border);
-					colNum += colMerge;	 // 列号向前
+					// 列号向前
+					colNum += colMerge;
 				} else {
 					// 如果cell已经有了找到下一个空的cell
 					colNum = getCell(row,colNum);

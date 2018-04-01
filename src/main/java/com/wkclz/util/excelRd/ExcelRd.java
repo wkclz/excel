@@ -66,8 +66,10 @@ public class ExcelRd extends ExcelRdContent {
 		
 		// 循环所有【右边的边界】
 		int right = getStartCol() + types.size();
-		int rowThreshold = 0;	// 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
-		int colThreshold = 0;	// 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
+        // 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
+		int rowThreshold = 0;
+        // 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
+		int colThreshold = 0;
 		
 		for (int i = getStartRow();; i++) {
 			

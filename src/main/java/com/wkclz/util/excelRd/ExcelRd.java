@@ -25,7 +25,7 @@ public class ExcelRd extends ExcelRdContent {
 	}
 	
 	public List<ExcelRdRow> analysisXlsx() throws ExcelRdException, IOException {
-		String xlsxPath = file.getPath();
+		String xlsxPath = this.file.getPath();
 		
 		if(!(xlsxPath.endsWith(DOT_XLS)||xlsxPath.endsWith(DOT_XLSX))) {
 			throw new ExcelRdException("Excel can only be xlsx or xls!");
@@ -36,10 +36,10 @@ public class ExcelRd extends ExcelRdContent {
 			xls = true;
 		}
 		
-		if(!file.exists()) {
+		if(!this.file.exists()) {
 			throw new ExcelRdException("Excel path is not correct");
 		}
-		if(!file.isFile()) {
+		if(!this.file.isFile()) {
 			throw new ExcelRdException("Excel path is not a file");
 		}
 		
@@ -47,21 +47,21 @@ public class ExcelRd extends ExcelRdContent {
 		if(types==null||types.size()==0) {
 			throw new ExcelRdException("Types of the data must be set");
 		}
-		
-		is = new FileInputStream(file);
+
+        this.is = new FileInputStream(this.file);
 		
 		if(xls) {
-			workbook03 = new HSSFWorkbook(is);
+            this.workbook03 = new HSSFWorkbook(this.is);
 		} else {
-			workbook = new XSSFWorkbook(is);
+            this.workbook07 = new XSSFWorkbook(this.is);
 		}
 				
 		
 		// 当前只考虑识别一个 sheet
 		if(xls) {
-			sheet03 = workbook03.getSheetAt(0);
+            this.sheet03 = this.workbook03.getSheetAt(0);
 		} else {
-			sheet = workbook.getSheetAt(0);
+            this.sheet07 = this.workbook07.getSheetAt(0);
 		}
 		
 		// 循环所有【右边的边界】
@@ -79,12 +79,12 @@ public class ExcelRd extends ExcelRdContent {
 			}
 			
 			if(xls) {
-				row03 = sheet03.getRow(i);
+                this.row03 = this.sheet03.getRow(i);
 			} else {
-				row = sheet.getRow(i);
+                this.row07 = this.sheet07.getRow(i);
 			}
 			
-			if(row03==null&&row==null){
+			if(this.row03==null&&this.row07==null){
 				rowThreshold ++;
 				continue;
 			}
@@ -94,12 +94,12 @@ public class ExcelRd extends ExcelRdContent {
 			for (int j = getStartCol(); j < right; j++) {
 				
 				if(xls) {
-					cell03 = row03.getCell(j);
+                    this.cell03 = this.row03.getCell(j);
 				} else {
-					cell = row.getCell(j);
+                    this.cell07 = this.row07.getCell(j);
 				}
 				
-				if(cell03==null&&cell==null){
+				if(this.cell03==null&&this.cell07==null){
 					colThreshold ++;
 					excelRdRow.addCell("");
 				} else {
@@ -107,9 +107,9 @@ public class ExcelRd extends ExcelRdContent {
 					Object cellValue;
 					
 					if(xls) {
-						cellValue = ExcelRdUtil.getCellValue(cell03, types.get(j - getStartCol()));
+						cellValue = ExcelRdUtil.getCellValue(this.cell03, types.get(j - getStartCol()));
 					} else {
-						cellValue = ExcelRdUtil.getCellValue(cell, types.get(j - getStartCol()));
+						cellValue = ExcelRdUtil.getCellValue(this.cell07, types.get(j - getStartCol()));
 					}
 					
 					excelRdRow.addCell(cellValue);

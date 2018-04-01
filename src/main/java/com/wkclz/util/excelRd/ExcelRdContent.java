@@ -1,9 +1,43 @@
 package com.wkclz.util.excelRd;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ExcelRdContent extends ExcelRdBase {
+public abstract class ExcelRdContent {
+
+
+	/**
+	 *  Excek 读取过程使用到的全局变量，统一管理
+	 */
+	/** File */
+	protected File file;
+	/** FileInputStream*/
+	protected FileInputStream is;
+
+	/** 07版本 excel */
+	protected XSSFWorkbook workbook07;
+	protected XSSFSheet sheet07;
+	protected XSSFRow row07;
+	protected XSSFCell cell07;
+
+	/** 03版本 excel */
+	protected HSSFWorkbook workbook03;
+	protected HSSFSheet sheet03;
+	protected HSSFRow row03;
+	protected HSSFCell cell03;
+
+
 
 	/** 起始行 */
 	private int startSheet;

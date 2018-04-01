@@ -67,7 +67,7 @@ public class Excel extends ExcelContent {
      * @date 2017年7月16日 上午12:57:41 *
      * @throws
      */
-    public String CreateXlsx() throws ExcelException, IOException {
+    public String createXlsx() throws ExcelException, IOException {
         // 把最后一次的数据加进去
         if(row!=null) {
 			addRow(row);
@@ -96,7 +96,7 @@ public class Excel extends ExcelContent {
      * @date 2017年12月09日 上午10:31:09 *
      * @throws
      */
-    public File CreateXlsxByFile() throws ExcelException {
+    public File createXlsxByFile() throws ExcelException {
         // 把最后一次的数据加进去
         if(row!=null) {
 			addRow(row);
@@ -119,6 +119,28 @@ public class Excel extends ExcelContent {
         return file;
 
     }
+
+
+	/**
+	 * 以下是为了兼容旧的错误命名
+	 * @return
+	 * @throws ExcelException
+	 * @throws IOException
+	 */
+    @Deprecated
+	public String CreateXlsx() throws ExcelException, IOException {
+    	return createXlsx();
+	}
+
+	/**
+	 * 以下是为了兼容旧的错误命名
+	 * @return
+	 * @throws ExcelException
+	 */
+	@Deprecated
+	public File CreateXlsxByFile() throws ExcelException {
+    	return createXlsxByFile();
+	}
 
 
     /**
@@ -162,47 +184,47 @@ public class Excel extends ExcelContent {
 		// title
 		if( title!=null && !"".equals(title.trim()) ){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, getWidth()-1));
-			SXSSFRow row_title = getSheet().createRow(rownum++);
-			SXSSFCell cell_title = row_title.createCell(0);
-			cell_title.setCellStyle(getStyleTitle());
-			cell_title.setCellValue(title);
+			SXSSFRow rowTitle = getSheet().createRow(rownum++);
+			SXSSFCell cellTitle = rowTitle.createCell(0);
+			cellTitle.setCellStyle(getStyleTitle());
+			cellTitle.setCellValue(title);
 		}
 
 		// infomation of this excel
 		getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, 2));
-		SXSSFRow row_info = getSheet().createRow(rownum);
-		SXSSFCell cell_time = row_info.createCell(0);
-		cell_time.setCellStyle(getStyleStrLeftNoBorder());
-		cell_time.setCellValue("创建时间："+sdf_dateTime.format(new Date()));
+		SXSSFRow rowInfo = getSheet().createRow(rownum);
+		SXSSFCell cellTime = rowInfo.createCell(0);
+		cellTime.setCellStyle(getStyleStrLeftNoBorder());
+		cellTime.setCellValue("创建时间："+sdf_dateTime.format(new Date()));
 
 		// create_by
 		if(getCreateBy()!=null){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 3, 5));
-			SXSSFCell cell_create_by = row_info.createCell(3);
-			cell_create_by.setCellStyle(getStyleStrLeftNoBorder());
-			cell_create_by.setCellValue("创建人："+getCreateBy());
+			SXSSFCell cellCreateBy = rowInfo.createCell(3);
+			cellCreateBy.setCellStyle(getStyleStrLeftNoBorder());
+			cellCreateBy.setCellValue("创建人："+getCreateBy());
 		}
 
 		rownum++;
 
 		// date_from_to
-		String date_info = "";
+		String dateInfo = "";
 		if(getDateFrom()!=null&&getDateTo()!=null) {
-			date_info = "时间范围：从"+getDateFrom()+"到"+getDateTo();
+			dateInfo = "时间范围：从"+getDateFrom()+"到"+getDateTo();
 		}
 		if(getDateFrom()!=null&&getDateTo()==null) {
-			date_info = "时间："+getDateFrom();
+			dateInfo = "时间："+getDateFrom();
 		}
 		if(getDateFrom()==null&&getDateTo()!=null) {
-			date_info = "时间："+getDateTo();
+			dateInfo = "时间："+getDateTo();
 		}
 
-		if(!"".equals(date_info)){
+		if(!"".equals(dateInfo)){
 			getSheet().addMergedRegion(new CellRangeAddress(rownum, rownum, 0, 5));
-			SXSSFRow row_date_info = getSheet().createRow(rownum);
-			SXSSFCell cell_date_info = row_date_info.createCell(0);
-			cell_date_info.setCellStyle(getStyleStrLeftNoBorder());
-			cell_date_info.setCellValue(date_info);
+			SXSSFRow rowDateInfo = getSheet().createRow(rownum);
+			SXSSFCell cellDateInfo = rowDateInfo.createCell(0);
+			cellDateInfo.setCellStyle(getStyleStrLeftNoBorder());
+			cellDateInfo.setCellValue(dateInfo);
 			rownum++;
 		}
 
@@ -210,11 +232,11 @@ public class Excel extends ExcelContent {
 		// 写 列名称
 		List<String> hs = getHeader();
 		if(hs!=null&&hs.size()>0){
-			SXSSFRow row_header = getSheet().createRow(rownum++);
+			SXSSFRow rowHeader = getSheet().createRow(rownum++);
 			for (int i = 0; i < hs.size(); i++) {
-				SXSSFCell cell_header = row_header.createCell(i);
-				cell_header.setCellStyle(getStyleHeader());
-				cell_header.setCellValue(hs.get(i));
+				SXSSFCell cellHeader = rowHeader.createCell(i);
+				cellHeader.setCellStyle(getStyleHeader());
+				cellHeader.setCellValue(hs.get(i));
 				ExcelUtil.setWidth(getSheet(), i, hs.get(i));
 			}
 		}
@@ -236,7 +258,7 @@ public class Excel extends ExcelContent {
 		// 对所有行对象进行循环
 		for (ExcelRow line : lines) {
 
-			int col_num = 0;	// 列号
+			int colNum = 0;	// 列号
 			SXSSFRow row = getSheet().getRow(rownum);
 			if(row==null) {
 				row = getSheet().createRow(rownum);
@@ -246,37 +268,37 @@ public class Excel extends ExcelContent {
 			int size = line.size();
 			for (int j = 0; j < size; j++) {
 
-				int now_cell = col_num;	// 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
+				int nowCell = colNum;	// 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
 
 				excelCell = line.get(j);
 				content = excelCell.getCellContent();
 				align = excelCell.getAlign();
 				border = excelCell.getBorder();
-				int col_merge = excelCell.getCol();
-				if(col_merge<1) {
-					col_merge = 1;
+				int colMerge = excelCell.getCol();
+				if(colMerge<1) {
+					colMerge = 1;
 				}
-				int row_merge = excelCell.getRow();
-				if(row_merge<1) {
-					row_merge = 1;
+				int rowMerge = excelCell.getRow();
+				if(rowMerge<1) {
+					rowMerge = 1;
 				}
 
 				// 若有创建cell 直接获取，否则，新建【新建cell ，合并，设置边框，这些都将只有在新建的时候进行操作，之后只是跳过相应的cell】
-				SXSSFCell cell = row.getCell(col_num);
+				SXSSFCell cell = row.getCell(colNum);
 				if(cell==null){
-					cell = row.createCell(col_num, CellType.NUMERIC);
+					cell = row.createCell(colNum, CellType.NUMERIC);
 					// 合并单元格
-					mergeCell(col_merge, row_merge, col_num, border);
-					col_num += col_merge;	 // 列号向前
+					mergeCell(colMerge, rowMerge, colNum, border);
+					colNum += colMerge;	 // 列号向前
 				} else {
 					// 如果cell已经有了找到下一个空的cell
-					col_num = getCell(row,col_num);
+					colNum = getCell(row,colNum);
 					// 当前列号需要更新
-					now_cell = col_num;
-					cell = row.createCell(col_num, CellType.NUMERIC);
+					nowCell = colNum;
+					cell = row.createCell(colNum, CellType.NUMERIC);
 					// 合并单元格
-					mergeCell(col_merge, row_merge, col_num, border);
-					col_num ++;
+					mergeCell(colMerge, rowMerge, colNum, border);
+					colNum ++;
 				}
 
 				// 空
@@ -296,8 +318,8 @@ public class Excel extends ExcelContent {
 					setDoubleStyle(cell, align, border);
 					cell.setCellValue((Double) content);
 					// 列不合并才自动宽度
-					if(col_merge==1) {
-						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					if(colMerge==1) {
+						ExcelUtil.setWidth(getSheet(), nowCell, content.toString());
 					}
 					continue;
 				}
@@ -312,8 +334,8 @@ public class Excel extends ExcelContent {
 						e.printStackTrace();
 					}
 					// 列不合并才自动宽度
-					if(col_merge==1) {
-						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					if(colMerge==1) {
+						ExcelUtil.setWidth(getSheet(), nowCell, content.toString());
 					}
 					continue;
 				}
@@ -328,22 +350,22 @@ public class Excel extends ExcelContent {
 						e.printStackTrace();
 					}
 					// 列不合并才自动宽度
-					if(col_merge==1) {
-						ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
+					if(colMerge==1) {
+						ExcelUtil.setWidth(getSheet(), nowCell, content.toString());
 					}
 					continue;
 				}
 
 				// 最后，当字符串处理
-				cell = row.createCell(now_cell, CellType.STRING);
+				cell = row.createCell(nowCell, CellType.STRING);
 				setIntStrStyle(cell, align, border);
 				cell.setCellValue(content.toString());
 
 				// 如果文字内容太长了，设置为富文本类型
 				// 列不合并才自动宽度
-				if(col_merge==1){
-					boolean too_long = ExcelUtil.setWidth(getSheet(), now_cell, content.toString());
-					if(too_long) {
+				if(colMerge==1){
+					boolean tooLong = ExcelUtil.setWidth(getSheet(), nowCell, content.toString());
+					if(tooLong) {
 						setWrapTextStyle(cell, align, border);
 					}
 				}
@@ -444,21 +466,21 @@ public class Excel extends ExcelContent {
 	* @date 2017年7月15日 下午9:09:00 *  
 	* @throws
 	 */
-	private int getCell(SXSSFRow row,int col_num){
-		if (row.getCell(col_num)!=null) {
-			return getCell(row, col_num+1);
+	private int getCell(SXSSFRow row,int colNum){
+		if (row.getCell(colNum)!=null) {
+			return getCell(row, colNum+1);
 		}
-		return col_num;
+		return colNum;
 	}
 	
-	private void mergeCell(int col_merge, int row_merge, int col_num, boolean border){
+	private void mergeCell(int colMerge, int rowMerge, int colNum, boolean border){
 		// 检查是否需要合并单元格
-		if(col_merge>1||row_merge>1){
-			getSheet().addMergedRegion(new CellRangeAddress( rownum, rownum+row_merge-1, col_num, col_num+col_merge-1));
+		if(colMerge>1||rowMerge>1){
+			getSheet().addMergedRegion(new CellRangeAddress( rownum, rownum+rowMerge-1, colNum, colNum+colMerge-1));
 			
 			//预设内容
-			for (int x=rownum; x < rownum+row_merge; x++) {
-				for (int y = col_num; y < col_num+col_merge; y++) {
+			for (int x=rownum; x < rownum+rowMerge; x++) {
+				for (int y = colNum; y < colNum+colMerge; y++) {
 					SXSSFRow r = getSheet().getRow(x);
 					if(r==null) {
 						r = getSheet().createRow(x);

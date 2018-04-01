@@ -29,7 +29,7 @@ public abstract class ExcelRdBase {
 	/** rownum */
 	protected int rownum = 0;
 	
-	// 03版本 excel
+	/** 03版本 excel */
 	protected HSSFWorkbook workbook03;
 	protected HSSFSheet sheet03;
 	protected HSSFRow row03;

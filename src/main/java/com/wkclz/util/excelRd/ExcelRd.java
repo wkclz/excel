@@ -12,6 +12,9 @@ public class ExcelRd extends ExcelRdContent {
 	
 	private boolean xls = false;
 
+	private static final String DOT_XLS = ".xls";
+	private static final String DOT_XLSX = ".xlsx";
+
 	public ExcelRd(String xlsxPath) {
 		super();
 		this.file = new File(xlsxPath);
@@ -24,12 +27,12 @@ public class ExcelRd extends ExcelRdContent {
 	public List<ExcelRdRow> analysisXlsx() throws ExcelRdException, IOException {
 		String xlsxPath = file.getPath();
 		
-		if(!(xlsxPath.endsWith(".xlsx")||xlsxPath.endsWith(".xls"))) {
+		if(!(xlsxPath.endsWith(DOT_XLS)||xlsxPath.endsWith(DOT_XLSX))) {
 			throw new ExcelRdException("Excel can only be xlsx or xls!");
 		}
 		
 		// 03版本的excel要特别标明
-		if(xlsxPath.endsWith(".xls")) {
+		if(xlsxPath.endsWith(DOT_XLS)) {
 			xls = true;
 		}
 		

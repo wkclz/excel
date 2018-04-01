@@ -6,6 +6,9 @@ package com.wkclz.util.excelRd;
  */
 public enum ExcelRdTypeEnum {
 
+    /**
+     * Excel 所支持读取的类型
+     */
     INTEGER("整形"),
     DOUBLE("双精浮点型"),
     DATE("日期型"),

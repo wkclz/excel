@@ -28,8 +28,8 @@
 1. 通过set 方法设置文档基本信息。
 1. 提供以下set方法：
 > * setTitle(String title) 
-> * setCreate_by(String create_by)
-> * setCreate_by(Object create_by)【会将object转换为String】
+> * setCreateBy(String createBy)
+> * setCreateBy(Object createNy)【会将object转换为String】
 > * setDateFrom(String dateFrom) [null]
 > * setDateTo(String dateTo) [null]
 > * setSavePath(String savePath) [null]
@@ -92,7 +92,7 @@
 ***
 > * setStartRow(int rowNum) 
 > * setStartCol(int colNum)
-> * setTypes(String[] types)
+> * setTypes(ExcelRdTypeEnum[] types)
 > * 最后骑过 analysisXlsx() 方法，得到所有行数据。
 
 
@@ -114,15 +114,23 @@
 
 ***
 # 更新日志
-2017-12-09 10:15:52
-1. Excel 生成去除结果返回，换成 throws 的方式抛出错误。
-2. 将 excel 生成过程独立，加入方法 CreateXlsxByFile()，写入到临时目录，返回File
-3. 结构优化
 ***
-2017-11-15 22:58:33
-1. Excel读取工具 ExcelRd 定义枚举类型ExcelRdTypeEnum：INTEGER("整形"),DOUBLE("双精浮点型"),DATE("日期型"),DATETIME("日期时间型"),STRING("字符型");读取时需要初始化字段类型。
+2018-04-01 19:14:38
+1. 标准化代码
+2. 优化Excel生成过程中的内存占用
+
 ***
 2018-01-26 11:41:22
 1. 还原旧方法，对旧版本的兼容
 2. 减小生成 excel生成时内存缓存的量，减小服务器压力。同时此参数支持设置。
+
+***
+2017-12-09 10:15:52
+1. Excel 生成去除结果返回，换成 throws 的方式抛出错误。
+2. 将 excel 生成过程独立，加入方法 CreateXlsxByFile()，写入到临时目录，返回File
+3. 结构优化
+
+***
+2017-11-15 22:58:33
+1. Excel读取工具 ExcelRd 定义枚举类型ExcelRdTypeEnum：INTEGER("整形"),DOUBLE("双精浮点型"),DATE("日期型"),DATETIME("日期时间型"),STRING("字符型");读取时需要初始化字段类型。
 

@@ -78,9 +78,6 @@ public abstract class ExcelContent {
     protected Integer cacheRowsInMemory;
 
 
-
-
-
 	public String getTitle() {
 		return title;
 	}

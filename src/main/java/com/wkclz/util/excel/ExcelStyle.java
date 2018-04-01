@@ -4,9 +4,14 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 
 public abstract class ExcelStyle extends ExcelBase {
+
+    private static final short DEFAULT_COLOR = Font.COLOR_NORMAL;
+    private static final short DEFAULT_HEIGHT_IN_POINTS = 10;
+    private static final String DEFAULT_FONT_NAME = "宋体";
 	
 	
 	/*
@@ -19,18 +24,13 @@ public abstract class ExcelStyle extends ExcelBase {
 	private XSSFCellStyle styleHeader;
 	
 	
-	
 	/** 标题样式【默认无边框】 */
 	protected XSSFCellStyle getStyleTitle() {
 		if (styleTitle==null){
 			styleTitle = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleTitle.setAlignment(HorizontalAlignment.CENTER);
 			styleTitle.setVerticalAlignment(VerticalAlignment.CENTER);
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 24);
-			font.setFontName("宋体");
-			styleTitle.setFont(font);
+			styleTitle.setFont(createFont(getWorkbook(),24));
 		}
 		return styleTitle;
 	}
@@ -44,13 +44,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleHeader = addBorder(styleHeader);
-
-			// 字体
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 12);
-			font.setFontName("宋体");
-			styleHeader.setFont(font);
+			styleHeader.setFont(createFont(getWorkbook(),12));
 		}
 		return styleHeader;
 	}
@@ -77,11 +71,8 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleStrLeftNoBorder = (XSSFCellStyle) getWorkbook().createCellStyle();
 			styleStrLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleStrLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleStrLeftNoBorder.setFont(font);
+
+			styleStrLeftNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleStrLeftNoBorder;
 	}
@@ -93,11 +84,8 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			styleStrCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleStrCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleStrCenterNoBorder.setFont(font);
+
+			styleStrCenterNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleStrCenterNoBorder;
 	}
@@ -111,12 +99,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleStrLeftWithBorder = addBorder(styleStrLeftWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleStrLeftWithBorder.setFont(font);
+			styleStrLeftWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleStrLeftWithBorder;
 	}
@@ -130,12 +113,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleStrCenterWithBorder = addBorder(styleStrCenterWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleStrCenterWithBorder.setFont(font);
+			styleStrCenterWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleStrCenterWithBorder;
 	}
@@ -163,11 +141,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleNumLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleNumLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleNumLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleNumLeftNoBorder.setFont(font);
+			styleNumLeftNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleNumLeftNoBorder;
 	}
@@ -179,11 +153,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleNumCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleNumCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleNumCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("0.00"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleNumCenterNoBorder.setFont(font);
+			styleNumCenterNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleNumCenterNoBorder;
 	}
@@ -198,12 +168,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleNumLeftWithBorder = addBorder(styleNumLeftWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleNumLeftWithBorder.setFont(font);
+			styleNumLeftWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleNumLeftWithBorder;
 	}
@@ -218,12 +183,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleNumCenterWithBorder = addBorder(styleNumCenterWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleNumCenterWithBorder.setFont(font);
+			styleNumCenterWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleNumCenterWithBorder;
 	}
@@ -251,11 +211,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateLeftNoBorder.setFont(font);
+			styleDateLeftNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateLeftNoBorder;
 	}
@@ -267,11 +223,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateCenterNoBorder.setFont(font);
+			styleDateCenterNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateCenterNoBorder;
 	}
@@ -286,12 +238,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleDateLeftWithBorder = addBorder(styleDateLeftWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateLeftWithBorder.setFont(font);
+			styleDateLeftWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateLeftWithBorder;
 	}
@@ -306,12 +253,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleDateCenterWithBorder = addBorder(styleDateCenterWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateCenterWithBorder.setFont(font);
+			styleDateCenterWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateCenterWithBorder;
 	}
@@ -339,11 +281,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateTimeLeftNoBorder.setAlignment(HorizontalAlignment.LEFT);
 			styleDateTimeLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateTimeLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateTimeLeftNoBorder.setFont(font);
+			styleDateTimeLeftNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateTimeLeftNoBorder;
 	}
@@ -355,11 +293,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleDateTimeCenterNoBorder.setAlignment(HorizontalAlignment.CENTER);
 			styleDateTimeCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleDateTimeCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateTimeCenterNoBorder.setFont(font);
+			styleDateTimeCenterNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateTimeCenterNoBorder;
 	}
@@ -374,12 +308,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleDateTimeLeftWithBorder = addBorder(styleDateTimeLeftWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateTimeLeftWithBorder.setFont(font);
+			styleDateTimeLeftWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateTimeLeftWithBorder;
 	}
@@ -394,12 +323,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleDateTimeCenterWithBorder = addBorder(styleDateTimeCenterWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleDateTimeCenterWithBorder.setFont(font);
+			styleDateTimeCenterWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleDateTimeCenterWithBorder;
 	}
@@ -428,11 +352,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleWrapTextLeftNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleWrapTextLeftNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextLeftNoBorder.setWrapText(true);
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleWrapTextLeftNoBorder.setFont(font);
+			styleWrapTextLeftNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleWrapTextLeftNoBorder;
 	}
@@ -445,11 +365,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			styleWrapTextCenterNoBorder.setVerticalAlignment(VerticalAlignment.CENTER);
 			styleWrapTextCenterNoBorder.setDataFormat(getWorkbook().createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
 			styleWrapTextCenterNoBorder.setWrapText(true);
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleWrapTextCenterNoBorder.setFont(font);
+			styleWrapTextCenterNoBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleWrapTextCenterNoBorder;
 	}
@@ -465,12 +381,7 @@ public abstract class ExcelStyle extends ExcelBase {
 
 			//边框
 			styleWrapTextLeftWithBorder = addBorder(styleWrapTextLeftWithBorder);
-
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleWrapTextLeftWithBorder.setFont(font);
+			styleWrapTextLeftWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleWrapTextLeftWithBorder;
 	}
@@ -486,11 +397,7 @@ public abstract class ExcelStyle extends ExcelBase {
 			//边框
 			styleWrapTextCenterWithBorder = addBorder(styleWrapTextCenterWithBorder);
 
-			Font font = getWorkbook().createFont();
-			font.setColor(Font.COLOR_NORMAL);
-			font.setFontHeightInPoints((short) 10);
-			font.setFontName("宋体");
-			styleWrapTextCenterWithBorder.setFont(font);
+			styleWrapTextCenterWithBorder.setFont(createFont(getWorkbook()));
 		}
 		return styleWrapTextCenterWithBorder;
 	}
@@ -501,7 +408,7 @@ public abstract class ExcelStyle extends ExcelBase {
 	 * @param xssfCellStyle
 	 * @return
 	 */
-	private XSSFCellStyle addBorder(XSSFCellStyle xssfCellStyle){
+	private static XSSFCellStyle addBorder(XSSFCellStyle xssfCellStyle){
 		//左边框
 		xssfCellStyle.setBorderLeft(ExcelUtil.BORDER);
 		//右边框
@@ -512,5 +419,41 @@ public abstract class ExcelStyle extends ExcelBase {
 		xssfCellStyle.setBorderBottom(ExcelUtil.BORDER);
 		return xssfCellStyle;
 	}
+
+
+    /**
+     * 构建字体
+     * @param workbook
+     * @return
+     */
+    private static Font createFont(SXSSFWorkbook workbook){
+        return createFont(workbook, 0, 0, null);
+    }
+
+    /**
+     * 构建字体
+     * @param workbook
+     * @param heightInPoints
+     * @return
+     */
+    private static Font createFont(SXSSFWorkbook workbook,int heightInPoints){
+        return createFont(workbook, 0, heightInPoints, null);
+    }
+
+    /**
+     * 构建字体
+     * @param workbook
+     * @param color
+     * @param heightInPoints
+     * @param fontName
+     * @return
+     */
+	private static Font createFont(SXSSFWorkbook workbook, int color, int heightInPoints, String fontName){
+        Font font = workbook.createFont();
+        font.setColor(color == 0 ? DEFAULT_COLOR : (short) color);
+        font.setFontHeightInPoints(heightInPoints == 0 ? DEFAULT_HEIGHT_IN_POINTS : (short)heightInPoints);
+        font.setFontName(fontName == null ? DEFAULT_FONT_NAME : fontName);
+        return font;
+    }
 	
 }

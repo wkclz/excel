@@ -15,11 +15,11 @@ import java.util.Map;
 public class ExcelUtil {
 	
 	/** 左对齐 */
-	protected static final HorizontalAlignment ALIGN_LEFT = HorizontalAlignment.LEFT;
+	public static final HorizontalAlignment ALIGN_LEFT = HorizontalAlignment.LEFT;
 	/** 中对齐 */
-    protected static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
+    public static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
 	/** 边框大小 */
-    protected static final BorderStyle BORDER = BorderStyle.THIN;
+    public static final BorderStyle BORDER = BorderStyle.THIN;
 
 
     /**

@@ -97,7 +97,7 @@
 > * setStartRow(int rowNum) 
 > * setStartCol(int colNum)
 > * setTypes(ExcelRdTypeEnum[] types)
-> * 最后骑过 analysisXlsx() 方法，得到所有行数据。
+> * 最后通过 analysisXlsx() 方法，得到所有行数据。
 
 
 ##### 示例代码：

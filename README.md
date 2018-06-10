@@ -97,7 +97,7 @@
 > * setStartRow(int rowNum) 
 > * setStartCol(int colNum)
 > * setTypes(ExcelRdTypeEnum[] types)
-> * 最后骑过 analysisXlsx() 方法，得到所有行数据。
+> * 最后通过 analysisXlsx() 方法，得到所有行数据。
 
 
 ##### 示例代码：
@@ -113,10 +113,7 @@
 # 捐赠
 ***
 > 如果您感觉这个工具很好用，希望支持作者，您还可以进行捐赠： \
-> **支付宝** 
-<div align=center>
-<img src="http://static.wkclz.com/img/alipay.png" width="280" height="280" alt="亦菲表演机器猫"/>
-</div>
+> 本页面最下方的<code>捐赠</code>
 
 ***
 # 更新日志

@@ -18,9 +18,7 @@ package com.wkclz.util.excelRd;
  */
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -34,40 +32,55 @@ public class ExcelRd extends ExcelRdContent {
 	private static final String DOT_XLSX = ".xlsx";
 
 	public ExcelRd(String xlsxPath) {
-		super();
-		this.file = new File(xlsxPath);
-	}
+        super();
+        // 03版本的excel要特别标明
+        if(xlsxPath.endsWith(DOT_XLS)) {
+            xls = true;
+        }
+        try {
+            this.is = new FileInputStream(xlsxPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 	public ExcelRd(File file) {
 		super();
-		this.file = file;
-	}
+        // 03版本的excel要特别标明
+        if(file.getAbsolutePath().endsWith(DOT_XLS)) {
+            xls = true;
+        }
+        try {
+            this.is = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public ExcelRd(InputStream ins, ExcelRdVersionEnum version) {
+        super();
+        // 03版本的excel要特别标明
+        if (version == ExcelRdVersionEnum.XLS) {
+            xls = true;
+        }
+        this.is = (FileInputStream)ins;
+    }
+
+    public ExcelRd(FileInputStream fins, ExcelRdVersionEnum version) {
+        super();
+        // 03版本的excel要特别标明
+        if (version == ExcelRdVersionEnum.XLS) {
+            xls = true;
+        }
+        this.is = fins;
+    }
+
 	
 	public List<ExcelRdRow> analysisXlsx() throws ExcelRdException, IOException {
-		String xlsxPath = this.file.getPath();
-		
-		if(!(xlsxPath.endsWith(DOT_XLS)||xlsxPath.endsWith(DOT_XLSX))) {
-			throw new ExcelRdException("Excel can only be xlsx or xls!");
-		}
-		
-		// 03版本的excel要特别标明
-		if(xlsxPath.endsWith(DOT_XLS)) {
-			xls = true;
-		}
-		
-		if(!this.file.exists()) {
-			throw new ExcelRdException("Excel path is not correct");
-		}
-		if(!this.file.isFile()) {
-			throw new ExcelRdException("Excel path is not a file");
-		}
-		
+
 		List<ExcelRdTypeEnum> types = getTypes();
 		if(types==null||types.size()==0) {
 			throw new ExcelRdException("Types of the data must be set");
 		}
 
-        this.is = new FileInputStream(this.file);
-		
 		if(xls) {
             this.workbook03 = new HSSFWorkbook(this.is);
 		} else {

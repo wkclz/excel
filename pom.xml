@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <dependencies>
         <dependency>
@@ -36,5 +36,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- 发布位置配置 -->
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Snapshot</name>
+            <url>http://www.domain.com:port/repository/third-party/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Nexus Snapshot</name>
+            <url>http://www.domain.com:port/repository/third-party/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

@@ -89,11 +89,15 @@
 
 ##### 示例代码：
 ***
-> com.wkclz.util.excel.ExcelTest.main();
-
+> [com.wkclz.util.excel.ExcelTest.main()](src/test/java/com/wkclz/util/excel/ExcelTest.java);
 
 ### Excel读取类的使用方法：
 ***
+> * new ExcelRd()提供以下方法进行实例化
+>   * new ExcelRd(String xlsxPath)
+>   * new ExcelRd(File file)
+>   * new ExcelRd(InputStream ins, ExcelRdVersionEnum version)
+>   * new ExcelRd(FileInputStream fins, ExcelRdVersionEnum version)
 > * setStartRow(int rowNum) 
 > * setStartCol(int colNum)
 > * setTypes(ExcelRdTypeEnum[] types)
@@ -102,7 +106,7 @@
 
 ##### 示例代码：
 ***
-> com.wkclz.util.excel.ExcelRdTest.main();
+> [com.wkclz.util.excel.ExcelRdTest.main()](src/test/java/com/wkclz/util/excelRd/ExcelRdTest.java);
 
 ##### Excel 生成效果图：
 ![](dist/excel.png)
@@ -117,6 +121,10 @@
 
 ***
 # 更新日志
+***
+2018-06-12 11:44:12
+1. Excel 读取，支持文件流方式，适应文件上传直接读取的应用场景
+
 ***
 2018-04-02 00:45:15
 1. 标准化代码

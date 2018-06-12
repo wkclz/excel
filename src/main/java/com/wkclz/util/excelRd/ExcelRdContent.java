@@ -55,8 +55,6 @@ public abstract class ExcelRdContent {
 	/**
 	 *  Excek 读取过程使用到的全局变量，统一管理
 	 */
-	/** File */
-	protected File file;
 	/** FileInputStream*/
 	protected FileInputStream is;
 

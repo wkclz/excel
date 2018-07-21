@@ -6,8 +6,8 @@
 > * 对 excel 的生成 的读取，一直都是一个很花时间的问题，现对excel的生成和读取，封装成一个工具，将加快excel 在 java中的处理。 
 > * Excel 是对 poi 的封装，建立一个通用的excel模板，再通过 set,add,create等简单的操作方法生成 excel。同时也能指定起始度坐标，对标准的 Excel进行读取。
 
-### 下载（Latest: v 1.0.5）
-- 2018-04-02: [excel-1.0.5.jar](dist/excel.png)
+### 下载（Latest: v 1.0.6）
+- 2018-04-02: [excel-1.0.6.jar](dist/excel.png)
 
 ### 依赖：
 ***

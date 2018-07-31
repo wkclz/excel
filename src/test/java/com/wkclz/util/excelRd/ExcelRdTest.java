@@ -19,6 +19,7 @@ public class ExcelRdTest {
 		excelRd.setStartCol(1);	// 指定起始列，从0开始
         ExcelRdTypeEnum[] types = {
 			ExcelRdTypeEnum.INTEGER,
+			ExcelRdTypeEnum.LONG,
             ExcelRdTypeEnum.DOUBLE,
             ExcelRdTypeEnum.DATETIME,
             ExcelRdTypeEnum.DATE,
@@ -43,7 +44,6 @@ public class ExcelRdTest {
 			
 			plans[i] = plan;
 		}
-
 	}
 
 }

@@ -17,6 +17,10 @@ public class ExcelRdUtil {
 			Double numeric = cell.getNumericCellValue();
 			return numeric.intValue();
 		}
+		if( type == ExcelRdTypeEnum.LONG && cellType == CellType.NUMERIC){
+			Double numeric = cell.getNumericCellValue();
+			return numeric.longValue();
+		}
 		if( type == ExcelRdTypeEnum.DOUBLE && cellType == CellType.NUMERIC){
 			return cell.getNumericCellValue();
 		}
@@ -40,6 +44,10 @@ public class ExcelRdUtil {
 		if( type == ExcelRdTypeEnum.INTEGER && cellType == CellType.NUMERIC){
 			Double numeric = cell.getNumericCellValue();
 			return numeric.intValue();
+		}
+		if( type == ExcelRdTypeEnum.LONG && cellType == CellType.NUMERIC){
+			Double numeric = cell.getNumericCellValue();
+			return numeric.longValue();
 		}
 		if( type == ExcelRdTypeEnum.DOUBLE && cellType == CellType.NUMERIC){
 			return cell.getNumericCellValue();

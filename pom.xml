@@ -2,10 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
     <version>1.0.7</version>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <dependencies>
         <dependency>
@@ -27,7 +34,39 @@
         </dependency>
     </dependencies>
 
-    <!-- 发布位置配置 -->
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:wkclz/excel.git</url>
+        <connection>scm:git:git@github.com:wkclz/excel.git</connection>
+        <developerConnection>scm:git:git@github.com:wkclz/excel.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>wkclz</name>
+            <email>wkclz@qq.com</email>
+            <organization>L.Z.Workstudio</organization>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 发布位置配置
     <distributionManagement>
         <repository>
             <id>nexus</id>
@@ -39,5 +78,6 @@
             <url>http://nexus.donain.com/repository/3d-party/</url>
         </snapshotRepository>
     </distributionManagement>
+    -->
 
 </project>

@@ -9,6 +9,15 @@
 ### 下载（Latest: v 1.0.7）
 - 2018-04-02: [excel-1.0.7.jar](dist/excel.png)
 
+### 项目引用（Latest: v 1.0.7）
+~~~
+<dependency>
+    <groupId>com.wkclz.util</groupId>
+    <artifactId>excel</artifactId>
+    <version>1.0.7</version>
+</dependency>
+~~~
+
 ### 依赖：
 ***
 > 1. JDK 1.8

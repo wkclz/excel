@@ -14,11 +14,17 @@ import java.util.Map;
 
 public class ExcelUtil {
 	
-	/** 左对齐 */
+	/**
+     * 左对齐
+     */
 	public static final HorizontalAlignment ALIGN_LEFT = HorizontalAlignment.LEFT;
-	/** 中对齐 */
+    /**
+     * 中对齐
+     */
     public static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
-	/** 边框大小 */
+    /**
+     * 边框大小
+     */
     public static final BorderStyle BORDER = BorderStyle.THIN;
 
 
@@ -47,20 +53,20 @@ public class ExcelUtil {
 
 
 
-	/**
-	 * 判断字符是否为单字节字符
-	 * @param c
-	 * @return
+	 /**
+	 * Description 判断字符是否为单字节字符
+	 * @param c c
+	 * @return int
 	 */
 	private static boolean isLetter(char c) {
 		int k = 0x80;
 		return c / k == 0 ? true : false;
 	}
 
-	/**
-	 * 判断长度
-	 * @param s
-	 * @return
+	 /**
+	 * Description 判断长度
+	 * @param s s
+	 * @return int
 	 */
 	private static int length(String s) {
 		if (s == null) {
@@ -83,16 +89,14 @@ public class ExcelUtil {
 	}
 	
 	/**
-	* @Title:
-	* @Description: 自动设置shell 的 col 宽度。如果超过宽度，返回true.
-	* @param @param sheel
-	* @param @param col
-	* @param @param s
-	* @param @return    设定文件 
-	* @author wangkc admin@wkclz.com  
-	* @date 2017年7月15日 下午9:10:16 *  
-	* @throws
-	 */
+    * Description 自动设置shell的col宽度。如果超过宽度，返回真
+    * create @ 2017-07-15 21:10:16
+	* @param sheel sheel
+	* @param col col
+	* @param s s
+	* @author wangkc admin@wkclz.com
+    * @return boolean
+	*/
     protected static boolean setWidth(SXSSFSheet sheel, int col, String s){
 		int width = ExcelUtil.width(s);
 		width = width > 72*256 ? 72*256 : width;
@@ -104,15 +108,11 @@ public class ExcelUtil {
 	
 	
 	/**
-	 * java.util.Date 转换为 java.sql.Date
-	* @Title:  
-	* @Description: 使用标准时间换取年月日的时间
-	* @param @param date
-	* @param @return    设定文件 
-	* @author wangkc admin@wkclz.com  
-	* @date 2017年7月14日 下午9:18:09 *  
-	* @throws
-	 */
+	* Description 使用标准时间换取年月日的时间
+    * create @ 2017-07-14 21:18:09
+	* @param date date
+	* @author wangkc admin@wkclz.com
+    */
 	public static java.sql.Date getSqlDate(Date date){
 		if(date==null) {
 			return null;
@@ -124,32 +124,32 @@ public class ExcelUtil {
 
 
 
-    /**
-     * 构建字体
-     * @param excel
-     * @return
+     /**
+     * Description 构建字体
+     * @param excel excel
+     * @return Font
      */
     protected static Font createFont(Excel excel){
         return createFont(excel, 0, 0, null);
     }
 
-    /**
-     * 构建字体
-     * @param excel
-     * @param heightInPoints
-     * @return
+     /**
+     * Description 构建字体
+     * @param excel excel
+     * @param heightInPoints heightInPoints
+     * @return Font
      */
     protected static Font createFont(Excel excel,int heightInPoints){
         return createFont(excel, 0, heightInPoints, null);
     }
 
-    /**
-     * 构建字体
-     * @param excel
-     * @param color
-     * @param heightInPoints
-     * @param fontName
-     * @return
+     /**
+     * Description 构建字体
+     * @param excel excel
+     * @param color color
+     * @param heightInPoints heightInPoints
+     * @param fontName fontName
+     * @return Font
      */
     protected static Font createFont(Excel excel, int color, int heightInPoints, String fontName){
         SXSSFWorkbook workbook = excel.getWorkbook();
@@ -177,6 +177,13 @@ public class ExcelUtil {
     }
 
 
+    /**
+     *
+     * @param excel excel
+     * @param cell cell
+     * @param align align
+     * @param border border
+     */
     protected static void setIntStrStyle(Excel excel, SXSSFCell cell, HorizontalAlignment align, boolean border){
         ExcelStyle style = excel.getStyle();
         cell.setCellStyle(style.getStyleStrCenterWithBorder(excel));
@@ -193,6 +200,14 @@ public class ExcelUtil {
             cell.setCellStyle(style.getStyleStrCenterNoBorder(excel));
         }
     }
+
+    /**
+     *
+     * @param excel excel
+     * @param cell cell
+     * @param align align
+     * @param border border
+     */
     protected static void setDoubleStyle(Excel excel, SXSSFCell cell,HorizontalAlignment align, boolean border){
         ExcelStyle style = excel.getStyle();
         cell.setCellStyle(style.getStyleNumCenterWithBorder(excel));
@@ -209,6 +224,14 @@ public class ExcelUtil {
             cell.setCellStyle(style.getStyleNumCenterNoBorder(excel));
         }
     }
+
+    /**
+     *
+     * @param excel excel
+     * @param cell cell
+     * @param align align
+     * @param border border
+     */
     protected static void setDateStyle(Excel excel, SXSSFCell cell,HorizontalAlignment align, boolean border){
         ExcelStyle style = excel.getStyle();
         cell.setCellStyle(style.getStyleDateCenterWithBorder(excel));
@@ -225,6 +248,13 @@ public class ExcelUtil {
             cell.setCellStyle(style.getStyleDateCenterNoBorder(excel));
         }
     }
+    /**
+     *
+     * @param excel excel
+     * @param cell cell
+     * @param align align
+     * @param border border
+     */
     protected static void setDateTimeStyle(Excel excel, SXSSFCell cell,HorizontalAlignment align, boolean border){
         ExcelStyle style = excel.getStyle();
         cell.setCellStyle(style.getStyleDateTimeCenterWithBorder(excel));
@@ -241,6 +271,13 @@ public class ExcelUtil {
             cell.setCellStyle(style.getStyleDateTimeCenterNoBorder(excel));
         }
     }
+    /**
+     *
+     * @param excel excel
+     * @param cell cell
+     * @param align align
+     * @param border border
+     */
     protected static void setWrapTextStyle(Excel excel, SXSSFCell cell,HorizontalAlignment align, boolean border){
         ExcelStyle style = excel.getStyle();
         cell.setCellStyle(style.getStyleWrapTextCenterWithBorder(excel));

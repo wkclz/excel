@@ -75,39 +75,11 @@ public class Excel extends ExcelContent {
     }
 
 
-
-
-
     /**
-     * 以下是为了兼容旧的错误命名
-     * @return
-     * @throws ExcelException
-     * @throws IOException
-     */
-    @Deprecated
-    public String CreateXlsx() throws ExcelException, IOException {
-        return createXlsx();
-    }
-
-    /**
-     * 以下是为了兼容旧的错误命名
-     * @return
-     * @throws ExcelException
-     */
-    @Deprecated
-    public File CreateXlsxByFile() throws ExcelException {
-        return createXlsxByFile();
-    }
-
-
-
-    /**
-     * @Title:
-     * @Description: 生成 Excel 到指定目录
-     * @param @return    设定文件
+     * Description 生成Excel到指定目录
+	 * create @ 2017-07-16 12:57:41
      * @author wangkc admin@wkclz.com
-     * @date 2017年7月16日 上午12:57:41 *
-     * @throws
+     * @throws ExcelException,IOException
      */
     public String createXlsx() throws ExcelException, IOException {
         // 把最后一次的数据加进去
@@ -132,12 +104,10 @@ public class Excel extends ExcelContent {
     }
 
     /**
-     * @Title:
-     * @Description: 生成 Excel 到输出流
-     * @param @return    设定文件
+     * Description 生成Excel到输出流
+	 * create @ 2017-12-09 10:31:09
      * @author wangkc admin@wkclz.com
-     * @date 2017年12月09日 上午10:31:09 *
-     * @throws
+     * @throws ExcelException
      */
     public File createXlsxByFile() throws ExcelException {
         // 把最后一次的数据加进去
@@ -425,15 +395,12 @@ public class Excel extends ExcelContent {
 
 
 	/**
-	* @Title:
-	* @Description: 递归找到空的cell
-	* @param @param row
-	* @param @param col_num
-	* @param @return    设定文件 
-	* @author wangkc admin@wkclz.com  
-	* @date 2017年7月15日 下午9:09:00 *  
-	* @throws
-	 */
+	* Description 递归找到空的cell
+	* create @ 2017-07-15 21:09:00
+	* @param row row
+	* @param colNum colNum
+	* @author wangkc admin@wkclz.com
+	*/
 	private int getCell(SXSSFRow row,int colNum){
 		if (row.getCell(colNum)!=null) {
 			return this.getCell(row, colNum+1);

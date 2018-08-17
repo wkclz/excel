@@ -14,7 +14,15 @@ public class ExcelCell {
 	private int col;
 	/**	合并行数【高度】 */
 	private int row;
-	
+
+	/**
+	 * 创建 cell
+	 * @param cellContent cellContent
+	 * @param border border
+	 * @param align align
+	 * @param col col
+	 * @param row row
+	 */
 	protected ExcelCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row) {
 		super();
 		this.cellContent = cellContent;

@@ -16,9 +16,13 @@ public class ExcelStyle {
 	private XSSFCellStyle styleTitle;
 	/** 列名样式【默认有边框】 */
 	private XSSFCellStyle styleHeader;
-	
-	
-	/** 标题样式【默认无边框】 */
+
+
+    /**
+     * 标题样式【默认无边框】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleTitle(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if (styleTitle==null){
@@ -30,7 +34,11 @@ public class ExcelStyle {
 		return styleTitle;
 	}
 	
-	/** 列名样式【默认有边框】 */
+    /**
+     * 列名样式【默认有边框】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleHeader(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleHeader==null){
@@ -61,7 +69,11 @@ public class ExcelStyle {
 	private XSSFCellStyle styleStrCenterWithBorder;
 	
 	
-	/** 字符串 【无边框,左边】 */
+    /**
+     * 字符串【无边框,左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleStrLeftNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrLeftNoBorder==null){
@@ -73,7 +85,11 @@ public class ExcelStyle {
 		return styleStrLeftNoBorder;
 	}
 	
-	/** 字符串 【无边框，中间】 */
+    /**
+     * 字符串【无边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleStrCenterNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrCenterNoBorder==null){
@@ -87,7 +103,11 @@ public class ExcelStyle {
 		return styleStrCenterNoBorder;
 	}
 	
-	/** 字符串 【有边框，左边】 */
+    /**
+     * 字符串【有边框，左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleStrLeftWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrLeftWithBorder==null){
@@ -102,7 +122,11 @@ public class ExcelStyle {
 		return styleStrLeftWithBorder;
 	}
 	
-	/** 字符串 【有边框，中间】 */
+    /**
+     * 字符串【有边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleStrCenterWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleStrCenterWithBorder==null){
@@ -131,9 +155,13 @@ public class ExcelStyle {
 	private XSSFCellStyle styleNumLeftWithBorder;
 	/** 小数 【有边框，中间】 */
 	private XSSFCellStyle styleNumCenterWithBorder;
-	
-	
-	/** 小数 【无边框,左边】 */
+
+
+    /**
+     * 小数 【无边框,左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleNumLeftNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumLeftNoBorder==null){
@@ -145,8 +173,12 @@ public class ExcelStyle {
 		}
 		return styleNumLeftNoBorder;
 	}
-	
-	/** 小数 【无边框，中间】 */
+
+    /**
+     * 小数 【无边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleNumCenterNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumCenterNoBorder==null){
@@ -158,8 +190,12 @@ public class ExcelStyle {
 		}
 		return styleNumCenterNoBorder;
 	}
-	
-	/** 小数 【有边框，左边】 */
+
+    /**
+     * 小数 【有边框，左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleNumLeftWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumLeftWithBorder==null){
@@ -174,8 +210,12 @@ public class ExcelStyle {
 		}
 		return styleNumLeftWithBorder;
 	}
-	
-	/** 小数 【有边框，中间】 */
+
+    /**
+     * 小数 【有边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleNumCenterWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleNumCenterWithBorder==null){
@@ -205,9 +245,13 @@ public class ExcelStyle {
 	private XSSFCellStyle styleDateLeftWithBorder;
 	/** 日期 【有边框，中间】 */
 	private XSSFCellStyle styleDateCenterWithBorder;
-	
-	
-	/** 日期 【无边框,左边】 */
+
+
+    /**
+     * 日期 【无边框,左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateLeftNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateLeftNoBorder==null){
@@ -219,8 +263,12 @@ public class ExcelStyle {
 		}
 		return styleDateLeftNoBorder;
 	}
-	
-	/** 日期 【无边框，中间】 */
+
+    /**
+     * 日期 【无边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateCenterNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateCenterNoBorder==null){
@@ -232,8 +280,12 @@ public class ExcelStyle {
 		}
 		return styleDateCenterNoBorder;
 	}
-	
-	/** 日期 【有边框，左边】 */
+
+    /**
+     * 日期 【有边框，左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateLeftWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateLeftWithBorder==null){
@@ -248,8 +300,12 @@ public class ExcelStyle {
 		}
 		return styleDateLeftWithBorder;
 	}
-	
-	/** 日期 【有边框，中间】 */
+
+    /**
+     * 日期 【有边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateCenterWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateCenterWithBorder==null){
@@ -279,9 +335,13 @@ public class ExcelStyle {
 	private XSSFCellStyle styleDateTimeLeftWithBorder;
 	/** 日期时间 【有边框，中间】 */
 	private XSSFCellStyle styleDateTimeCenterWithBorder;
-	
-	
-	/** 日期时间 【无边框,左边】 */
+
+
+    /**
+     * 日期时间 【无边框,左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateTimeLeftNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeLeftNoBorder==null){
@@ -293,8 +353,12 @@ public class ExcelStyle {
 		}
 		return styleDateTimeLeftNoBorder;
 	}
-	
-	/** 日期时间 【无边框，中间】 */
+
+    /**
+     * 日期时间 【无边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateTimeCenterNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeCenterNoBorder==null){
@@ -306,8 +370,12 @@ public class ExcelStyle {
 		}
 		return styleDateTimeCenterNoBorder;
 	}
-	
-	/** 日期时间 【有边框，左边】 */
+
+    /**
+     * 日期时间 【有边框，左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateTimeLeftWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeLeftWithBorder==null){
@@ -322,8 +390,12 @@ public class ExcelStyle {
 		}
 		return styleDateTimeLeftWithBorder;
 	}
-	
-	/** 日期时间 【有边框，中间】 */
+
+    /**
+     * 日期时间 【有边框，中间】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleDateTimeCenterWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleDateTimeCenterWithBorder==null){
@@ -353,9 +425,13 @@ public class ExcelStyle {
 	private XSSFCellStyle styleWrapTextLeftWithBorder;
 	/** 富文本，自动换行 【有边框，中间】 */
 	private XSSFCellStyle styleWrapTextCenterWithBorder;
-	
-	
-	/** 富文本，自动换行 【无边框,左边】 */
+
+
+    /**
+     * 富文本，自动换行 【无边框,左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleWrapTextLeftNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextLeftNoBorder==null){
@@ -368,8 +444,12 @@ public class ExcelStyle {
 		}
 		return styleWrapTextLeftNoBorder;
 	}
-	
-	/** 富文本，自动换行 【无边框，中间】 */
+
+    /**
+     * 富文本，自动换行 【无边框，中间】
+     * @param  excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleWrapTextCenterNoBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextCenterNoBorder==null){
@@ -382,8 +462,12 @@ public class ExcelStyle {
 		}
 		return styleWrapTextCenterNoBorder;
 	}
-	
-	/** 富文本，自动换行 【有边框，左边】 */
+
+    /**
+     * 富文本，自动换行 【有边框，左边】
+     * @param excel excel
+     * @return XSSFCellStyle
+     */
 	protected XSSFCellStyle getStyleWrapTextLeftWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextLeftWithBorder==null){
@@ -399,8 +483,12 @@ public class ExcelStyle {
 		}
 		return styleWrapTextLeftWithBorder;
 	}
-	
-	/** 富文本，自动换行 【有边框，中间】 */
+
+	/**
+	 * Descripition 富文本，自动换行【有边框，中间】
+	 * @param excel excel
+	 * @return XSSFCellStyle
+	 */
 	protected XSSFCellStyle getStyleWrapTextCenterWithBorder(Excel excel) {
         SXSSFWorkbook workbook = excel.getWorkbook();
 		if(styleWrapTextCenterWithBorder==null){
@@ -419,9 +507,9 @@ public class ExcelStyle {
 
 
 	/**
-	 * 添加边框
-	 * @param xssfCellStyle
-	 * @return
+	 * Description 添加边框
+	 * @param xssfCellStyle nxssfCellStyle
+	 * @return XSSFCellStyle
 	 */
 	private static XSSFCellStyle addBorder(XSSFCellStyle xssfCellStyle){
 		//左边框

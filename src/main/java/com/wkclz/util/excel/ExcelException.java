@@ -3,11 +3,10 @@ package com.wkclz.util.excel;
 public class ExcelException extends Exception {
 
 	/**
-	* @Fields serialVersionUID
+	* Fields serialVersionUID
+	* create @ 2017-12-09 09:27:55
 	* @author wangkc admin@wkclz.com
-	* @date 2017年12月09日 上午09:27:55 *
 	*/
-
 	public ExcelException(String msg) {
 		super(msg);
 	}

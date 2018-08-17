@@ -3,11 +3,10 @@ package com.wkclz.util.excelRd;
 public class ExcelRdException extends Exception {
 	
 	/** 
-	* @Fields serialVersionUID :
-	* @author wangkc admin@wkclz.com  
-	* @date 2017年7月19日 上午11:12:23 * 
-	*/ 
-	
+	* Fields serialVersionUID :
+	* create @ 2017-07-19 11:12:23
+	* @author wangkc admin@wkclz.com
+	*/
 	private static final long serialVersionUID = 1L;
 
 	public ExcelRdException(String msg) {

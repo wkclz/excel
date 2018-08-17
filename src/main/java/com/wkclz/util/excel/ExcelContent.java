@@ -166,18 +166,22 @@ public abstract class ExcelContent {
 	public Integer getWidth() {
 		return width;
 	}
+	/** nothing */
 	public void setWidth(Integer width) {
 		this.width = width;
 	}
+	/** nothing */
 	public void setRows(List<ExcelRow> rows) {
 		this.rows = rows;
 	}
+	/** nothing */
 	protected List<ExcelRow> getRows() {
 		if(rows==null) {
 			rows = new ArrayList<ExcelRow>();
 		}
 		return rows;
 	}
+	/** nothing */
 	protected void addRow(ExcelRow row) {
 		if(this.rows==null) {
 			this.rows = new ArrayList<ExcelRow>();
@@ -185,69 +189,43 @@ public abstract class ExcelContent {
 		this.rows.add(row);
 	}
 
+	/** nothing */
     public Integer getCacheRowsInMemory() {
         return cacheRowsInMemory;
     }
 
+	/** nothing */
     public void setCacheRowsInMemory(Integer cacheRowsInMemory) {
         this.cacheRowsInMemory = cacheRowsInMemory;
     }
 
+	/** nothing */
     public Map<String, Font> getWorkBookFonts() {
         return workBookFonts;
     }
 
+	/** nothing */
     public void setWorkBookFonts(Map<String, Font> workBookFonts) {
         this.workBookFonts = workBookFonts;
     }
 
+	/** nothing */
     public ExcelStyle getStyle() {
         return style;
     }
 
+	/** nothing */
     public void setStyle(ExcelStyle style) {
         this.style = style;
     }
 
+	/** nothing */
     public SXSSFWorkbook getWorkbook() {
         return workbook;
     }
+	/** nothing */
     public void setWorkbook(SXSSFWorkbook workbook) {
         this.workbook = workbook;
-    }
-
-    /**
-     * 此方法为了兼容旧版，
-     * @param createBy
-     */
-    @Deprecated
-    public void setCreate_by(String createBy) {
-        if(createBy==null) {
-			createBy = "";
-		}
-        this.createBy = createBy;
-    }
-
-    /**
-     * 此方法为了兼容旧版，
-     * @param createBy
-     */
-    @Deprecated
-    public void setCreate_by(Object createBy) {
-        if(createBy==null) {
-			createBy = "";
-		}
-        this.createBy = createBy.toString();
-    }
-
-
-    /**
-     * 此方法为了兼容旧版，
-     * @return
-     */
-    @Deprecated
-    public String getCreate_by() {
-        return createBy;
     }
 
 }

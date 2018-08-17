@@ -1,8 +1,9 @@
 package com.wkclz.util.excelRd;
 
 /**
- * Description:
- * Created: wangkaicun @ 2017-11-15 下午10:42
+ * Description enum
+ * create @: 2017-11-15 下午10:42
+ * @author wangkaicun wkclz@qq.com
  */
 public enum ExcelRdTypeEnum {
 

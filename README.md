@@ -100,6 +100,11 @@
 ***
 > [com.wkclz.util.excel.ExcelTest.main()](src/test/java/com/wkclz/util/excel/ExcelTest.java);
 
+
+##### Excel 生成效果图：
+![](dist/excel.png)
+
+
 ### Excel读取类的使用方法：
 ***
 > * new ExcelRd()提供以下方法进行实例化
@@ -116,17 +121,10 @@
 ##### 示例代码：
 ***
 > [com.wkclz.util.excel.ExcelRdTest.main()](src/test/java/com/wkclz/util/excelRd/ExcelRdTest.java);
-
-##### Excel 生成效果图：
-![](dist/excel.png)
+> [示例 Excel](dist/test.xlsx);
 
 ***
 > 最后，此工具类共享出来给大家使用，希望大家能够帮助一起完善，通过开源的方式互助。发现有什么bug，或者有什么想法欢迎 PR.
-
-# 捐赠
-***
-> 如果您感觉这个工具很好用，希望支持作者，您还可以进行捐赠： \
-> 本页面最下方的<code>捐赠</code>
 
 ***
 # 更新日志

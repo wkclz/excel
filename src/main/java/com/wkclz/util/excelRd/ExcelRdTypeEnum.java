@@ -3,6 +3,7 @@ package com.wkclz.util.excelRd;
 /**
  * Description enum
  * create @: 2017-11-15 下午10:42
+ *
  * @author wangkaicun wkclz@qq.com
  */
 public enum ExcelRdTypeEnum {
@@ -18,7 +19,13 @@ public enum ExcelRdTypeEnum {
     STRING("字符型");
 
     private String value;
-    private ExcelRdTypeEnum(String value) { this.value = value; }
-    public String getValue() { return value; }
+
+    private ExcelRdTypeEnum(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 
 }

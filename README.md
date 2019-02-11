@@ -7,9 +7,25 @@
 > * Excel 是对 poi 的封装，建立一个通用的excel模板，再通过 set,add,create等简单的操作方法生成 excel。同时也能指定起始度坐标，对标准的 Excel进行读取。
 
 ### 下载（Latest: v 1.0.7）
+- 2019-02-12: [excel-1.0.8.jar](dist/excel.png)
+
 - 2018-04-02: [excel-1.0.7.jar](dist/excel.png)
 
-### 项目引用（Latest: v 1.0.7）
+### 项目引用（Latest: v 1.0.8）
+~~~
+<dependency>
+    <groupId>com.wkclz.util</groupId>
+    <artifactId>excel</artifactId>
+    <version>1.0.8</version>
+</dependency>
+<repositories>
+    <repository>
+        <id>git-maven</id>
+        <url>https://gitee.com/wkclz/maven-repository/raw/master</url>
+    </repository>
+</repositories>
+~~~
+#####（v 1.0.7）
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
@@ -127,9 +143,14 @@
 > 最后，此工具类共享出来给大家使用，希望大家能够帮助一起完善，通过开源的方式互助。发现有什么bug，或者有什么想法欢迎 PR.
 
 ***
-# 更新日志
+# 更新日志、
 ***
-2018-7-31 18:4:20
+2019-02-12 01:47:35
+1. 使用gitee 发布jar 包
+2. 修正空白 header 时的判断错误
+
+***
+2018-07-31 18:4:20
 1. Excel 读取，支持（类似）手机的长型识别
 
 ***

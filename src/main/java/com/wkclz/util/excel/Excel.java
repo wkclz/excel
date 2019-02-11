@@ -175,7 +175,7 @@ public class Excel extends ExcelContent {
             throw new ExcelException("title contains this chars: \"" + rt + "\" is not allowd!");
         }
 
-        boolean headerError = (header == null || header.size() == 0) && header == null;
+        boolean headerError = (header == null || header.size() == 0) && width == null;
         if (headerError) {
             throw new ExcelException("header or width cannot be null or empty!");
         }

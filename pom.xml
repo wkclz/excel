@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -58,6 +58,27 @@
         </developer>
     </developers>
 
+    <repositories>
+        <repository>
+            <id>git-maven</id>
+            <url>https://gitee.com/wkclz/maven-repository</url>
+        </repository>
+
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
     <build>
         <plugins>
             <plugin>
@@ -93,5 +114,17 @@
         </snapshotRepository>
     </distributionManagement>
     -->
+    <!-- 以下是从自己 git 拉下来的仓库，部署进去，再提交到 git -->
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>file:${user.home}/project/code/maven-repository</url>
+        </repository>
+        <snapshotRepository>
+            <id>Nexus Snapshot</id>
+            <url>file:${user.home}/project/code/maven-repository</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

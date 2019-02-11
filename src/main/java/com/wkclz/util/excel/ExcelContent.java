@@ -46,51 +46,80 @@ import java.util.Map;
 
 public abstract class ExcelContent {
 
-    /** excel 工作簿 */
+    /**
+     * excel 工作簿
+     */
     protected SXSSFWorkbook workbook;
     /** sheet */
-    /** 多 sheet 支持 */
+    /**
+     * 多 sheet 支持
+     */
     protected SXSSFSheet sheet;
     protected List<SXSSFSheet> sheets;
-    /** sheet号 */
+    /**
+     * sheet号
+     */
     protected Integer sheetNum = 0;
-    /** 行号 */
+    /**
+     * 行号
+     */
     protected Integer rowNum = 0;
     /** 基本信息后的第一行。 */
 
-	/** 标题 */
+    /**
+     * 标题
+     */
     protected String title;
-	/** 创建人 */
+    /**
+     * 创建人
+     */
     protected String createBy;
-	/** 时间从 */
+    /**
+     * 时间从
+     */
     protected String dateFrom;
-	/** 时间从 */
+    /**
+     * 时间从
+     */
     protected String dateTo;
-	/** 保存路径 */
+    /**
+     * 保存路径
+     */
     protected String savePath;
-	/** 表格列名 */
+    /**
+     * 表格列名
+     */
     protected List<String> header;
-	/** Excel 宽度【用于在没有title的情况下定义标题合并】 */
+    /**
+     * Excel 宽度【用于在没有title的情况下定义标题合并】
+     */
     protected Integer width;
-	/** 行对象 */
+    /**
+     * 行对象
+     */
     protected List<ExcelRow> rows;
 
-	/** 字体缓存重用 */
+    /**
+     * 字体缓存重用
+     */
     protected Map<String, Font> workBookFonts;
 
-    /** 所有样式 */
+    /**
+     * 所有样式
+     */
     protected ExcelStyle style;
 
     protected Integer cacheRowsInMemory = 10240;
 
     protected List<SXSSFSheet> getSheets() {
-        if(this.sheets==null) {
+        if (this.sheets == null) {
             this.sheets = new ArrayList<SXSSFSheet>();
         }
         return this.sheets;
     }
+
     protected void addSheet(SXSSFSheet sheet) {
-        if(this.sheets==null) {
+        if (this.sheets == null) {
             this.sheets = new ArrayList<SXSSFSheet>();
         }
 
@@ -104,126 +133,173 @@ public abstract class ExcelContent {
         this.sheets.add(sheet);
     }
 
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getCreateBy() {
-		return createBy;
-	}
-	public void setCreateBy(String createBy) {
-		if(createBy==null) {
-			createBy = "";
-		}
-		this.createBy = createBy;
-	}
-	public void setCreateBy(Object createBy) {
-		if(createBy==null) {
-			createBy = "";
-		}
-		this.createBy = createBy.toString();
-	}
-	public String getDateFrom() {
-		return dateFrom;
-	}
-	public void setDateFrom(String dateFrom) {
-		this.dateFrom = dateFrom;
-	}
-	public String getDateTo() {
-		return dateTo;
-	}
-	public void setDateTo(String dateTo) {
-		this.dateTo = dateTo;
-	}
-	public String getSavePath() {
-		return savePath;
-	}
-	public void setSavePath(String savePath) {
-		this.savePath = savePath;
-	}
-	public List<String> getHeader() {
-		return header;
-	}
-	/** 使用List<String>初始化列名 */
-	public void setHeader(List<String> header) {
-		if(header!=null) {
-			this.width = header.size();
-		}
-		this.header = header;
-	}
-	/** 使用String[] 初始化列名 */
-	public void setHeader(String[] header) {
-		if(header!=null) {
-			this.width = header.length;
-		}
-		this.header = new ArrayList<String>();
-		for (String h : header) {
-			this.header.add(h);
-		}
-	}
-	public Integer getWidth() {
-		return width;
-	}
-	/** nothing */
-	public void setWidth(Integer width) {
-		this.width = width;
-	}
-	/** nothing */
-	public void setRows(List<ExcelRow> rows) {
-		this.rows = rows;
-	}
-	/** nothing */
-	protected List<ExcelRow> getRows() {
-		if(rows==null) {
-			rows = new ArrayList<ExcelRow>();
-		}
-		return rows;
-	}
-	/** nothing */
-	protected void addRow(ExcelRow row) {
-		if(this.rows==null) {
-			this.rows = new ArrayList<ExcelRow>();
-		}
-		this.rows.add(row);
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	/** nothing */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        if (createBy == null) {
+            createBy = "";
+        }
+        this.createBy = createBy;
+    }
+
+    public void setCreateBy(Object createBy) {
+        if (createBy == null) {
+            createBy = "";
+        }
+        this.createBy = createBy.toString();
+    }
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
+    }
+
+    public List<String> getHeader() {
+        return header;
+    }
+
+    /**
+     * 使用List<String>初始化列名
+     */
+    public void setHeader(List<String> header) {
+        if (header != null) {
+            this.width = header.size();
+        }
+        this.header = header;
+    }
+
+    /**
+     * 使用String[] 初始化列名
+     */
+    public void setHeader(String[] header) {
+        if (header != null) {
+            this.width = header.length;
+        }
+        this.header = new ArrayList<String>();
+        for (String h : header) {
+            this.header.add(h);
+        }
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    /**
+     * nothing
+     */
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    /**
+     * nothing
+     */
+    public void setRows(List<ExcelRow> rows) {
+        this.rows = rows;
+    }
+
+    /**
+     * nothing
+     */
+    protected List<ExcelRow> getRows() {
+        if (rows == null) {
+            rows = new ArrayList<ExcelRow>();
+        }
+        return rows;
+    }
+
+    /**
+     * nothing
+     */
+    protected void addRow(ExcelRow row) {
+        if (this.rows == null) {
+            this.rows = new ArrayList<ExcelRow>();
+        }
+        this.rows.add(row);
+    }
+
+    /**
+     * nothing
+     */
     public Integer getCacheRowsInMemory() {
         return cacheRowsInMemory;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public void setCacheRowsInMemory(Integer cacheRowsInMemory) {
         this.cacheRowsInMemory = cacheRowsInMemory;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public Map<String, Font> getWorkBookFonts() {
         return workBookFonts;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public void setWorkBookFonts(Map<String, Font> workBookFonts) {
         this.workBookFonts = workBookFonts;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public ExcelStyle getStyle() {
         return style;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public void setStyle(ExcelStyle style) {
         this.style = style;
     }
 
-	/** nothing */
+    /**
+     * nothing
+     */
     public SXSSFWorkbook getWorkbook() {
         return workbook;
     }
-	/** nothing */
+
+    /**
+     * nothing
+     */
     public void setWorkbook(SXSSFWorkbook workbook) {
         this.workbook = workbook;
     }

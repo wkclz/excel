@@ -65,6 +65,9 @@
 > * setHeader(String[] header)
 > * setWidth(Integer width)【在有设置 header的时候，会自动取其长度，不需要header的需要设置 width】
 > * setCacheRowsInMemory(Integer rows) [10240] 【设置内存缓存的数据行数。内存小的服务器请调小。如果不理解，请不要设置。】
+> * setParams:
+>   * titleOff [default null] 是否关闭 title 显示
+>   * createInfoOff [default dull] 是否关闭创建信息显示，创建时间和创建人
 
 * 提供的get方法：
 > * 以上的set方法均有对应的无参get方法。
@@ -143,7 +146,15 @@
 > 最后，此工具类共享出来给大家使用，希望大家能够帮助一起完善，通过开源的方式互助。发现有什么bug，或者有什么想法欢迎 PR.
 
 ***
-# 更新日志、
+# 更新日志
+***
+2019-02-15 06:41:17
+1. 引入lombpk
+2. 添加 params控制参数
+3. 标题可选关闭显示
+4. 创建时间，创建人 可选关闭显示
+5. 文字靠右
+
 ***
 2019-02-12 01:47:35
 1. 使用gitee 发布jar 包

@@ -34,16 +34,17 @@ package com.wkclz.util.excel;
                   不见满街漂亮妹，哪个归得程序员？
 */
 
+import lombok.Data;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Data
 public abstract class ExcelContent {
 
     /**
@@ -105,6 +106,11 @@ public abstract class ExcelContent {
     protected Map<String, Font> workBookFonts;
 
     /**
+     * 其他参数
+     */
+    protected Map<String, Object> params;
+
+    /**
      * 所有样式
      */
     protected ExcelStyle style;
@@ -133,18 +139,6 @@ public abstract class ExcelContent {
         this.sheets.add(sheet);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
     public void setCreateBy(String createBy) {
         if (createBy == null) {
             createBy = "";
@@ -157,34 +151,6 @@ public abstract class ExcelContent {
             createBy = "";
         }
         this.createBy = createBy.toString();
-    }
-
-    public String getDateFrom() {
-        return dateFrom;
-    }
-
-    public void setDateFrom(String dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    public String getDateTo() {
-        return dateTo;
-    }
-
-    public void setDateTo(String dateTo) {
-        this.dateTo = dateTo;
-    }
-
-    public String getSavePath() {
-        return savePath;
-    }
-
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
-    }
-
-    public List<String> getHeader() {
-        return header;
     }
 
     /**
@@ -210,27 +176,6 @@ public abstract class ExcelContent {
         }
     }
 
-    public Integer getWidth() {
-        return width;
-    }
-
-    /**
-     * nothing
-     */
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    /**
-     * nothing
-     */
-    public void setRows(List<ExcelRow> rows) {
-        this.rows = rows;
-    }
-
-    /**
-     * nothing
-     */
     protected List<ExcelRow> getRows() {
         if (rows == null) {
             rows = new ArrayList<ExcelRow>();
@@ -238,9 +183,6 @@ public abstract class ExcelContent {
         return rows;
     }
 
-    /**
-     * nothing
-     */
     protected void addRow(ExcelRow row) {
         if (this.rows == null) {
             this.rows = new ArrayList<ExcelRow>();
@@ -248,60 +190,5 @@ public abstract class ExcelContent {
         this.rows.add(row);
     }
 
-    /**
-     * nothing
-     */
-    public Integer getCacheRowsInMemory() {
-        return cacheRowsInMemory;
-    }
-
-    /**
-     * nothing
-     */
-    public void setCacheRowsInMemory(Integer cacheRowsInMemory) {
-        this.cacheRowsInMemory = cacheRowsInMemory;
-    }
-
-    /**
-     * nothing
-     */
-    public Map<String, Font> getWorkBookFonts() {
-        return workBookFonts;
-    }
-
-    /**
-     * nothing
-     */
-    public void setWorkBookFonts(Map<String, Font> workBookFonts) {
-        this.workBookFonts = workBookFonts;
-    }
-
-    /**
-     * nothing
-     */
-    public ExcelStyle getStyle() {
-        return style;
-    }
-
-    /**
-     * nothing
-     */
-    public void setStyle(ExcelStyle style) {
-        this.style = style;
-    }
-
-    /**
-     * nothing
-     */
-    public SXSSFWorkbook getWorkbook() {
-        return workbook;
-    }
-
-    /**
-     * nothing
-     */
-    public void setWorkbook(SXSSFWorkbook workbook) {
-        this.workbook = workbook;
-    }
 
 }

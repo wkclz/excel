@@ -23,6 +23,10 @@ public class ExcelUtil {
      */
     public static final HorizontalAlignment ALIGN_CENTER = HorizontalAlignment.CENTER;
     /**
+     * 右对齐
+     */
+    public static final HorizontalAlignment ALIGN_RIGHT = HorizontalAlignment.RIGHT;
+    /**
      * 边框大小
      */
     public static final BorderStyle BORDER = BorderStyle.THIN;

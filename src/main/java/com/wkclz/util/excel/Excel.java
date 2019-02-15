@@ -193,10 +193,6 @@ public class Excel extends ExcelContent {
          * 3、边框，
          * 4、合并
          */
-        ExcelCell excelCell;    // cell 对象
-        Object content;            // cell 内容
-        HorizontalAlignment align;            // cell 对齐方式【默认居中】
-        boolean border;            // cell 边框【默认有边框】
 
         // 对所有行对象进行循环
         for (ExcelRow excelRow : rows) {
@@ -222,10 +218,15 @@ public class Excel extends ExcelContent {
                 // 当前单元格，只用于cell的宽度设定。col_num 将在使用完后就指定下一cell
                 int nowCell = colNum;
 
-                excelCell = excelRow.get(j);
-                content = excelCell.getCellContent();
-                align = excelCell.getAlign();
-                border = excelCell.getBorder();
+                // cell 对象
+                ExcelCell excelCell = excelRow.get(j);
+                // cell 内容
+                Object content = excelCell.getCellContent();
+                // cell 对齐方式【默认居中】
+                HorizontalAlignment align = excelCell.getAlign();
+                // cell 边框【默认有边框】
+                Boolean border = excelCell.getBorder();
+
                 int colMerge = excelCell.getCol();
                 if (colMerge < 1) {
                     colMerge = 1;
@@ -339,30 +340,35 @@ public class Excel extends ExcelContent {
         style = new ExcelStyle();
 
         // title
-        if (title != null && !"".equals(title.trim())) {
-            sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, width - 1));
-            SXSSFRow rowTitle = sheet.createRow(rowNum++);
-            SXSSFCell cellTitle = rowTitle.createCell(0);
-            cellTitle.setCellStyle(style.getStyleTitle(this));
-            cellTitle.setCellValue(title);
+        if (!(params!=null && Boolean.valueOf(params.get("titleOff").toString()))){
+            if (title != null && !"".equals(title.trim())) {
+                sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, width - 1));
+                SXSSFRow rowTitle = sheet.createRow(rowNum++);
+                SXSSFCell cellTitle = rowTitle.createCell(0);
+                cellTitle.setCellStyle(style.getStyleTitle(this));
+                cellTitle.setCellValue(title);
+            }
         }
 
         // infomation of this excel
-        sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, 2));
-        SXSSFRow rowInfo = sheet.createRow(rowNum);
-        SXSSFCell cellTime = rowInfo.createCell(0);
-        cellTime.setCellStyle(style.getStyleStrLeftNoBorder(this));
-        cellTime.setCellValue("创建时间：" + ExcelUtil.SDF_DATE_TIME.format(new Date()));
+        if (!(params!=null && Boolean.valueOf(params.get("createInfoOff").toString()))){
+            // createTime
+            sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, 2));
+            SXSSFRow rowInfo = sheet.createRow(rowNum);
+            SXSSFCell cellTime = rowInfo.createCell(0);
+            cellTime.setCellStyle(style.getStyleStrLeftNoBorder(this));
+            cellTime.setCellValue("创建时间：" + ExcelUtil.SDF_DATE_TIME.format(new Date()));
 
-        // create_by
-        if (createBy != null) {
-            sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 3, 5));
-            SXSSFCell cellCreateBy = rowInfo.createCell(3);
-            cellCreateBy.setCellStyle(style.getStyleStrLeftNoBorder(this));
-            cellCreateBy.setCellValue("创建人：" + createBy);
+            // create_by
+            if (createBy != null) {
+                sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 3, 5));
+                SXSSFCell cellCreateBy = rowInfo.createCell(3);
+                cellCreateBy.setCellStyle(style.getStyleStrLeftNoBorder(this));
+                cellCreateBy.setCellValue("创建人：" + createBy);
+            }
+            rowNum++;
         }
 
-        rowNum++;
 
         // date_from_to
         String dateInfo = "";

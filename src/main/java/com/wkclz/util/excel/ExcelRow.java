@@ -1,5 +1,6 @@
 package com.wkclz.util.excel;
 
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import java.util.ArrayList;
@@ -40,23 +41,58 @@ public class ExcelRow {
     }
 
     public void addCell(Object cellContent, boolean border, HorizontalAlignment align) {
-        addCell(cellContent, border, align, 1, 1);
+        addCell(cellContent, border, align, 1, 1, null);
     }
 
     public void addCell(Object cellContent, int col, int row) {
-        addCell(cellContent, true, ExcelUtil.ALIGN_CENTER, col, row);
+        addCell(cellContent, true, ExcelUtil.ALIGN_CENTER, col, row, null);
     }
 
     public void addCell(Object cellContent, boolean border, int col, int row) {
-        addCell(cellContent, border, ExcelUtil.ALIGN_CENTER, col, row);
+        addCell(cellContent, border, ExcelUtil.ALIGN_CENTER, col, row, null);
     }
 
     public void addCell(Object cellContent, HorizontalAlignment align, int col, int row) {
-        addCell(cellContent, true, align, col, row);
+        addCell(cellContent, true, align, col, row, null);
     }
 
-    public void addCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row) {
-        ExcelCell excelCell = new ExcelCell(cellContent, border, align, col, row);
+
+    /**
+     * 以下有包含 Font
+     * @param cellContent
+     * @param font
+     */
+    public void addCell(Object cellContent, Font font) {
+        addCell(cellContent, true, ExcelUtil.ALIGN_CENTER, font);
+    }
+
+    public void addCell(Object cellContent, boolean border, Font font) {
+        addCell(cellContent, border, ExcelUtil.ALIGN_CENTER, font);
+    }
+
+    public void addCell(Object cellContent, HorizontalAlignment align, Font font) {
+        addCell(cellContent, true, align, font);
+    }
+
+    public void addCell(Object cellContent, boolean border, HorizontalAlignment align, Font font) {
+        addCell(cellContent, border, align, 1, 1, font);
+    }
+
+    public void addCell(Object cellContent, int col, int row, Font font) {
+        addCell(cellContent, true, ExcelUtil.ALIGN_CENTER, col, row, font);
+    }
+
+    public void addCell(Object cellContent, boolean border, int col, int row, Font font) {
+        addCell(cellContent, border, ExcelUtil.ALIGN_CENTER, col, row, font);
+    }
+
+    public void addCell(Object cellContent, HorizontalAlignment align, int col, int row, Font font) {
+        addCell(cellContent, true, align, col, row, font);
+    }
+
+
+    public void addCell(Object cellContent, boolean border, HorizontalAlignment align, int col, int row, Font font) {
+        ExcelCell excelCell = new ExcelCell(cellContent, border, align, col, row, font);
         if (this.row == null) {
             this.row = new ArrayList<ExcelCell>();
         }

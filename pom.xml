@@ -85,7 +85,7 @@
         </repository>
     </repositories>
 
-
+    <!--
     <build>
         <plugins>
             <plugin>
@@ -107,6 +107,7 @@
             </plugin>
         </plugins>
     </build>
+    -->
 
     <!-- 发布位置配置
     <distributionManagement>

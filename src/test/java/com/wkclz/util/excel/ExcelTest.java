@@ -3,6 +3,8 @@ package com.wkclz.util.excel;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExcelTest {
 
@@ -44,6 +46,11 @@ public class ExcelTest {
         excel.setSavePath(savePath);
         String[] header = {"序号", "日期", "时间", "数字", "row合并", "col合并1", "col合并2", "超长文字自动换行"};
         excel.setHeader(header);
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("titleOff", true);
+        params.put("createInfoOff", true);
+        excel.setParams(params);
 
         for (int i = 0; i < 120; i++) {
 

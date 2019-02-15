@@ -340,7 +340,7 @@ public class Excel extends ExcelContent {
         style = new ExcelStyle();
 
         // title
-        if (params!=null && !Boolean.valueOf(params.get("titleOff").toString())){
+        if (!(params!=null && Boolean.valueOf(params.get("titleOff").toString()))){
             if (title != null && !"".equals(title.trim())) {
                 sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, width - 1));
                 SXSSFRow rowTitle = sheet.createRow(rowNum++);
@@ -351,7 +351,7 @@ public class Excel extends ExcelContent {
         }
 
         // infomation of this excel
-        if (params!=null && !Boolean.valueOf(params.get("createInfoOff").toString())){
+        if (!(params!=null && Boolean.valueOf(params.get("createInfoOff").toString()))){
             // createTime
             sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, 2));
             SXSSFRow rowInfo = sheet.createRow(rowNum);
@@ -366,10 +366,9 @@ public class Excel extends ExcelContent {
                 cellCreateBy.setCellStyle(style.getStyleStrLeftNoBorder(this));
                 cellCreateBy.setCellValue("创建人：" + createBy);
             }
+            rowNum++;
         }
 
-
-        rowNum++;
 
         // date_from_to
         String dateInfo = "";

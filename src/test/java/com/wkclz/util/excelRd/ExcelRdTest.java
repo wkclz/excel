@@ -1,9 +1,7 @@
 package com.wkclz.util.excelRd;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ExcelRdTest {
 
@@ -27,22 +25,13 @@ public class ExcelRdTest {
         };
         excelRd.setTypes(types);    // 指定每列的类型
 
-        List<ExcelRdRow> rows = excelRd.analysisXlsx();
-        Map<String, Object>[] plans = new HashMap[rows.size()];
+        List<List<Object>> rows = excelRd.analysisXlsx();
 
-        int size = rows.size();
-        for (int i = 0; i < size; i++) {
-
-            ExcelRdRow excelRdRow = rows.get(i);
-            List<Object> row = excelRdRow.getRow();
-            HashMap<String, Object> plan = new HashMap<String, Object>();
-
-            for (Object t : row) {
-                System.out.println(t);
+        for (List<Object> row : rows) {
+            for (Object cell : row) {
+                System.out.println(cell);
             }
             System.out.println("\n");
-
-            plans[i] = plan;
         }
     }
 }

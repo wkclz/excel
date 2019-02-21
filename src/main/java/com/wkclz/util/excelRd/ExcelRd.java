@@ -18,11 +18,12 @@ package com.wkclz.util.excelRd;
  */
 
 
-import java.io.*;
-import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExcelRd extends ExcelRdContent {
 
@@ -76,7 +77,7 @@ public class ExcelRd extends ExcelRdContent {
     }
 
 
-    public List<ExcelRdRow> analysisXlsx() throws ExcelRdException, IOException {
+    public List<List<Object>> analysisXlsx() throws ExcelRdException, IOException {
 
         List<ExcelRdTypeEnum> types = getTypes();
         if (types == null || types.size() == 0) {
@@ -123,7 +124,7 @@ public class ExcelRd extends ExcelRdContent {
             }
             rowThreshold = 0;
 
-            ExcelRdRow excelRdRow = new ExcelRdRow();
+            List<Object> excelRdRow = new ArrayList<Object>();
             for (int j = getStartCol(); j < right; j++) {
 
                 if (xls) {
@@ -134,7 +135,7 @@ public class ExcelRd extends ExcelRdContent {
 
                 if (this.cell03 == null && this.cell07 == null) {
                     colThreshold++;
-                    excelRdRow.addCell("");
+                    excelRdRow.add("");
                 } else {
                     colThreshold = 0;
                     Object cellValue;
@@ -145,14 +146,13 @@ public class ExcelRd extends ExcelRdContent {
                         cellValue = ExcelRdUtil.getCellValue(this.cell07, types.get(j - getStartCol()));
                     }
 
-                    excelRdRow.addCell(cellValue);
+                    excelRdRow.add(cellValue);
                 }
             }
 
             // 如果row全部为null，将不加入结果
-            List<Object> rtRow = excelRdRow.getRow();
-            int size = rtRow.size();
-            for (Object object : rtRow) {
+            int size = excelRdRow.size();
+            for (Object object : excelRdRow) {
                 if (object == null || "".equals(object.toString().trim())) {
                     size--;
                 }

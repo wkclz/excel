@@ -48,6 +48,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ExcelRdContent {
 
@@ -96,7 +97,7 @@ public abstract class ExcelRdContent {
     /**
      * 行对象
      */
-    private List<ExcelRdRow> rows;
+    private List<List<Object>> rows;
 
 
     protected int getStartSheet() {
@@ -140,17 +141,17 @@ public abstract class ExcelRdContent {
         }
     }
 
-    protected List<ExcelRdRow> getRows() {
+    protected List<List<Object>> getRows() {
         return rows;
     }
 
-    protected void setRows(List<ExcelRdRow> rows) {
+    protected void setRows(List<List<Object>> rows) {
         this.rows = rows;
     }
 
-    protected void addRow(ExcelRdRow row) {
+    protected void addRow(List<Object> row) {
         if (rows == null) {
-            rows = new ArrayList<ExcelRdRow>();
+            rows = new ArrayList<List<Object>>();
         }
         rows.add(row);
     }

@@ -8,15 +8,15 @@
 
 ### 下载（Latest: v 1.0.10）
 - 2019-02-12: [excel-1.0.10.jar](dist/excel.png)
+- 最新版本只发布在 gitee 的私库
+- 稳定版本发布中央仓库
 
-- 2018-04-02: [excel-1.0.7.jar](dist/excel.png)
-
-### 项目引用（Latest: v 1.0.10）
+### 最新项目引用（Latest: v 1.0.10）
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.10</version>
+    <version>${latest}</version>
 </dependency>
 <repositories>
     <repository>
@@ -25,12 +25,13 @@
     </repository>
 </repositories>
 ~~~
-#####（v 1.0.7）
+
+#####（Stable v 1.0.10）
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.7</version>
+    <version>${stable}</version>
 </dependency>
 ~~~
 

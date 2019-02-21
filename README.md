@@ -6,17 +6,17 @@
 > * 对 excel 的生成 的读取，一直都是一个很花时间的问题，现对excel的生成和读取，封装成一个工具，将加快excel 在 java中的处理。 
 > * Excel 是对 poi 的封装，建立一个通用的excel模板，再通过 set,add,create等简单的操作方法生成 excel。同时也能指定起始度坐标，对标准的 Excel进行读取。
 
-### 下载（Latest: v 1.0.9）
-- 2019-02-12: [excel-1.0.9.jar](dist/excel.png)
+### 下载（Latest: v 1.0.10）
+- 2019-02-12: [excel-1.0.10.jar](dist/excel.png)
 
 - 2018-04-02: [excel-1.0.7.jar](dist/excel.png)
 
-### 项目引用（Latest: v 1.0.9）
+### 项目引用（Latest: v 1.0.10）
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
 </dependency>
 <repositories>
     <repository>
@@ -37,11 +37,11 @@
 ### 依赖：
 ***
 > 1. JDK 1.8
-> 1. poi-3.17.jar
-> 1. poi-ooxml-3.17.jar
-> 1. poi-ooxml-schemas-3.17.jar
-> 1. xmlbeans-2.6.0.jar
-> 1. commons-collections4-4.1.jar
+> 1. poi-4.0.1.jar
+> 1. poi-ooxml-4.0.1.jar
+> 1. poi-ooxml-schemas-4.0.1.jar
+> 1. xmlbeans-3.0.2.jar
+> 1. commons-collections4-4.2.jar
 * *以上依赖已经在 pom.xml 中描述，只支持 poi3.15及以上版本*
  
 
@@ -119,10 +119,59 @@
 ***
 > [com.wkclz.util.excel.ExcelTest.main()](src/test/java/com/wkclz/util/excel/ExcelTest.java);
 
-
 ##### Excel 生成效果图：
 ![](dist/excel.png)
 
+##### Springboot 架构向前端输出文件流：
+```java
+
+public class ExcelHelper {
+    private static final Logger log = LoggerFactory.getLogger(ExcelHelper.class);
+    public static void excelStreamResopnse(HttpServletResponse response, Excel excel) {
+        OutputStream fops = null;
+        InputStream in = null;
+        int len = 0;
+        byte[] bytes = new byte[1024];
+        try {
+            File file = excel.createXlsxByFile();
+            String fileName = file.getName();
+            String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+            log.info("the excel file is in {}", file.getPath());
+
+            in = new FileInputStream(file);
+
+            response.setContentType("application/x-excel");
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + new String(excel.getTitle().getBytes("utf-8"), "ISO8859-1") + "." + suffix);
+            response.setHeader("Content-Length", String.valueOf(file.length()));
+
+            fops = response.getOutputStream();
+            while ((len = in.read(bytes)) != -1) {
+                fops.write(bytes, 0, len);
+            }
+            fops.flush();
+            response.flushBuffer();
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("文件有误!");
+        } finally {
+            try {
+                if (fops != null) {
+                    fops.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
 
 ### Excel读取类的使用方法：
 ***
@@ -139,14 +188,36 @@
 
 ##### 示例代码：
 ***
-> [com.wkclz.util.excel.ExcelRdTest.main()](src/test/java/com/wkclz/util/excelRd/ExcelRdTest.java);
+> [com.wkclz.util.excel.ExcelRdTest.main()](src/test/java/com/wkclz/util/excelRd/ExcelRdTest.java); \
 > [示例 Excel](dist/test.xlsx);
+
+##### Springboot 上传Excel文件预处理：
+```java
+@RestController
+public class ExcelHelper {
+    @PostMapping("/excel/inport")
+    public Result excelRd(@RequestParam("file") MultipartFile file) throws IOException {
+        Result result = new Result();
+        if (file.isEmpty()) {
+            return result.setError("the file is empty");
+        }
+        ExcelRd excelRd = new ExcelRd(file.getInputStream(), ExcelRdVersionEnum.XLSX);
+        // 后续过程请参照 ExcelRdTest
+        return null;
+    }
+}
+```
 
 ***
 > 最后，此工具类共享出来给大家使用，希望大家能够帮助一起完善，通过开源的方式互助。发现有什么bug，或者有什么想法欢迎 PR.
 
 ***
 # 更新日志
+***
+2019-02-21 23:22:16
+1. Excel 读取返回二维数组
+2. 升级 poi 版本 至 4.0.1
+
 ***
 2019-02-15 06:41:17
 1. 引入lombpk

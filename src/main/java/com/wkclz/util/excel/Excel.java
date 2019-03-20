@@ -127,6 +127,9 @@ public class Excel extends ExcelContent {
             addRow(this.row);
             this.row = null;
         }
+        if (this.rows == null){
+            this.rows = new ArrayList<ExcelRow>();
+        }
 
         this.create();   // 生成的过程
 

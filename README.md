@@ -26,7 +26,7 @@
 </repositories>
 ~~~
 
-#####（Stable v 1.0.10）
+#### Stable v 1.0.10
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>

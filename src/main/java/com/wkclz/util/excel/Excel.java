@@ -24,16 +24,22 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Excel extends ExcelContent {
+
+    private static final Logger logger = LoggerFactory.getLogger(Excel.class);
+    private static final String[] NOT_ALLOWD_STRS = {":", "：", "/", "?", "？", "\\", "*", "[", "]"};
 
     private ExcelRow row;
 
@@ -98,12 +104,20 @@ public class Excel extends ExcelContent {
             addRow(this.row);
             this.row = null;
         }
+        if (this.rows == null){
+            this.rows = new ArrayList<ExcelRow>();
+        }
 
         if (savePath == null || "".equals(savePath.trim())) {
             throw new ExcelException("savePath cannot be null or empty!");
         }
 
-        create();   // 生成的过程
+        Date start = new Date();
+        logger.info("============> createXlsx {} start @ {} <============",this.title , ExcelUtil.SDF_DATE_TIME.format(start));
+        create();
+        Date end = new Date();
+        logger.info("============> createXlsx {} end @ {} <============",this.title, ExcelUtil.SDF_DATE_TIME.format(end));
+        logger.info("============> createXlsx {} rows, cost {} second <============",this.rows.size(), (end.getTime() - start.getTime()) / 1000 );
 
         // 导出到文件
         FileOutputStream outputStream = new FileOutputStream(savePath);
@@ -131,7 +145,12 @@ public class Excel extends ExcelContent {
             this.rows = new ArrayList<ExcelRow>();
         }
 
-        this.create();   // 生成的过程
+        Date start = new Date();
+        logger.info("============> createXlsxByFile {} start @ {} <============",this.title , ExcelUtil.SDF_DATE_TIME.format(start));
+        create();
+        Date end = new Date();
+        logger.info("============> createXlsxByFile {} end @ {} <============",this.title, ExcelUtil.SDF_DATE_TIME.format(end));
+        logger.info("============> createXlsx {} rows, cost {} second <============",this.rows.size(), (end.getTime() - start.getTime()) / 1000 );
 
         File file = null;
         try {
@@ -146,7 +165,6 @@ public class Excel extends ExcelContent {
             e.printStackTrace();
         }
         return file;
-
     }
 
 
@@ -161,21 +179,19 @@ public class Excel extends ExcelContent {
         }
 
         // 找出不允许的 str
-        String[] notAllowdStrs = {":", "：", "/", "?", "？", "\\", "*", "[", "]"};
         List<String> existStr = new ArrayList<String>();
-        for (String notAllowdStr : notAllowdStrs) {
+        for (String notAllowdStr : NOT_ALLOWD_STRS) {
             if (title.contains(notAllowdStr)) {
                 existStr.add(notAllowdStr);
             }
         }
 
         if (!existStr.isEmpty()) {
-            String rt = "";
+            StringBuffer sb = new StringBuffer();
             for (String s : existStr) {
-                rt = s + ",";
+                sb.append(s).append(",");
             }
-            rt = rt.substring(0, rt.length() - 1);
-            throw new ExcelException("title contains this chars: \"" + rt + "\" is not allowd!");
+            throw new ExcelException("title contains this chars: \"" + sb.substring(0, sb.length() - 1) + "\" is not allowd!");
         }
 
         boolean headerError = (header == null || header.size() == 0) && width == null;
@@ -263,6 +279,14 @@ public class Excel extends ExcelContent {
                     content = "";
                 }
 
+                // String
+                if (content instanceof String){
+                    cell = row.createCell(nowCell, CellType.STRING);
+                    ExcelUtil.setIntStrStyle(this, cell, align, border);
+                    cell.setCellValue((String)content);
+                    continue;
+                }
+
                 // Integer
                 if (content instanceof Integer) {
                     ExcelUtil.setIntStrStyle(this, cell, align, border);
@@ -274,6 +298,18 @@ public class Excel extends ExcelContent {
                 if (content instanceof Double) {
                     ExcelUtil.setDoubleStyle(this, cell, align, border);
                     cell.setCellValue((Double) content);
+                    // 列不合并才自动宽度
+                    if (colMerge == 1) {
+                        ExcelUtil.setWidth(sheet, nowCell, content.toString());
+                    }
+                    continue;
+                }
+
+                // BigDecimal
+                if (content instanceof BigDecimal) {
+                    ExcelUtil.setDoubleStyle(this, cell, align, border);
+                    BigDecimal c = (BigDecimal) content;
+                    cell.setCellValue(c.doubleValue());
                     // 列不合并才自动宽度
                     if (colMerge == 1) {
                         ExcelUtil.setWidth(sheet, nowCell, content.toString());
@@ -427,28 +463,31 @@ public class Excel extends ExcelContent {
     }
 
     private void mergeCell(Excel excel, int colMerge, int rowMerge, int colNum, boolean border) {
+
+        if (colMerge == 1 && rowMerge == 1){
+            return;
+        }
+
         // 检查是否需要合并单元格
-        if (colMerge > 1 || rowMerge > 1) {
-            sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum + rowMerge - 1, colNum, colNum + colMerge - 1));
+        sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum + rowMerge - 1, colNum, colNum + colMerge - 1));
 
-            //预设内容
-            for (int x = rowNum; x < rowNum + rowMerge; x++) {
-                for (int y = colNum; y < colNum + colMerge; y++) {
-                    SXSSFRow r = sheet.getRow(x);
-                    if (r == null) {
-                        r = sheet.createRow(x);
-                    }
-                    SXSSFCell c = r.getCell(y);
-                    if (c == null) {
-                        c = r.createCell(y);
-                    }
+        //预设内容
+        for (int x = rowNum; x < rowNum + rowMerge; x++) {
+            for (int y = colNum; y < colNum + colMerge; y++) {
+                SXSSFRow r = sheet.getRow(x);
+                if (r == null) {
+                    r = sheet.createRow(x);
+                }
+                SXSSFCell c = r.getCell(y);
+                if (c == null) {
+                    c = r.createCell(y);
+                }
 
-                    // 是否需要设置边框
-                    if (border) {
-                        c.setCellStyle(excel.getStyle().getStyleNumCenterWithBorder(excel));
-                    } else {
-                        c.setCellStyle(excel.getStyle().getStyleNumCenterNoBorder(excel));
-                    }
+                // 是否需要设置边框
+                if (border) {
+                    c.setCellStyle(excel.getStyle().getStyleNumCenterWithBorder(excel));
+                } else {
+                    c.setCellStyle(excel.getStyle().getStyleNumCenterNoBorder(excel));
                 }
             }
         }

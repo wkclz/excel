@@ -56,6 +56,9 @@ public class ExcelUtil {
     protected static final SimpleDateFormat SDF_DATE = new SimpleDateFormat("yyyy-MM-dd");
 
 
+    private static final int DEFAULT_WIDTH = 72 * 256;
+
+
     /**
      * Description 判断字符是否为单字节字符
      *
@@ -105,11 +108,11 @@ public class ExcelUtil {
      */
     protected static boolean setWidth(SXSSFSheet sheel, int col, String s) {
         int width = ExcelUtil.width(s);
-        width = width > 72 * 256 ? 72 * 256 : width;
+        width = width > DEFAULT_WIDTH ? DEFAULT_WIDTH : width;
         if (width > sheel.getColumnWidth(col)) {
             sheel.setColumnWidth(col, width);
         }
-        return width == 72 * 256;
+        return width == DEFAULT_WIDTH;
     }
 
 

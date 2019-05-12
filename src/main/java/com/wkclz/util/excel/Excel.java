@@ -278,6 +278,16 @@ public class Excel extends ExcelContent {
                 cell = row.createCell(nowCell, CellType.STRING);
                 ExcelUtil.setIntStrStyle(this, cell, align, border);
                 cell.setCellValue((String)content);
+
+                // 如果文字内容太长了，设置为富文本类型
+                // 列不合并才自动宽度
+                if (colMerge == 1) {
+                    boolean tooLong = ExcelUtil.setWidth(sheet, nowCell, content.toString());
+                    if (tooLong) {
+                        ExcelUtil.setWrapTextStyle(this, cell, align, border);
+                    }
+                }
+
                 continue;
             }
 
@@ -360,7 +370,6 @@ public class Excel extends ExcelContent {
         }
         rowNum++;
     }
-
 
     private SXSSFSheet newSheet() {
 
@@ -452,7 +461,6 @@ public class Excel extends ExcelContent {
         return sheet;
     }
 
-
     /**
      * Description 递归找到空的cell
      * create @ 2017-07-15 21:09:00
@@ -498,7 +506,6 @@ public class Excel extends ExcelContent {
             }
         }
     }
-
 
     private void init(){
         if (this.rows == null){

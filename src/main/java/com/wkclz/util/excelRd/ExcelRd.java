@@ -18,6 +18,7 @@ package com.wkclz.util.excelRd;
  */
 
 
+import com.wkclz.util.excelRd.domain.ExcelRdSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -74,76 +75,110 @@ public class ExcelRd extends ExcelRdContent {
             xls = true;
         }
         this.is = fins;
+
+    }
+
+    /**
+     * 第一个 sheet 识别
+     * @return
+     * @throws ExcelRdException
+     */
+    @Deprecated
+    public List<List<Object>> analysisXlsx() throws ExcelRdException {
+        initWorkbook();
+        ExcelRdSheet excelRdSheet = analysisXlsxSheet(this, sheets.get(0));
+        return excelRdSheet.getRows();
+    }
+
+    /**
+     * 第一个 sheet 识别
+     * @return
+     * @throws ExcelRdException
+     */
+    public ExcelRdSheet analysisFirstSheet() throws ExcelRdException {
+        initWorkbook();
+        ExcelRdSheet excelRdSheet = analysisXlsxSheet(this, sheets.get(0));
+        return excelRdSheet;
     }
 
 
-    public List<List<Object>> analysisXlsx() throws ExcelRdException, IOException {
+    /**
+     * 识别excel 多 sheet
+     * @return
+     * @throws ExcelRdException
+     */
+    public List<ExcelRdSheet> analysis() throws ExcelRdException {
+        initWorkbook();
+        List<ExcelRdSheet> result = new ArrayList<ExcelRdSheet>();
+        for (ExcelRdSheet sheet: sheets) {
+            ExcelRdSheet excelRdSheet = analysisXlsxSheet(this, sheet);
+            result.add(excelRdSheet);
+        }
+        return result;
+    }
 
-        List<ExcelRdTypeEnum> types = getTypes();
+
+    private static ExcelRdSheet analysisXlsxSheet(ExcelRd excelRd, ExcelRdSheet sheet) throws ExcelRdException {
+        List<ExcelRdTypeEnum> types = sheet.getTypes();
         if (types == null || types.size() == 0) {
-            throw new ExcelRdException("Types of the data must be set");
+            throw new ExcelRdException("Types of the data must be set @ sheet " + sheet.getSheet() + ", " + sheet.getSheetName());
         }
-
-        if (xls) {
-            this.workbook03 = new HSSFWorkbook(this.is);
-        } else {
-            this.workbook07 = new XSSFWorkbook(this.is);
-        }
-
 
         // 当前只考虑识别一个 sheet
-        if (xls) {
-            this.sheet03 = this.workbook03.getSheetAt(0);
+        if (excelRd.xls) {
+            excelRd.sheet03 = excelRd.workbook03.getSheetAt(sheet.getSheet());
+            sheet.setSheetName(excelRd.sheet03.getSheetName());
         } else {
-            this.sheet07 = this.workbook07.getSheetAt(0);
+            excelRd.sheet07 = excelRd.workbook07.getSheetAt(sheet.getSheet());
+            sheet.setSheetName(excelRd.sheet07.getSheetName());
         }
 
         // 循环所有【右边的边界】
-        int right = getStartCol() + types.size();
+        int right = sheet.getStartCol() + types.size();
         // 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
         int rowThreshold = 0;
         // 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
         int colThreshold = 0;
 
-        for (int i = getStartRow(); ; i++) {
+        for (int i = sheet.getStartRow(); ; i++) {
 
             // 阈值【当连续取到三个空行，或者连续取到 3 * size 个空 cell 时，将会退出检测】
             if (rowThreshold >= 3 || colThreshold >= 3 * types.size()) {
                 break;
             }
 
-            if (xls) {
-                this.row03 = this.sheet03.getRow(i);
+            if (excelRd.xls) {
+                excelRd.row03 = excelRd.sheet03.getRow(i);
             } else {
-                this.row07 = this.sheet07.getRow(i);
+                excelRd.row07 = excelRd.sheet07.getRow(i);
             }
 
-            if (this.row03 == null && this.row07 == null) {
+            if (excelRd.row03 == null && excelRd.row07 == null) {
                 rowThreshold++;
                 continue;
             }
             rowThreshold = 0;
 
             List<Object> excelRdRow = new ArrayList<Object>();
-            for (int j = getStartCol(); j < right; j++) {
+            for (int j = sheet.getStartCol(); j < right; j++) {
 
-                if (xls) {
-                    this.cell03 = this.row03.getCell(j);
+                if (excelRd.xls) {
+                    excelRd.cell03 = excelRd.row03.getCell(j);
                 } else {
-                    this.cell07 = this.row07.getCell(j);
+                    excelRd.cell07 = excelRd.row07.getCell(j);
                 }
 
-                if (this.cell03 == null && this.cell07 == null) {
+                if (excelRd.cell03 == null && excelRd.cell07 == null) {
                     colThreshold++;
                     excelRdRow.add("");
                 } else {
                     colThreshold = 0;
                     Object cellValue;
 
-                    if (xls) {
-                        cellValue = ExcelRdUtil.getCellValue(this.cell03, types.get(j - getStartCol()));
+                    if (excelRd.xls) {
+                        cellValue = ExcelRdUtil.getCellValue(excelRd.cell03, types.get(j - sheet.getStartCol()));
                     } else {
-                        cellValue = ExcelRdUtil.getCellValue(this.cell07, types.get(j - getStartCol()));
+                        cellValue = ExcelRdUtil.getCellValue(excelRd.cell07, types.get(j - sheet.getStartCol()));
                     }
 
                     excelRdRow.add(cellValue);
@@ -158,9 +193,35 @@ public class ExcelRd extends ExcelRdContent {
                 }
             }
             if (size != 0) {
-                addRow(excelRdRow);
+                sheet.addRow(excelRdRow);
             }
         }
-        return getRows();
+
+        return sheet;
     }
+
+    /**
+     * 初始化 Workbook
+     */
+    private void initWorkbook() throws ExcelRdException {
+        int numberOfSheets = 0;
+        try {
+            if (this.xls) {
+                this.workbook03 = new HSSFWorkbook(this.is);
+                numberOfSheets = this.workbook03.getNumberOfSheets();
+            } else {
+                this.workbook07 = new XSSFWorkbook(this.is);
+                numberOfSheets = this.workbook07.getNumberOfSheets();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (this.sheets == null || this.sheets.size() == 0){
+            throw new ExcelRdException("Sheets of the data must be set");
+        }
+        if (this.sheets.size() > numberOfSheets){
+            throw new ExcelRdException(numberOfSheets + " Sheets was found in excel, but you set " + this.sheets.size() + " Sheets for analysis!");
+        }
+    }
+
 }

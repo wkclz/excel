@@ -6,12 +6,9 @@
 > * 对 excel 的生成 的读取，一直都是一个很花时间的问题，现对excel的生成和读取，封装成一个工具，将加快excel 在 java中的处理。 
 > * Excel 是对 poi 的封装，建立一个通用的excel模板，再通过 set,add,create等简单的操作方法生成 excel。同时也能指定起始度坐标，对标准的 Excel进行读取。
 
-### 下载（Latest: v 1.0.10）
-- 2019-02-12: [excel-1.0.10.jar](dist/excel.png)
-- 最新版本只发布在 gitee 的私库
-- 稳定版本发布中央仓库
 
-### 最新项目引用（Latest: v 1.0.10）
+### 最新版本引用（Latest: v 1.0.11）
+- 最新版本只发布在 github 的私库
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
@@ -20,13 +17,14 @@
 </dependency>
 <repositories>
     <repository>
-        <id>git-maven</id>
-        <url>https://gitee.com/wkclz/maven-repository/raw/master</url>
+        <id>github-mvn</id>
+        <url>https://github.com/wkclz/mvn-repository/raw/master</url>
     </repository>
 </repositories>
 ~~~
 
-#####（Stable v 1.0.10）
+#### 稳定版本引用（Stable v 1.0.11）
+- 稳定版本发布中央仓库
 ~~~
 <dependency>
     <groupId>com.wkclz.util</groupId>
@@ -181,10 +179,12 @@ public class ExcelHelper {
 >   * new ExcelRd(File file)
 >   * new ExcelRd(InputStream ins, ExcelRdVersionEnum version)
 >   * new ExcelRd(FileInputStream fins, ExcelRdVersionEnum version)
-> * setStartRow(int rowNum) 
-> * setStartCol(int colNum)
-> * setTypes(ExcelRdTypeEnum[] types)
-> * 最后通过 analysisXlsx() 方法，得到所有行数据。
+> * new ExcelRdSheet()新增一个 sheet 识别配置 
+>   * setStartRow(int rowNum) 
+>   * setStartCol(int colNum)
+>   * setTypes(ExcelRdTypeEnum[] types)
+> excelRd.addSheets(sheet)
+> * 最后通过 analysis() 方法，得到所有行数据。
 
 
 ##### 示例代码：
@@ -214,6 +214,10 @@ public class ExcelHelper {
 
 ***
 # 更新日志
+***
+2019-05-12 23:56:30
+1. Excel 识别支持多 sheet
+
 ***
 2019-02-21 23:22:16
 1. Excel 读取返回二维数组

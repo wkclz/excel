@@ -35,6 +35,7 @@ package com.wkclz.util.excelRd;
 */
 
 
+import com.wkclz.util.excelRd.domain.ExcelRdSheet;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -44,11 +45,9 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public abstract class ExcelRdContent {
 
@@ -79,80 +78,64 @@ public abstract class ExcelRdContent {
 
 
     /**
-     * 起始行
+     * sheet 配置
      */
-    private int startSheet;
-    /**
-     * 起始行
-     */
-    private int startRow;
-    /**
-     * 起始列
-     */
-    private int startCol;
-    /**
-     * 列类型
-     */
-    private List<ExcelRdTypeEnum> types;
-    /**
-     * 行对象
-     */
-    private List<List<Object>> rows;
+    protected List<ExcelRdSheet> sheets;
 
 
-    protected int getStartSheet() {
-        return startSheet;
+
+    public void setSheets(List<ExcelRdSheet> sheets) {
+        for(int i = 0; i< sheets.size(); i++){sheets.get(i).setSheet(i);}
+        this.sheets = sheets;
+    }
+    public void addSheets(ExcelRdSheet sheet) {
+        if (this.sheets == null){
+            this.sheets = new ArrayList<ExcelRdSheet>();
+        }
+        sheet.setSheet(this.sheets.size());
+        this.sheets.add(sheet);
     }
 
-    public void setStartSheet(int startSheet) {
-        this.startSheet = startSheet;
+    @Deprecated
+    public void setStartRow(Integer startRow) {
+        ExcelRdSheet rdSheet = init();
+        rdSheet.setStartRow(startRow);
     }
 
-    protected int getStartRow() {
-        return startRow;
-    }
-
-    public void setStartRow(int startRow) {
-        this.startRow = startRow;
-    }
-
-    protected int getStartCol() {
-        return startCol;
-    }
-
+    @Deprecated
     public void setStartCol(int startCol) {
-        this.startCol = startCol;
+        ExcelRdSheet rdSheet = init();
+        rdSheet.setStartCol(startCol);
     }
 
-    protected List<ExcelRdTypeEnum> getTypes() {
-        return types;
-    }
-
+    @Deprecated
     public void setTypes(List<ExcelRdTypeEnum> types) {
-        this.types = types;
+        ExcelRdSheet rdSheet = init();
+        rdSheet.setTypes(types);
     }
 
+    @Deprecated
     public void setTypes(ExcelRdTypeEnum[] types) {
-        if (this.types == null) {
-            this.types = new ArrayList<ExcelRdTypeEnum>();
+        ExcelRdSheet rdSheet = init();
+        if (rdSheet.getTypes() == null) {
+            rdSheet.setTypes(new ArrayList<ExcelRdTypeEnum>());
         }
         for (ExcelRdTypeEnum type : types) {
-            this.types.add(type);
+            rdSheet.getTypes().add(type);
         }
     }
 
-    protected List<List<Object>> getRows() {
-        return rows;
-    }
 
-    protected void setRows(List<List<Object>> rows) {
-        this.rows = rows;
-    }
 
-    protected void addRow(List<Object> row) {
-        if (rows == null) {
-            rows = new ArrayList<List<Object>>();
+    // 初始化 config
+    private ExcelRdSheet init(){
+        if (this.sheets == null){
+            this.sheets = new ArrayList<ExcelRdSheet>();
+            ExcelRdSheet sheet = new ExcelRdSheet();
+            sheet.setSheet(0);
+            this.sheets.add(sheet);
         }
-        rows.add(row);
+        ExcelRdSheet sheet = this.sheets.get(0);
+        return sheet;
     }
 }

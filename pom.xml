@@ -75,10 +75,9 @@
 
     <repositories>
         <repository>
-            <id>git-maven</id>
-            <url>https://gitee.com/wkclz/maven-repository</url>
+            <id>github-mvn</id>
+            <url>https://github.com/wkclz/mvn-repository/raw/master</url>
         </repository>
-
         <repository>
             <id>maven-ali</id>
             <url>http://maven.aliyun.com/nexus/content/groups/public//</url>

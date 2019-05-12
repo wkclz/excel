@@ -51,11 +51,13 @@ public abstract class ExcelContent {
      * excel 工作簿
      */
     protected SXSSFWorkbook workbook;
-    /** sheet */
+    /**
+     * sheet
+     */
+    protected SXSSFSheet sheet;
     /**
      * 多 sheet 支持
      */
-    protected SXSSFSheet sheet;
     protected List<SXSSFSheet> sheets;
     /**
      * sheet号
@@ -98,6 +100,10 @@ public abstract class ExcelContent {
     /**
      * 行对象
      */
+    protected List<ExcelRow> rowsBeforeHeader;
+    /**
+     * 行对象
+     */
     protected List<ExcelRow> rows;
 
     /**
@@ -115,6 +121,7 @@ public abstract class ExcelContent {
      */
     protected ExcelStyle style;
 
+    // 内存缓存条数
     protected Integer cacheRowsInMemory = 10240;
 
     protected List<SXSSFSheet> getSheets() {
@@ -190,5 +197,17 @@ public abstract class ExcelContent {
         this.rows.add(row);
     }
 
+    protected List<ExcelRow> getRowsBeforeHeader() {
+        if (rowsBeforeHeader == null) {
+            rowsBeforeHeader = new ArrayList<ExcelRow>();
+        }
+        return rowsBeforeHeader;
+    }
 
+    protected void addRowBeforeHeader(ExcelRow row) {
+        if (this.rowsBeforeHeader == null) {
+            this.rowsBeforeHeader = new ArrayList<ExcelRow>();
+        }
+        this.rowsBeforeHeader.add(row);
+    }
 }

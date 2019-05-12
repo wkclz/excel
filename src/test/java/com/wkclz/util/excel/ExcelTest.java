@@ -55,6 +55,20 @@ public class ExcelTest {
         excel.setParams(params);
         */
 
+        // 在 header 前的 rows, 使用方法同 header 后的 rows
+        excel.createRowBeforeHeader();
+        ExcelRow rowBeforeHeader = excel.createRowBeforeHeader();
+        rowBeforeHeader.addCell(0, false);                              // 序号
+        rowBeforeHeader.addCell(new java.sql.Date(new Date().getTime()), false);       // 日期
+        rowBeforeHeader.addCell(new Date(), false);                                    // 时间
+        rowBeforeHeader.addCell(120, false);                            // 数字
+        rowBeforeHeader.addCell(new BigDecimal("12.34"), false);                  // 金钱
+        rowBeforeHeader.addCell("row合并", false);
+        rowBeforeHeader.addCell("col合并", false, 2, 1);           // col合并
+        rowBeforeHeader.addCell("wer", false);
+
+        excel.createRowBeforeHeader();
+
         for (int i = 0; i < 120; i++) {
 
             // 多 Sheet，每 30 条数据一个Sheet 【注意，Sheet 分离时，不能有row合并，否则排版会异常】

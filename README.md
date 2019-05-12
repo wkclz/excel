@@ -78,6 +78,7 @@
 
 * 提供的create方法：
 > * createRow() 创建行对象【创建row对象，创建前会将上一个行对象添加到excel】
+> * createRowBeforeHeader() 创建行对象【创建在 header 之前的 row】
 > * createRowInCache()创建行对象【不直接添加到excel中，需要调用addRowFromCache(ExcelRow row) 对会被加入到excel】
 > * CreateXlsx() 创建最终的excel，无返回.
 > * CreateXlsxByFile() 创建最终的excel在临时目录，并返回 File.
@@ -217,6 +218,8 @@ public class ExcelHelper {
 ***
 2019-05-12 23:56:30
 1. Excel 识别支持多 sheet
+1. Excel 生成，添加日志打印
+1. Excel 生成，header 上可加 rows
 
 ***
 2019-02-21 23:22:16

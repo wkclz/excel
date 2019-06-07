@@ -34,7 +34,6 @@ package com.wkclz.util.excel;
                   不见满街漂亮妹，哪个归得程序员？
 */
 
-import lombok.Data;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -44,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Data
 public abstract class ExcelContent {
 
     /**
@@ -209,5 +207,134 @@ public abstract class ExcelContent {
             this.rowsBeforeHeader = new ArrayList<ExcelRow>();
         }
         this.rowsBeforeHeader.add(row);
+    }
+
+
+
+
+
+
+    public SXSSFWorkbook getWorkbook() {
+        return workbook;
+    }
+
+    public void setWorkbook(SXSSFWorkbook workbook) {
+        this.workbook = workbook;
+    }
+
+    public SXSSFSheet getSheet() {
+        return sheet;
+    }
+
+    public void setSheet(SXSSFSheet sheet) {
+        this.sheet = sheet;
+    }
+
+    public void setSheets(List<SXSSFSheet> sheets) {
+        this.sheets = sheets;
+    }
+
+    public Integer getSheetNum() {
+        return sheetNum;
+    }
+
+    public void setSheetNum(Integer sheetNum) {
+        this.sheetNum = sheetNum;
+    }
+
+    public Integer getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(Integer rowNum) {
+        this.rowNum = rowNum;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
+    }
+
+    public List<String> getHeader() {
+        return header;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public void setRowsBeforeHeader(List<ExcelRow> rowsBeforeHeader) {
+        this.rowsBeforeHeader = rowsBeforeHeader;
+    }
+
+    public void setRows(List<ExcelRow> rows) {
+        this.rows = rows;
+    }
+
+    public Map<String, Font> getWorkBookFonts() {
+        return workBookFonts;
+    }
+
+    public void setWorkBookFonts(Map<String, Font> workBookFonts) {
+        this.workBookFonts = workBookFonts;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
+
+    public ExcelStyle getStyle() {
+        return style;
+    }
+
+    public void setStyle(ExcelStyle style) {
+        this.style = style;
+    }
+
+    public Integer getCacheRowsInMemory() {
+        return cacheRowsInMemory;
+    }
+
+    public void setCacheRowsInMemory(Integer cacheRowsInMemory) {
+        this.cacheRowsInMemory = cacheRowsInMemory;
     }
 }

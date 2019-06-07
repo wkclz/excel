@@ -1,10 +1,8 @@
 package com.wkclz.util.excel;
 
-import lombok.Data;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
-@Data
 public class ExcelCell {
 
     /**
@@ -58,4 +56,53 @@ public class ExcelCell {
         return border;
     }
 
+
+
+
+
+
+
+    public Object getCellContent() {
+        return cellContent;
+    }
+
+    public void setCellContent(Object cellContent) {
+        this.cellContent = cellContent;
+    }
+
+    public void setBorder(Boolean border) {
+        this.border = border;
+    }
+
+    public HorizontalAlignment getAlign() {
+        return align;
+    }
+
+    public void setAlign(HorizontalAlignment align) {
+        this.align = align;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
+    }
 }

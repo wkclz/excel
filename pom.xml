@@ -6,13 +6,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
-    <version>1.0.11</version>
+    <version>1.0.11-SNAPSHOT</version>
 
+    <!-- 不发布 中央仓库
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
+    -->
 
     <properties>
         <java.version>1.8</java.version>
@@ -22,12 +24,12 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.0.1</version>
+            <version>4.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>4.0.1</version>
+            <version>4.1.0</version>
         </dependency>
 
         <dependency>
@@ -123,11 +125,11 @@
         <repository>
             <id>nexus</id>
             <name>nexus</name>
-            <url>file:${user.home}/project/code/maven-repository</url>
+            <url>file:${user.home}/project/lz/mvn-repository</url>
         </repository>
         <snapshotRepository>
             <id>Nexus Snapshot</id>
-            <url>file:${user.home}/project/code/maven-repository</url>
+            <url>file:${user.home}/project/lz/mvn-repository</url>
         </snapshotRepository>
     </distributionManagement>
 

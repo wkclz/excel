@@ -24,8 +24,6 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +36,6 @@ import java.util.List;
 
 public class Excel extends ExcelContent {
 
-    private static final Logger logger = LoggerFactory.getLogger(Excel.class);
     private static final String[] NOT_ALLOWD_STRS = {":", "：", "/", "?", "？", "\\", "*", "[", "]"};
 
     private ExcelRow rowBeforeHeader;
@@ -106,12 +103,7 @@ public class Excel extends ExcelContent {
             throw new ExcelException("savePath cannot be null or empty!");
         }
 
-        Date start = new Date();
-        logger.info("============> createXlsx {} start @ {} <============",this.title , ExcelUtil.SDF_DATE_TIME.format(start));
         create();
-        Date end = new Date();
-        logger.info("============> createXlsx {} end @ {} <============",this.title, ExcelUtil.SDF_DATE_TIME.format(end));
-        logger.info("============> createXlsx {} rows, cost {} second <============",this.rows.size(), (end.getTime() - start.getTime()) / 1000 );
 
         // 导出到文件
         FileOutputStream outputStream = new FileOutputStream(savePath);
@@ -131,12 +123,7 @@ public class Excel extends ExcelContent {
     public File createXlsxByFile() throws ExcelException {
         init();
 
-        Date start = new Date();
-        logger.info("============> createXlsxByFile {} start @ {} <============",this.title , ExcelUtil.SDF_DATE_TIME.format(start));
         create();
-        Date end = new Date();
-        logger.info("============> createXlsxByFile {} end @ {} <============",this.title, ExcelUtil.SDF_DATE_TIME.format(end));
-        logger.info("============> createXlsx {} rows, cost {} second <============",this.rows.size(), (end.getTime() - start.getTime()) / 1000 );
 
         File file = null;
         try {

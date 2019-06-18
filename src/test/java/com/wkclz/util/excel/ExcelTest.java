@@ -1,15 +1,11 @@
 package com.wkclz.util.excel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class ExcelTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExcelTest.class);
 
     public static void main(String[] args) {
         String savePath = "/Users/wangkaicun/Desktop/test.xlsx";
@@ -23,7 +19,7 @@ public class ExcelTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.info("========> 生成excel到指定目录完成: {}", ExcelUtil.SDF_DATE_TIME.format(new Date()));
+        System.out.println("========> 生成excel到指定目录完成: " + ExcelUtil.SDF_DATE_TIME.format(new Date()));
         /*
         // 保存到临时文件并输出 File
         try {
@@ -37,7 +33,7 @@ public class ExcelTest {
     }
 
     public static Excel excel(String savePath) {
-        logger.info("========> 数据准备: {}", ExcelUtil.SDF_DATE_TIME.format(new Date()));
+        System.out.println(("========> 数据准备: " + ExcelUtil.SDF_DATE_TIME.format(new Date())));
 
         Excel excel = new Excel();
         excel.setTitle("标题");
@@ -88,7 +84,7 @@ public class ExcelTest {
             //超长文字自动换行
             row.addCell("超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，靠左边", ExcelUtil.ALIGN_LEFT);
         }
-        logger.info("========> 数据准备完成，准备生成excel: {}", ExcelUtil.SDF_DATE_TIME.format(new Date()));
+        System.out.println(("========> 数据准备完成，准备生成excel: " + ExcelUtil.SDF_DATE_TIME.format(new Date())));
         return excel;
     }
 }

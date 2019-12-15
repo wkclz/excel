@@ -62,19 +62,15 @@
 
     <repositories>
         <repository>
-            <id>github-mvn</id>
-            <url>https://github.com/wkclz/mvn-repository/raw/master</url>
+            <id>wkclz-releases</id>
+            <url>https://mvn.wkclz.com/repository/</url>
         </repository>
         <repository>
-            <id>maven-ali</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>wkclz-snapshots</id>
+            <url>https://mvn.wkclz.com/repository/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
             </snapshots>
         </repository>
     </repositories>
@@ -117,7 +113,6 @@
     </distributionManagement>
     -->
     <!-- 以下是从自己 git 拉下来的仓库，部署进去，再提交到 git -->
-    <!--
     <distributionManagement>
         <repository>
             <id>nexus</id>
@@ -129,16 +124,4 @@
             <url>file:${user.home}/project/lz/mvn-repository</url>
         </snapshotRepository>
     </distributionManagement>
-    -->
-    <distributionManagement>
-        <repository>
-            <id>rdc-releases</id>
-            <url>https://repo.rdc.aliyun.com/repository/39635-release-c3rPD0/</url>
-        </repository>
-        <snapshotRepository>
-            <id>rdc-snapshots</id>
-            <url>https://repo.rdc.aliyun.com/repository/39635-snapshot-plF5tD/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 </project>

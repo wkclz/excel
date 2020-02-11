@@ -60,21 +60,6 @@
         </developer>
     </developers>
 
-    <repositories>
-        <repository>
-            <id>wkclz-releases</id>
-            <url>https://mvn.wkclz.com/repository/</url>
-        </repository>
-        <repository>
-            <id>wkclz-snapshots</id>
-            <url>https://mvn.wkclz.com/repository/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <!--
     <build>
         <plugins>
@@ -113,6 +98,7 @@
     </distributionManagement>
     -->
     <!-- 以下是从自己 git 拉下来的仓库，部署进去，再提交到 git -->
+    <!--
     <distributionManagement>
         <repository>
             <id>nexus</id>
@@ -124,4 +110,20 @@
             <url>file:${user.home}/project/lz/mvn-repository</url>
         </snapshotRepository>
     </distributionManagement>
+    -->
+
+    <distributionManagement>
+        <repository>
+            <id>wkclz-release</id>
+            <name>wkclz-release</name>
+            <url>http://mvn.wkclz.com/repository/wkclz-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>wkclz-snapshot</id>
+            <name>wkclz-snapshot</name>
+            <url>http://mvn.wkclz.com/repository/wkclz-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
 </project>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.wkclz.util</groupId>
     <artifactId>excel</artifactId>
     <version>1.0.11-SNAPSHOT</version>
@@ -22,6 +21,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
     </properties>
 
     <dependencies>
@@ -60,6 +60,16 @@
         </developer>
     </developers>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
     <!--
     <build>
         <plugins>
@@ -78,7 +88,6 @@
                         </configuration>
                     </execution>
                 </executions>
-
             </plugin>
         </plugins>
     </build>
@@ -97,22 +106,5 @@
         </snapshotRepository>
     </distributionManagement>
     -->
-    <!-- 以下是从自己 git 拉下来的仓库，部署进去，再提交到 git -->
-    <!--
-
-    <distributionManagement>
-        <repository>
-            <id>wkclz-release</id>
-            <name>wkclz-release</name>
-            <url>http://mvn.wkclz.com/repository/wkclz-release/</url>
-        </repository>
-        <snapshotRepository>
-            <id>wkclz-snapshot</id>
-            <name>wkclz-snapshot</name>
-            <url>http://mvn.wkclz.com/repository/wkclz-snapshot/</url>
-        </snapshotRepository>
-    </distributionManagement>
-    -->
-
 
 </project>

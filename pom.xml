@@ -99,18 +99,6 @@
     -->
     <!-- 以下是从自己 git 拉下来的仓库，部署进去，再提交到 git -->
     <!--
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>nexus</name>
-            <url>file:${user.home}/project/lz/mvn-repository</url>
-        </repository>
-        <snapshotRepository>
-            <id>Nexus Snapshot</id>
-            <url>file:${user.home}/project/lz/mvn-repository</url>
-        </snapshotRepository>
-    </distributionManagement>
-    -->
 
     <distributionManagement>
         <repository>
@@ -124,6 +112,7 @@
             <url>http://mvn.wkclz.com/repository/wkclz-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
+    -->
 
 
 </project>

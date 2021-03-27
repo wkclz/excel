@@ -385,14 +385,14 @@ public class Excel extends ExcelContent {
             SXSSFRow rowInfo = sheet.createRow(rowNum);
             SXSSFCell cellTime = rowInfo.createCell(0);
             cellTime.setCellStyle(style.getStyleStrLeftNoBorder(this));
-            cellTime.setCellValue("创建时间：" + ExcelUtil.SDF_DATE_TIME.format(new Date()));
+            cellTime.setCellValue("Create time: " + ExcelUtil.SDF_DATE_TIME.format(new Date()));
 
             // create_by
             if (createBy != null) {
                 sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 3, 5));
                 SXSSFCell cellCreateBy = rowInfo.createCell(3);
                 cellCreateBy.setCellStyle(style.getStyleStrLeftNoBorder(this));
-                cellCreateBy.setCellValue("创建人：" + createBy);
+                cellCreateBy.setCellValue("Create by: " + createBy);
             }
             rowNum++;
         }
@@ -401,13 +401,13 @@ public class Excel extends ExcelContent {
         // date_from_to
         String dateInfo = "";
         if (dateFrom != null && dateTo != null) {
-            dateInfo = "时间范围：从" + dateFrom + "到" + dateTo;
+            dateInfo = "Time from " + dateFrom + "to " + dateTo;
         }
         if (dateFrom != null && dateTo == null) {
-            dateInfo = "时间：" + dateFrom;
+            dateInfo = "Time: " + dateFrom;
         }
         if (dateFrom == null && dateTo != null) {
-            dateInfo = "时间：" + dateTo;
+            dateInfo = "Time: " + dateTo;
         }
 
         if (!"".equals(dateInfo)) {

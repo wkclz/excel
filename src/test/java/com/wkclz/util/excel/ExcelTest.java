@@ -36,12 +36,12 @@ public class ExcelTest {
         System.out.println(("========> 数据准备: " + ExcelUtil.SDF_DATE_TIME.format(new Date())));
 
         Excel excel = new Excel();
-        excel.setTitle("标题");
-        excel.setCreateBy("虾米");
+        excel.setTitle("Title");
+        excel.setCreateBy("Shrimp...");
         excel.setDateFrom("2017-07-01");
         excel.setDateTo("2017-07-12");
         excel.setSavePath(savePath);
-        String[] header = {"序号", "日期", "时间", "数字", "金钱", "row合并", "col合并1", "col合并2", "超长文字自动换行"};
+        String[] header = {"Seq", "Date", "Datetime", "Number", "Money", "Row merge", "Col merge1", "Col merge2", "Line wrap for extra long text"};
         excel.setHeader(header);
 
         /*
@@ -59,8 +59,8 @@ public class ExcelTest {
         rowBeforeHeader.addCell(new Date(), false);                                    // 时间
         rowBeforeHeader.addCell(120, false);                            // 数字
         rowBeforeHeader.addCell(new BigDecimal("12.34"), false);                  // 金钱
-        rowBeforeHeader.addCell("row合并", false);
-        rowBeforeHeader.addCell("col合并", false, 2, 1);           // col合并
+        rowBeforeHeader.addCell("row merge", false);
+        rowBeforeHeader.addCell("col merge", false, 2, 1);           // col合并
         rowBeforeHeader.addCell("wer", false);
 
         excel.createRowBeforeHeader();
@@ -78,11 +78,11 @@ public class ExcelTest {
             row.addCell(12.1222);                            // 数字
             row.addCell(new BigDecimal("12.34"));                  // 金钱
             if (i % 3 == 0) {                                           // row合并
-                row.addCell("row合并", 1, 3);
+                row.addCell("row merge", 1, 3);
             }
-            row.addCell("col合并", 2, 1);      // col合并
+            row.addCell("col merge", 2, 1);      // col合并
             //超长文字自动换行
-            row.addCell("超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，靠左边，超长文字自动换行，靠左边", ExcelUtil.ALIGN_LEFT);
+            row.addCell("Line wrap for extra long text, Keep to the left. Line wrap for extra long text, Keep to the left. Line wrap for extra long text, Keep to the left. Line wrap for extra long text, Keep to the left. Line wrap for extra long text, Keep to the left. ", ExcelUtil.ALIGN_LEFT);
         }
         System.out.println(("========> 数据准备完成，准备生成excel: " + ExcelUtil.SDF_DATE_TIME.format(new Date())));
         return excel;
